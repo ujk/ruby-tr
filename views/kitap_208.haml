@@ -570,6 +570,216 @@
     %br
     
     
+    %a(name=":height")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:height" style="width: 100%;") 
+        %big 
+          %b :height 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i tüm slot ve elemanlar
+    %p
+      O nesnenin piksel yüksekliğini belirler. Eğer noktalı bir sayıysa yükseklik 
+      içinde bulunduğu elemana göre yüzde olarak hesaplanır. ( 0.0 ise %0, 
+      1.0 ise %100 olacaktır )
+    %br
+    
+    
+    %a(name=":hidden")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:hidden" style="width: 100%;") 
+        %big 
+          %b :hidden 
+        » true or false
+    %br
+    
+    %p
+      Ne için: 
+      %i tüm slot ve elemanlar
+    %p
+      O elemanı görünür ya da görünmez yapar. 
+      %b hidden: true 
+      olan bir nesne ekranda gösterilmez. Çocukları da gösterilmez.
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        slot = stack hidden: true do
+          title 'hello'
+          flow do
+            image File.join DIR, '../samples/loogink.png'
+          end
+          para link('Go go!'){alert 'hi'}
+        end
+        timer(2){slot.show}
+        timer(5){slot.hide}
+      end
+    %br
+    
+    %p
+      %b Not: 
+      Green Shoes 
+      %b :hidden 
+      stilini sadece slotlar, shape'ler, text blokları ve image için destekler.
+    %br
+    
+    
+    %a(name=":inner")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:inner" style="width: 100%;") 
+        %big 
+          %b :inner 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i star
+    %p
+      Bir star nesnesi için iç dairenin çapı (piksel olarak). İç daire yıldızın uçlarının 
+      başladığı daire çapıdır. 
+    %br
+    
+    
+    %a(name=":items")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:items" style="width: 100%;") 
+        %big 
+          %b :items 
+        » an array
+    %br
+    
+    %p
+      Ne için: 
+      %i list_box
+    %p
+      Bir list_box içindeki seçeneklerin bir listesi. Örnek için 
+      %a(href="/kitap/218#list_box") list_box 
+      metoduna bakınız.
+    %br
+    
+    
+    %a(name=":justify")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:justify" style="width: 100%;") 
+        %big 
+          %b :justify 
+        » true or false
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, subtitle, tagline, title
+    %p
+      Yazıyı yatay olarak aralarında eşit boşluk olacak şekilde dağıtır.
+    %br
+    
+    
+    %a(name=":kerning")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:kerning" style="width: 100%;") 
+        %big 
+          %b :kerning 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i 
+        banner, caption, code, del, em, ins, inscription, link, para, 
+        span, strong, sub, sup, subtitle, tagline, title.
+    %p
+      Yazının harfleri arasına verilen piksel kadar aralık açar.
+    %p
+      %b Not: 
+      Green Shoes 
+      %b :kerning 
+      stilini desteklemez.
+    %br
+    
+    
+    %a(name=":leading")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:leading" style="width: 100%;") 
+        %big 
+          %b :leading 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, subtitle, tagline, title
+    %p
+      Bir text bloğunda satırlar arası boşluğu piksel olarak ayarlar. Default 
+      değeri 4'tür.
+    %br
+    
+    
+    %a(name=":left")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:left" style="width: 100%;") 
+        %big 
+          %b :left 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i tüm slot ve elemanlar
+    %p
+      O nesnenin sol koordinatını piksel olarak ayarlar. 
+      %b left: 10 
+      yaparak elemanın sol kenarının içinde bulunduğu elemanın sol kenarından 
+      10 piksel içerde olduğu belirtilir. Eğer bu stil boş bırakılmışsa (ya da 
+      %b nil 
+      değer verildiyse) nesne diğerlerine göre yerleşir.
+    %br
+    
+    
+    %a(name=":margin")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:margin" style="width: 100%;") 
+        %big 
+          %b :margin 
+        » bir sayı ya da 4 sayıdan oluşan bir array
+    %br
+    
+    %p
+      Ne için: 
+      %i tüm slot ve elemanlar
+    %p
+      Bir elemanla çevreleyenleri arasındaki boşluğu belirler. Her elemanın 
+      sol, üst, sağ ve alt margin değerleri vardır. Eğer 
+      %b :margin 
+      stiline tek sayı verildiyse, tüm kenarlarda bu boşluk bırakılır. Mesela 
+      %b margin: 8 
+      yapıldıysa elemanın tüm kenarlarında diğerleriyle arasında 8 piksel 
+      boşluk bırakılır. 
+    
+    
+    
     
     
 
