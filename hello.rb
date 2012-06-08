@@ -6,7 +6,11 @@ get "/" do
 end
 
 get "/kitap/:n" do |number|
-	haml :"kitap_#{number}"
+  if File.exist?("./views/kitap_#{number}.haml")
+    haml :"kitap_#{number}"
+  else
+    haml :"405"
+  end
 end
 
 get "/k_search" do
@@ -21,5 +25,11 @@ get "/email/:name" do |isim|
 end
 
 get "/:sayfa" do |s|
-  haml :"#{s}"
+  if File.exist?("./views/#{s}.haml")
+    haml :"#{s}"
+  else
+    haml :"404"
+  end
 end
+
+  
