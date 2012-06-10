@@ -944,6 +944,102 @@
     %br
     
     
+    %a(name=":rise")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:rise" style="width: 100%;") 
+        %big 
+          %b :rise 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title.
+    %p
+      Bir kısım yazının hizalamasını aşağı yada yukarı kaydırır. Örneğin bir 
+      %a(href="/kitap/218#sup") sup 
+      elemanı 10 piksel 
+      %b :raise 
+      değerine sahipken, bir 
+      %a(href="/kitap/218#sub") sub 
+      elemanı -10 piksel
+      %b :raise 
+      değerine sahiptir. 
+    %br
+    
+    
+    %a(name=":scroll")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:scroll" style="width: 100%;") 
+        %big 
+          %b :scroll 
+        » true or false
+    %br
+    
+    %p
+      Ne için: 
+      %i flow, stack
+    %p
+      Bu slotu eğer 
+      %b :slot => true 
+      ise scrollbar'lı yapar. Yani içindekilerin boyutu kendisini aşarsa yan tarafında 
+      scrollbar (kaydırma çubuğu) çıkacaktır. Scrollbar eğer gerekirse görünür 
+      gerekmezse yok olur. Ayrıca scrollbar slotun iç tarafına yerleşir ve 
+      boyutu değişmeden kalır. 
+    %p
+      %b Not: 
+      Green Shoes 
+      %b :scroll 
+      stillere kısıtlama getirir
+    %ul
+      %li clear, hide vb genel slot metodları sağlıklı çalışmaz
+      %li mouse olayları algılanamaz
+      %li 
+        dışardan 
+        %b flush 
+        metodu çağırmak gerekir.
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        s = stack left: 100, top: 50, width: 300, 
+          height: 100, scroll: true do
+          background gold
+          image File.join(DIR, '../samples/loogink.png')
+          10.times{para 'hello'}
+          flush
+        end
+      end
+    %br
+    
+    
+    %a(name=":secret")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:secret" style="width: 100%;") 
+        %big 
+          %b :secret 
+        » true or false
+    %br
+    
+    %p
+      Ne için: 
+      %i ask, edit_line.
+    %p
+      Password alanları için kullanılır. Bu ayarla girilen karakterlerin ekranda 
+      gösterimi engellenir. Bunun yerine her karaktere yıldız karakteri konarak 
+      karakter girildiği anlatılır.
+    %br
+    
+    
+    
+    
 
     %h3 Devam Edecek...
 
