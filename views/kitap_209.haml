@@ -1,0 +1,41 @@
+-# coding: UTF-8
+
+
+%div.row
+  %div.span10
+    %h1 Sınıflar Listesi
+    %h3
+      There is a complete list of all the classes introduced by Green Shoes.
+
+    %hr
+    %h4 Çeviren : Ümit Kayacık
+  %div.span2
+    %form.form-search(action='/k_search' method='GET')
+      %input(type="hidden" name="start" value="201")
+      %input(type="hidden" name="end" value="238")
+      %input.search-query(type="text" name="search_str" style="width: 70px;" placeholder="Ara")
+      %button.btn(type="submit")
+        %i.icon-search
+    = haml :gs_sidebar
+%div.row
+  %div.span12
+    %hr
+    %p
+      Look at Green Shoes RDoc.
+
+    
+    
+
+
+
+
+
+    %h3 Devam Edecek...
+
+    %hr
+    %a.btn.btn-large.btn-success.pull-left(href="/kitap/207")
+      %i.icon-backward.icon-white 
+      App Nesnesi
+    %a.btn.btn-large.btn-success.pull-right(href="/kitap/209")
+      Sınıflar
+      %i.icon-forward.icon-white

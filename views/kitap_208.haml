@@ -1038,15 +1038,341 @@
     %br
     
     
+    %a(name=":size")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:size" style="width: 100%;") 
+        %big 
+          %b :size 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i  banner, caption, inscription, para, span, subtitle, tagline, title.
+    %p
+      Text bloğunun içinde kullanılan font'un piksel boyutunu belirler.
+    %p
+      Font boyutu ayrıca aşağıdaki stringlerle de belirlenebilir:
+    %ul
+      %li "xx-small" - olan boyutun %57'si
+      %li "x-small" - olan boyutun %64'ü
+      %li "small" - olan boyutun %83'ü
+      %li "medium" - olan boyut değişmez
+      %li "large" - olan boyutun %120'si
+      %li "x-large" - olan boyutun %143'ü
+      %li "xx-large" - olan boyutun %173'ü
+    %br 
     
     
-
-    %h3 Devam Edecek...
+    %a(name=":state")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:state" style="width: 100%;") 
+        %big 
+          %b :state 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i button, check, edit_box, edit_line, list_box, radio
+    %p
+      %b :state 
+      stili bazı kontrolleri engellemenizi ya da kilitlemenizi sağlar (eğer değiştirilmesini 
+      istemiyorsanız). 
+    %p Olası değerleri şunlardır:
+    %ul
+      %li nil - kontrol aktiftir ve değiştirilebilir
+      %li "readonly" - kontrol aktif fakat değiştirilemez
+      %li "disabled" - kontrol aktif değil (rengi solar) ve değiştirilemez
+    %br
+    
+    
+    %a(name=":stretch")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:stretch" style="width: 100%;") 
+        %big 
+          %b :stretch 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title
+    %p Kullanılan font'un esnetilmesi şeklini tarif eder.
+    %p Olası ayarlar:
+    %ul
+      %li "condensed" - daha dar yazılar
+      %li "normal" - standart genişlik yazılar
+      %li "expanded" - daha geniş yazılar
+    %p
+      %b Not: 
+      Green Shoes 
+      %b :stretch 
+      stilini desteklemez.
+    %br
+    
+    
+    %a(name=":strikecolor")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:strikecolor" style="width: 100%;") 
+        %big 
+          %b :strikecolor 
+        » a RGB array
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p Bu yazının yapıldığı çizgilerin rengini belirler.
+    %br
+    
+    
+    %a(name=":strikethrough")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:strikethrough" style="width: 100%;") 
+        %big 
+          %b :strikethrough 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p Yazı üstü çizili mi? İki olasılık var:
+    %ul
+      %li "none" - çizgi yok
+      %li "single" - bir tek çizgi çizilmiş
+    %br
+    
+    
+    %a(name=":stroke")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:stroke" style="width: 100%;") 
+        %big 
+          %b :stroke 
+        » a hex code, a rgb array or a range of either
+    %br
+    
+    %p
+      Ne için: 
+      %i background, banner, border, caption, inscription, para, line, oval, rect, shape, star, subtitle, tagline, title
+    %p
+      Çizgi kaleminin rengi. Şekiller söz konusu olduğunda, bu çizgilerin rengidir. 
+      Bir yazı bloğu için yazılar bu renkte yazılır.
+    %br
+    
+    
+    %a(name=":strokewidth")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:strokewidth" style="width: 100%;") 
+        %big 
+          %b :strokewidth 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i background, border, line, oval, rect, shape, star
+    %p
+      Çizginin piksel olarak kalınlığı. Şekil çizerken mesela bu değer 2 ise 
+      çizgiler 2 piksel kalınlığındadır.
+    %br
+    
+    
+    %a(name=":text")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:text" style="width: 100%;") 
+        %big 
+          %b :text 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i edit_box, edit_line
+    %p Bir edit_box veya edit_line'da gösterilen mesajı ayarlar
+    %br
+    
+    
+    %a(name=":top")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:top" style="width: 100%;") 
+        %big 
+          %b :top 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i Tüm slot ve elemanlar
+    %p
+      Bir elemanın üst kenarının yerini içinde bulunduğu nesneye göre belirler. 
+      Eğer nesne 
+      %b top: 40 
+      ayarlandıysa içinde bulunduğu nesnenin üst kenarından 40 piksel aşağıya 
+      üst kenarı gelecek şekilde yerleştirilir. Eğer 
+      %b :top 
+      stili verilmediyse nesne slot içindeki sırasına göre yerleşir.
+    %br
+    
+    
+    %a(name=":undercolor")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:undercolor" style="width: 100%;") 
+        %big 
+          %b :undercolor 
+        » a RGB array
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p Altı çizili yazıda kullanılan çizgi rengi.
+    %br
+    
+    
+    %a(name=":underline")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:underline" style="width: 100%;") 
+        %big 
+          %b :underline 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p 
+      Yazıda kullanılacak alt çizginin rengini belirler. 
+    %p Olası seçenekler:
+    %ul
+      %li "none" - altını çizmek yok
+      %li "single" - tek sürekli çizgi ile altı çizilmiş
+      %li "double" - çift sürekli çizgi ile altı çizilmiş
+      %li "low" - Font'un temel çizgisinin altında bir alt çizgi. Genelde tek karakterlerde kullanılır.
+      %li "error" - dalgalı bir alt çizgi , genellikle bir hatayı göstermek için kullanılır
+    %br
+    
+    
+    %a(name=":variant")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:variant" style="width: 100%;") 
+        %big 
+          %b :variant 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title
+    %p Bir grup yazı için font değişimi yapar. İki seçenek vardır:
+    %ul
+      %li "normal" - standart font
+      %li 
+        "smallcaps" - küçük harfler diğerlerine göre daha kısa ama büyük 
+        harflerle değiştirilir.
+    %p
+      %b Not: 
+      Green Shoes 
+      %b :variant 
+      stilini desteklemez.
+    %br
+    
+    
+    %a(name=":weight")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:weight" style="width: 100%;") 
+        %big 
+          %b :weight 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p
+      Yazının koyuluğunu belirler. Genellikle şu olasılıklar vardır:
+    %ul
+      %li "ultralight" - çok silik yazı (=200)
+      %li "light" - silik yazı (=300)
+      %li "normal" - default koyuluk (=400)
+      %li "semibold" - koyu ile normal arasında bir koyuluk (=600)
+      %li "bold" - koyu yazı (= 700)
+      %li "ultrabold" - çok koyu (=800)
+      %li "heavy" - çok çok koyu (=900)
+    %p Bunun yanında direk olarak sayı da verebilirsiniz.
+    %br
+    
+    
+    %a(name=":width")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:width" style="width: 100%;") 
+        %big 
+          %b :width 
+        » a number
+    %br
+    
+    %p
+      Ne için: 
+      %i Tüm slot ve elemanlar
+    %p 
+      Elemanın piksel olarak genişliğini belirler. Eğer noktalı sayı verilirse yüzde 
+      olarak değerlendirilir. (0.0 => %0 ve 1.0 => %100) %100 demek içinde 
+      bulunduğu slotun genişliğini kaplar. 
+    %br
+    
+    
+    %a(name=":wrap")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#:wrap" style="width: 100%;") 
+        %big 
+          %b :wrap 
+        » a string
+    %br
+    
+    %p
+      Ne için: 
+      %i banner, caption, inscription, para, span, subtitle, tagline, title
+    %p Yazı tüm genişliği doldurunca nasıl kesilecek? Olası seçenekler:
+    %ul
+      %li "word" - satırları kelimelerden ayır
+      %li "char" - satırları karakterlerin arasından ayırır, bazı kelimeler bölünür
+      %li "trim" - eğer satır çok uzunsa bir kısa keser
 
     %hr
-    %a.btn.btn-large.btn-success.pull-left(href="/kitap/206")
+    %a.btn.btn-large.btn-success.pull-left(href="/kitap/207")
       %i.icon-backward.icon-white 
-      Dahili Metodlar
-    %a.btn.btn-large.btn-success.pull-right(href="/kitap/208")
-      Stiller
+      App Nesnesi
+    %a.btn.btn-large.btn-success.pull-right(href="/kitap/209")
+      Sınıflar
       %i.icon-forward.icon-white
