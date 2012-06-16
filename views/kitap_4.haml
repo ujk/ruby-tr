@@ -149,10 +149,36 @@
       #   a = Array.new[1,2,3]
     %br
     
+    %p
+      Array içinde veri tiplerinin karışık olmasına izin verilir ve eşitlik içermesine de 
+      Diyelim şu metodu tanımlamıştınız:
+    %br
+    :coderay
+      #!Ruby
+      def hello
+        return "hello world"
+      end
+    %br
+    
+    %p Şimdi şöyle bir array tanımlayabilirsiniz:
+    :coderay
+      #!Ruby
+      x = [1+2, hello, `dir`]
+    %br
+    
+    %p
+      Burada ilk eleman bir tamsayı olan 3, ve ikincisi string "hello world" (
+      %b hello 
+      metodunun sonucu dönen değer). Eğer bunu Windows'ta çalıştırırsanız 
+      üçüncü array elemanı bulunulan klasördeki dosyaları gösteren bir string 
+      olacaktır. Çünkü 
+      %b `dir` 
+      ters tırnaklı bir stringdir ve işletim sistemi tarafından çalıştırılır (3. bölüme bakınız). 
+      Eğer farklı bir 
     
 
     
-    62
+    63
     %h3 Devam Edecek...
 
     %p.orta Copyright © 2009 Huw Collingbourne
