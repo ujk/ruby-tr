@@ -174,11 +174,91 @@
       olacaktır. Çünkü 
       %b `dir` 
       ters tırnaklı bir stringdir ve işletim sistemi tarafından çalıştırılır (3. bölüme bakınız). 
-      Eğer farklı bir 
+      Eğer farklı bir işletim sistemindeyseniz son elemanı işletim sistemine uygun 
+      komut ile değiştirmeniz gerekir. 
+    %br
     
+    %h4.sag dir_array.rb
+    :coderay
+      #!Ruby
+      # The Book of Ruby - http://www.sapphiresteel.com
+      
+      p( Dir.entries( 'C:\\' ) )
+    %br
+    
+    .alert.alert-info
+      %p
+        %b Dosya İsimlerinden bir Array Oluşturmak
+      %p
+        Birçok Ruby sınıfları bir array değeri geri dönen metodlara sahiptir. 
+        Mesela Dir sınıfı, diskteki klasörler üzerinde işlemler yapmaya yarar. 
+        Bu sınıfın 
+        %b entries 
+        metodu vardır. Bu metoda bir klasör adını verdiğinizde o klasördeki 
+        dosya isimlerinden oluşan bir array geri döner:
+      %br
+      
+      :coderay
+        #!Ruby
+        Dir.entries('C:\\')     # C:\ deki dosya isimlerini döner
+      %br
+    %br
+    
+    %p
+      Eğer tek tırnaklı stringlerden oluşan bir array yapmak ister ama üstüste 
+      tırnak açıp kapamak istemezseniz, 3. bölümde anlatıldığı gibi boşlukla 
+      ayırdığınız stringleri bir parantez içine koyup başına 
+      %b %w 
+      koyabilirsiniz (ya da çift tırnaklı için büyük harf 
+      %b %W 
+      ).
+    %br
+    
+    %h4.sag array2.rb
+    :coderay
+      #!Ruby
+      
+      y = %w( bu stringlerden oluşan bir array )
+      puts(y.inspect)
+      
+    %br
+    
+    %p
+      Array'leri ayrıca nesne üretim metodu 
+      %b new 
+      kullanarak da yapabilirsiniz. Seçenek olarak 
+      %b new 
+      metoduna bir sayı parametre vererek o kadar elemanlı bir array üretebilirsiniz 
+      (her elemanı nil değer olan). Ya da 2 argüman vererek ilkiyle eleman sayısını , 
+      ikinciyle elemanların değerini belirtirsiniz. Şöyle ki:
+    %br
+    
+    :coderay
+      #!Ruby
+      a = Array.new    # boş bir array
+      a = Array.new(2)   # [nil,nil]
+      a = Array.new(2,"hello world") # ["hello world","hello world"]
+    %br
+    
+    %h3 Çok Boyutlu Array'ler
+    %p
+      Çok boyutlu bir array üretmek için bir array üretip her elemanına başka 
+      array'ler ekleyebilirsiniz. Örneğin bu kod , iki elemanlı bir array üretir, her 
+      elemana kendisi array olan iki değer yüklenir:
+    %br
+    :coderay
+      #!Ruby
+      a = Array.new(2)
+      a[0]= Array.new(2,'hello')
+      a[1]= Array.new(2,'world')
+    %br
+    
+    
+    
+  
 
     
-    63
+    64
     %h3 Devam Edecek...
 
     %p.orta Copyright © 2009 Huw Collingbourne
