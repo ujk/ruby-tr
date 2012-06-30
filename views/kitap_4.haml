@@ -253,12 +253,130 @@
       a[1]= Array.new(2,'world')
     %br
     
+    .alert.alert-info
+      %p
+        Ayrıca 
+        %b new 
+        metoduna array argümanlar göndererek de bir array oluşturabilirsiniz. 
+        Fakat dikkatli olun. Ruby'de bir süpriz taraf vardır, metod argümanlarını 
+        parantez içinde ya da dışında vermek farketmez dense de, eğer new 
+        metodundan sonra parantez açmayıp boşluk ile yazmaya kalkarsanız 
+        Ruby hata verecektir - parantez kullanma alışkanlığı kazanmak için bir 
+        sebep daha.
+    %br
+    
+    %p
+      Ayrıca array'leri direk köşeli parantezler kullanarak da içiçe yazabilirsiniz. 
+      Bu kod her biri 4 tamsayıdan oluşan 4 array'den oluşmuş bir çok boyutlu 
+      array tanımlıyor:
+    %br
+    
+    :coderay
+      #!Ruby
+      a = [ [1,2,3,4],
+      [5,6,7,8],
+      [9,10,11,12],
+      [13,14,15,16]  ] 
+    %br
+    
+    %p
+      Yukarıda gösterilen kodda 4 tane "alt array" i ayrı satırlarda yerleştirdim. 
+      Bu zorunlu değil ama bir tablo gibi her alt array'i ayrı satırda göstermek 
+      daha net görünmesine yardımcı olur. Bir içiçe array konuşulurken her bir alt 
+      array içinde bulunduğu array'in "satırı" olarak da adlandırılır. (çevirmen notu: 
+      yukarıdaki kod birden fazla satıra yayılmış bir koddur. Bu durumlarda 
+      Ruby'de satır sonlandırma karakteri olmadığı için - ";" gibi - 
+      elemanlar arasında bölümleme işlemi yaparken virgül sonrası alt satıra 
+      geçilmelidir)
+    %br
+    
+    %h4.sag multi_array.rb
+    :coderay
+      #!Ruby
+      # The Book of Ruby - http://www.sapphiresteel.com
+      
+      # iki alt-array'li bir array oluşturun  - örn. her biri 4 elemanlı 2 'satır'
+      multiarr = [['one','two','three','four'], # multiarr[0]
+                [1,2,3,4]]                      # multiarr[1]
+      
+      # multiarr'nin elemanları (satırları) üzerinde iterasyon
+      puts( "for i in.. (multi-dimensional array)" )
+      for i in multiarr
+        puts(i.inspect) 
+      end
+      
+      puts( "\nfor a, b, c, d in.. (multi-dimensional array)" )
+      for (a,b,c,d) in multiarr
+        print("a=\#{a}, b=\#{b}, c=\#{c}, d=\#{d}\n" )
+      end
+    %br
+    
+    %p
+      Çok boyutlu arra'ler hakkında daha fazla örnek için 
+      %b multi_array.rb 
+      programını çalıştırın. Bu program içinde iki diğer array 
+      %b multiarr 
+      adında bir array üreterek başlar. Bu array'lerin ilki 
+      %b multiarr' 
+      nin index 0'ındadır , ikincisi index 1'inde:
+    %br
+    
+    :coderay
+      #!Ruby
+      multiarr = [['one','two','three','four'],[1,2,3,4]]
+    %br
+    
+    %h3 Array Üzerinde İterasyon
+    
+    %p
+      Bir array'in elemanları üzerinde 
+      %b for 
+      döngüsü ile iterasyon yapabilirsiniz. Burdaki döngü iki eleman üzerinden 
+      iterasyon yapıyor, index 0 ve 1'deki alt array'ler:
+    %br
+    
+    :coderay
+      #!Ruby
+      for i  in multiarr
+        puts(i.inspect) 
+      end
+    %br
+    
+    %p Bu şu çıktıyı verir:
+    
+    :coderay
+      #!Ruby
+      ["one", "two", "three", "four"]
+      [1, 2, 3, 4] 
+    %br
+    
+    %p
+      Bu durumda, iki alt array'in elemanları üzerinde nasıl iterasyon yapacağız? 
+      Eğer sabit sayıda eleman varsa her birisi için ayrı bir iterasyon değişkeni 
+      kullanılabilir. Her değişken karşı gelen array elemanıyla eşleşecektir. 
+    %p
+      Burada biz dört alt array sahibiyiz, bu durumda bu değişkenleri şöyle 
+      kullanabilirsiniz:
+    %br
+    
+    :coderay
+      #!Ruby
+      for (a,b,c,d) in multiarr
+        print("a=\#{a}, b=\#{b}, c=\#{c}, d=\#{d}\n" )
+      end 
+    %br
+    
+    .alert.alert-info
+      %p
+        %b İterasyonlar ve For Döngüleri
+      %p
+        
     
     
   
 
     
-    64
+    66
     %h3 Devam Edecek...
 
     %p.orta Copyright © 2009 Huw Collingbourne
