@@ -13,11 +13,130 @@
       %a(href="/kitap/101")İçindekiler <<<
     %br
     %h2 Başlarken
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspBir bilgisayarı programlamak demek ; onun anlayacağı dilden yani 
+      %b programlama dili 
+      ile onunla konuşmanız demektir. Birçoğu mükemmel olan programlama dilleri mevcuttur. 
+      Burada benin için favori programlama dili olan Ruby yi seçtim. Ruby Türkçede YAKUT 
+      anlamına gelmektedir.
+    %br   
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspBenim favori programlama dilim olması bir yana Ruby, gördüğüm en kolay programlama 
+      dillerinden biri. Gerçek sebep budur. Yoksa bu dökümanı yazmaya karar verip sonrada 
+      bunu Ruby ile yazmayı seçmedim. Ruby nin açık seçik ve basit oluşu bunu yazmamda beni 
+      motive etti. Bunu başka dillerde yazsaydım yüzlerce sayfa tutabilirdi. Fakat şu asla 
+      aklınıza gelmesin Ruby sadece yeni başlayanlara hitap eden basit bir dil değil aynı zamanda 
+      güçlü ve profesyonel bir uygulama dilidir.
+    %br   
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspİnsanların konuşma dilinde yazdığımız şeylere METİN  diyoruz. 
+      Bilgisayar dilinde yazdığımız şeylere de KOD  denir. Bu dökümanda birçok Ruby diline ait 
+      kodları göreceğiz. Örnek kodların kolay anlaşılması için bunları renklendirdim.
+      Sizin yazacaklarınız beyaz kutularda program çıktıları da kutular içinde gösterildi. 
+    %br
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspBu dökümanı okurken anlayamadığınız bölüm olursa veya aklınıza 
+      bir soru takılırsa bunu bir kenara not edin ve biraz daha okumaya devam edin. 
+      Büyük ihtimalle bir sonraki konuda sorunuzun cevabını bulacaksınız.
+      Yinede son bölüme kadar sorunuza cevap bulamamışsanız size bu soruyu nereden çözebileceğinizi
+      söyleyeceğim. Ruby dili camiasında sorularınıza benden daha iyi cevap verebilecek birçok 
+      arkadaşımız var.
+    %br
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspÖncelikle Ruby yi bilgisayarımıza kuralım. 
+    %br
+    %h2 Windows Kurulumu
+    %br
+    %p 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbspWindows kurulumu Ruby için çok kolaydır. Öncelikle Ruby Installer
+      programını şuradan indiriyoruz : 
+      %a(href="http://rubyinstaller.org" target="_blank") http://rubyinstaller.org.
+      Bu dökümanda biz Ruby 1.8.4 sürümünü kullandık.) Normal windows kurulum aşamaları ile 
+      Ruby öntanımlı klasöre kurulum yapıyoruz.
+    %br
+    %p 
+      Programlama için program kodlarını yazmalı ve bunu çalıştırmalıyız. Bunun içinde bir metin 
+      editörü ve komut satırına ihtiyacınız olacak.
+    %p 
+      Ruby installer ile birlikte çok kullanışlı bir metin editörüne sahip olacaksınız : 
+      %b SciTE (the Scintilla Text Editor)
+      Başlat menüsünden
+      %b SciTE 
+      yi çalıştırabilirsiniz. 
+      Yazdığınız kodların buradaki gibi renkli olasını istiyorsanız aşağıdaki dosyaları indirerek 
+      SciTE dosyanızın (c:/ruby/scite ) içine kopyalayın:
+    %p 
+      Global Properties :
+      %a(href="http://pine.fm/LearnToProgram/SciTEGlobal.properties" target="_blank") http://pine.fm/LearnToProgram/SciTEGlobal.properties
+    %p 
+      Ruby Properties :
+      %a(href="http://pine.fm/LearnToProgram/ruby.properties" target="_blank") http://pine.fm/LearnToProgram/ruby.properties
+    %p
+      %b Not: 
+      Ruby son sürümlerinde Scite editör beraberinde gelmemektedir. Ayrıca 
+      kurmak için 
+      %a(href="http://www.scintilla.org/SciTEDownload.html" target="_blank") http://www.scintilla.org/SciTEDownload.html 
+      adresinden indirip kurabilirsiniz.
+    %p 
+      Kendi kodlarınızı yazdığınızda bunları da bu klasör içinde kaydetmeyi unutmayın. 
+    %p 
+      Komut satırı için 
+      %i Başlangıç
+      daki 
+      %i Donatılar
+      menüsünden
+      %i Komut İstemini
+      çalıştırınız. Buradan yazdığınız kodların klasörüne ulaşmak için :
+      %b cd..
+      yazarsanız bir üst klasöre geçersiniz.
+      %b cd dosya adı/klasör adı
+      yazarsanız klasöre/dosyaya ulaşırsınız. Klasördeki tüm dosyaları görmek için
+      %i dir
+      komutunu kullanabilirsiniz. 
+    %p 
+      Bu kadar . Artık  sonraki bölüme geçebilirsiniz :
+    %br
+    %h2 Macintosh Kurulumu
+    %p 
+      Eğer sisteminiz Mac OS X 10.2 (Jaguar) ise, zaten Ruby sisteminizde mevcuttur. 
+      Daha eski sürümler için Ruby resmi sitesindeki çözümlerden faydalanmanız gerekecek. 
+    %p 
+      Komut satırı için 
+      %i Terminal
+      uygulamasını açın
+      %i (Applications/Utilities). 
+    %br
+    %p 
+      Metin editörü için bildiğiniz bir editörü kullanın. Eğer
+      %i TextEdit
+      kullanıyorsanız kodlarınızı metin olarak kaydetmeyi unutmayın. Yoksa kodlarınız çalışmaz .
+      Kullanabileceğiniz diğer metin editörleri :  emacs, vi, and pico dur. 
+    %p 
+      Bu kadar . Artık  sonraki bölüme geçebilirsiniz : 
+    %br
+    %h2 Linux Kurulumu
+    %p 
+      İlk olarak Ruby nin sisteminizde kurulu olup olmadığını kontrol edin. Bunun için komut 
+      satırına
+      %i
+        %b which ruby
+      yazın. Eğer
+      %i
+        %b /usr/bin/which: no ruby in (...)
+      , gibi bir çıktı alırsanız Ruby yi şurada anlatıldığı gibi kurmanız gerekir :
+      %a(href="http://www.ruby-lang.org/tr/downloads/" target="_blank") http://www.ruby-lang.org/tr/downloads/
+    %p 
+      Yada Ruby mevcut ise 
+      %b ruby –v
+      komutu ile sürüm no yu kontrol edin ve eski sürüme sahipseniz sitesinden son sürümü indiriniz.
+    %p 
+      Kurulumda kaynak koddan derlemek yerine kullandığınız linux dağıtımının 
+      kendi paket kurulumlarını kullanmanız daha kolaydır. Örneğin Pardus kullananlar 
+      PİSİ paketlerinden en son Ruby sürümünü kolayca bulacaklardır. Debian veya Ubuntu kullananlar 
+      için de bir sıkıntı olmayacaktır.
     %br
     %br
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/102") < Önsöz
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/104") Sayılar >

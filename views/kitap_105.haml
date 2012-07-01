@@ -14,10 +14,216 @@
     %br
     %h2 Harfler
     %br
+    %p Sayılar hakkında bir şeyler öğrendik. Peki harfler , kelimeler ve metinler ? 
+    %p 
+      Program içinde harflerden oluşan gruplara ( kelime gibi )
+      %b strings
+      diyoruz.Bunun kolay anlaşılması için aşağıdaki kodlarda STRING olan kısımlar kırmızı yazılmıştır. 
+    %p 'Hello.'
+    %p 'Ruby rocks.'
+    %p '5 is my favorite number... what is yours?'
+    %p 'Snoopy says #%^?&*@! when he stubs his toe.'
+    %p '     '
+    %p ''
+    %p 
+      Gördüğünüz gibi string ler içinde harflerin haricinde ; noktalama işaretleri , rakamlar , 
+      semboller ve boşluklar olabilir. Sonuncu string de hiçbir şey yok 
+      ( boşluk da yok  : çünkü programlamada hiç bir şey olmaması veya boşluk olması aynı şey değildir )
+      bunlara empty (boş) string diyoruz. 
+    %p 
+      Sayıları yazdırmak için puts komutunu kullanıyorduk. 
+      String ler için de puts komutunu deneyelim : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'Hello, world!'
+      puts ''
+      puts 'Good-bye.'
+    %br
+    :coderay
+      #!Ruby
+        
+      Hello, world!
+      Good-bye.
+    %br  
+    %p Şimdi kendiniz birkaç deneme yapın.
+    %br
+    %h2 String İşlemleri 
+    %br
+    %p Sayılarla yaptığımız işlemleri harfler ve stringlerle de yapabiliriz. 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'I like' + 'apple pie.'
+    %br
+    :coderay
+      #!Ruby
+      
+      I likeapple pie.
+    %br
+    %p 
+      Ama olmadı neden? Çünkü boşluk koymadan yazdık. 
+      Daha önce programlar için boşluğun önemli olmadığını söylemiştik ama boşluk 
+      stringler içinde ise ( çift veya tek tırnakların arasına yazılmışlarsa ) önemlidir. 
+      Tekrar deneyelim :
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'I like ' + 'apple pie.'
+      puts 'I like' + ' apple pie.'
+    %br
+    :coderay
+      #!Ruby
+      
+      I like apple pie.
+      I like apple pie.
+    %br
+    %p (gördüğünüz gibi boşluğun hangi string içinde olduğunun önemi yok.) 
+    %br
+    %p Stringler birbiri ile toplanabiliyor , aynı zamanda bir sayı ile çarpılabilirde . Şuna bakın : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'blink ' * 4
+      
+    %br
+    :coderay
+      #!Ruby
+      batting her eyes
+    %p (sadece şaka ... sonuç aşağıda:)
+    :coderay
+      #!Ruby
+      blink blink blink blink 
+    %br
+    %p Şöyle düşünün : 7*3 ne demektir ?  7+7+7, aynı şekilde 'moo'*3 demek  'moo'+'moo'+'moo' olur. 
+    %br
+    %b 12 ve '12' nin farkı
+    %p
+      Daha ileri gitmeden sayı ve rakam arasındaki farkı iyi öğrenmemiz lazım.
+      %b 12 bir sayı dır
+      ama
+      %b '12' iki adet rakamı olan bir string dir. 
+    %p Bunları kodlarda biraz inceleyelim : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts  12  +  12
+      puts '12' + '12'
+      puts '12  +  12'
+    %br
+    :coderay
+      #!Ruby
+      
+      24
+      1212
+      12  +  12
+    %br
+    :coderay
+      #!Ruby
+      
+      puts  2  *  5
+      puts '2' *  5
+      puts '2  *  5'
+    %br
+    :coderay
+      #!Ruby
+      
+      10
+      22222
+      2  *  5
+    %br
+    %p Çok kolay gibi görünebilir ama aradaki farklara dikkat etmemiz gerekiyor.
+    %br
+    %h2 Hatalar 
+    %p Aşağıdakileri deneyin ve çalışmadığını görün : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts '12' + 12
+      puts '2' * '5'
+    %br
+    :coderay
+      #!Ruby
+      #<TypeError: can't convert Fixnum into String>
+    %br
+    %p 
+      Buradaki sorun :  sayı ile string i toplayamazsınız ve iki string birbiri ile çarpılamaz .
+      Aşağıdakiler de hatalı koddur : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'Betty' + 12
+      puts 'Fred' * 'John'
+    %br
+    %p
+      Bir konuda da dikkatli olmamız lazım : kodlamada şu şekilde yazabiliriz ve doğrudur : 
+      %b 'koyun'*5
+      bu beş adet koyun yazan bir string kümesi oluşturur . Ama 
+      %b 5*'koyun' 
+      yazarsanız bu hataya sebep olur , çünkü koyun kadar 5 anlamsız bir önermedir.
     %br
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
+    %p 
+      Sonuçta 
+      %b “ You’re swell ! “ 
+      yazdırmak için ne yapıyoruz? : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'You're swell!'
+    %br
+    %p 
+      İyi ama çalışmadı ! String yazarken kullandığımız tırnak işaretinin üç tane olması 
+      hataya sebep olur. Bunu önlemek için ortadaki tırnak işaretinin string içinde bir 
+      eleman olduğunu belirtmeliyiz. Bunun için 
+      %b “escape (atlama) karakteri “ (ters bölü : \ )
+      kullanırız. 
+    %br
+    :coderay
+      #!Ruby
+      puts 'You\'re swell!'
+    %br
+    %br
+    :coderay
+      #!Shell
+      You're swell!
+    %br
+    %p Aşağıda birkaç örneği inceleyelim : 
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 'You\'re swell!'
+      puts 'backslash at the end of a string:  \\'
+      puts 'up\\down'
+      puts 'up\down'
+    %br
+    %br
+    :coderay
+      #!Shell
+      
+      You're swell!
+      backslash at the end of a string:  \
+      up\down
+      up\down
+    %br
+    %p 
+      Son iki kod farklı olduğu halde çıktıları aynı oldu. 
+      Çünkü  \ işareti ‘d’ harfini atlatamaz kendini atlatır . 
+      Çift \ \ ise bir \ atlatır diğeri kalır. 
+      \ işareti sadece noktalama işaretlerini ve kendini mi atlatıyor? , 
+      harf olunca atlatmıyor mu? , bunu kendimiz deneyelim. 
+    %br
+    %p Sorularınız olabilir ama okumaya devam ;
+    %br
+    %br
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/104") < Sayılar
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/106") Değişkenler ve Atamalar >

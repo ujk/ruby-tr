@@ -14,10 +14,139 @@
     %br
     %h2 Sayılar
     %br
+    %p
+      Şimdi hazırsak ilk programımızı yazalım ! Metin editör programınızı açın ve şunu yazın:
+    :coderay
+      #!Ruby
+      
+      puts 1+2
+    %br
+    %p 
+      Bunu 
+      %b calc.rb 
+      gibi bir isimle kaydedelim. ( .rb uzantısını Ruby ile yazılmış kodları kaydederken kullanacağız).
+      Şimdi komut satırına
+      %b ruby calc.rb 
+      yazarak çalıştıralım ( tabi önce kaydettiğiniz dizine gitmiş olmanız lazım ).
+      Çıktı olarak
+      %b 3
+      değerini vermiş olmalı . Gördünüz programlama hiç de zor değil , şimdilik. 
+    %br
+    %b 
+      %i puts
+    %p
+      Tahmin ettiğiniz gibi bu kod 1+2 işlemini yaptı. Bu şu kodla da aynı sonucu verecektir :
+    :coderay
+      #!Ruby
+      
+      puts 3
+      
+    %b puts
+    %p kendinden sonra yazılanı ekrana yazar. 
+    %br
+    %h2 Tamsayı ve Ondalık Sayılar
+    %p
+      Bazı tamsayılar : 
+    %p 5
+    %p -205
+    %p 9999999999999999999999999
+    %p 0
+    %br
+    %p Ve bazı Ondalık Sayılar: 
+    %p 54.321
+    %p 0.001
+    %p -205.3884
+    %p 0.0
+    %br
+    %p
+      Pratikte birçok program ondalık sayılar yerine tam sayıları kullanır. 
+      (yani , kimse 7.4 adet e postasına bakmaz ve “1.8 websitesi gezdim” veya  
+      “5.24 adet şarkı dinleyeceğim” diyemez....) Ondalık sayılar daha çok akademik ve 
+      bilimsel notasyonda kullanılırlar. 
+    %br
+    %b Basit Matematik 
+    %p 
+      Şimdi bir hesap makinesinin yapabildiklerini yapalım. (Hesap makinaları ondalık sayıları
+      kullanır , siz de bilgisayarınızı hesap makinası olarak kullanmak için ondalık sayıları 
+      kullanmalısınız) . Toplama ve çıkarma için  + ve - , çarpma ve bölme için de * ve  / kullandık.
+      %b calc.rb
+      dosyamızın içini biraz daha büyütelim ; şunları yazalım ve çalıştıralım :
+    :coderay
+      #!Ruby
+      
+      puts 1.0 + 2.0
+      puts 2.0 * 3.0
+      puts 5.0 - 8.0
+      puts 9.0 / 2.0
+    %br
+    %p Aşağıda çıktıyı görelim :
+    :coderay
+      #!Ruby
+      
+      3.0
+      6.0
+      -3.0
+      4.5
+    %br
+    %p
+      (Programda boşluklar önemli değildir . Kodların daha iyi okunması içindir.) Süpriz olmadı
+      değil mi? Bir de tamsayılar ile bunu deneyelim :
+    %br
+    :coderay
+      #!Ruby
+      
+      puts 1+2
+      puts 2*3
+      puts 5-8
+      puts 9/2
+    %br
+    %p Hemen hemen aynı değil mi?
+    :coderay
+      #!Ruby
+      3
+      6
+      -3
+      4
+    %br
+    %p
+      Ama… sonuncu hariç! Tamsayılar ile işlem yaparsanız sonuç da tamsayı olur. 
+      Bilgisayar 4.5 sayısını yuvarladı bu beklediğiniz sonuç olmayabilir ama bilgisayar için 
+      doğru bir sonuçtur.
+    %p Cebinizde 9 TL var ve bilet 2 TL ise kaç bilet alırsınız ? 4.5 bilet mi ? Tabiki 4 bilet.
+    %p Artık daha karmaşık işlemlerle denemeler yapmak size kalıyor.
+    %p Mesela ;
+    :coderay
+      #!Ruby
+      
+      puts 5 * (12-8) + -15
+      puts 98 + (59872 / (13*8)) * -52
+    %br
+    :coderay
+      #!Ruby
+      
+      5
+      -29802
+    %br
+    %h2 Şunları Deneyin 
+    %b Aşağıdaki sonuçları verecek programları yazın : 
+    %p Bir yılda kaç saat vardır ? 
+    %p On yıl içinde kaç dakika vardır ? 
+    %p Yaşınız kaç saniye? 
+    %p Hayatınızda ne kadar çikolata yemeyi düşünüyorsunuz? 
+    %p
+      %b Uyarı:
+      Bunun hesaplanması biraz zaman alabilir : ) ! 
+
+    %p Biraz daha zor bir soru : 
+
+    %p Benim 1031 milyon saniye yaşında isem  sene olarak kaç yaşındayımdır ? 
+    %br
+    %p 
+      Sayılarla alıştırmalarınızı bitirdikten sonra biraz da 
+      %i harflere ve kelimelere
+      bakalım.
     %br
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/103") < Başlarken
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/105") Harfler >
