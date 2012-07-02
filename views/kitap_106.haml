@@ -14,10 +14,128 @@
     %br
     %h2 Değişkenler ve Atamalar
     %br
+    %p
+      Öğrendiklerimizden biz 
+      %b puts
+      komutu ile ne verirsek o ekrana aynen yazılıyor. 
+      Aynı şeyi iki defa yazdırmak için iki defa 
+      %b puts ile yazıyoruz.
+    :coderay
+      #!Ruby   
+
+      puts '...you can say that again...'
+      puts '...you can say that again...'
+    %br
+    :coderay
+      #!Shell
+      ...you can say that again...
+      ...you can say that again...
+    %p 
+      Ama bir kere yazıp onu saklasak ve istediğimizde tekrar kullanabilsek ne iyi olurdu değil mi? 
+      Bunu yapmak için saklayacağımız string e bir isim vermeliyiz. Programcılar bu isim 
+      vermeye 
+      %b 
+        %i atama
+        ( assignment ), 
+      verilen isme de 
+      %b 
+        %i değişken
+        ( variable ) 
+      der. Bu isim harf ve rakamlardan oluşur ama ilk karakter mutlaka bir harf ve 
+      küçük harf olmalıdır.
+      Son programımıza tekrar dönelim ve bu defa string e mystring ismini atayalım. 
+    %br
+    :coderay
+      #!Ruby
+      myString = '...you can say that again...'
+      puts myString
+      puts myString
+    %br
+    :coderay
+      #!Shell
+      ...you can say that again...
+      ...you can say that again...
+    %br
+    %p
+      Burada siz mystring adına ne yaptırırsanız bu  
+      %i '...you can say that again...' 
+      üzerine uygulanır. Yani değişken adları değişkenin kendisine yönlendirir , onu işaret eder. 
+      Biraz daha ilginç örneklere bakalım : 
+    %br
+    :coderay
+      #!Ruby
+      
+      name = 'Patricia Rosanna Jessica Mildred Oppenheimer'
+      puts 'My name is ' + name + '.'
+      puts 'Wow!  ' + name + ' is a really long name!'
+    %br
+    :coderay
+      #!Shell
+      My name is Patricia Rosanna Jessica Mildred Oppenheimer.
+      Wow!  Patricia Rosanna Jessica Mildred Oppenheimer is a really long name!
+    %p
+      Bir değişkene bir nesne atandıktan sonra aynı değişkene yeni bir başka nesne atayabiliriz.
+      Bu yüzden onlara değişken diyoruz. İşaret ettikleri (gösterdikleri ) değerler 
+      değişebildiği için. 
+    %br
+    :coderay
+      #!Ruby
+      
+      composer = 'Mozart'
+      puts composer + ' was "da bomb", in his day.'
+      composer = 'Beethoven'
+      puts 'But I prefer ' + composer + ', personally.'
+    %br
+    :coderay
+      #!Shell
+      Mozart was "da bomb", in his day.
+      But I prefer Beethoven, personally.
+    %br
+    %p Ayrıca değişkenler her zaman sadece stringlere işaret etmezler : 
+    %br
+    :coderay
+      #!Ruby
+      var = 'just another ' + 'string'
+      puts var
+
+      var = 5 * (1+2)
+      puts var
+    %br
+    :coderay
+      #!Shell
+      just another string
+      15
+    %br
+    %p Başka bir örnek : 
+    %br
+    :coderay
+      #!Ruby
+      
+      var1 = 8
+      var2 = var1
+      puts var1
+      puts var2
+      puts ''
+      var1 = 'eight'
+      puts var1
+      puts var2
+    %br
+    :coderay
+      #!Shell
+      
+      8
+      8
+
+      eight
+      8
+    %br
+    %p
+      Önce var2 ye var1 değerini atadık , yani 8 . Sonra var1 i değiştirdik ve  'eight' yaptık ,
+      ama var2 ilk değerinde kaldı.
+    %br
+    %p Evet buraya kadar bir çok şey öğrendik ; şimdi hepsini uygulayalım !
     %br
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/105") < Harfler
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/107") Genel Tekrar >

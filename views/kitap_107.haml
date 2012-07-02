@@ -14,11 +14,216 @@
     %br
     %h2 Genel Tekrar
     %br
+    %p
+      Şu ana kadar öğrendiğimiz
+      %b sayılar , harfler (strings) ve değişkenler
+      i kullanarak uygulamalar yapalım :
     %br
+    %p 
+      Ekrana 25 yazdırmak için aşağıdaki kodu kullanamayız , 
+      çünkü sayılar ve string ler toplanamaz : 
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
+    :coderay
+      #!Ruby
+      var1 = 2
+      var2 = '5'
+      puts var1 + var2
+    %p 
+      Bu kodu çalıştırırken bilgisayar karar veremez yani : 2 + 5 mi yapacak  yoksa “ 25 “ mi yazacak. 
+      Bu nedenle önce ya 
+      %b var1 i string 
+      yapmalı yada 
+      %b var2 yi tamsayı
+      yapmalıyız. 
+    %br
+    %h2 Çevirmeler ( tamsayı , string , ondalık ….) 
+    %br
+    %p 
+      Bir nesneyi 
+      %i string
+      tipine çevirmek için kendinden sonraya
+      %b .to_s
+      yazarız : 
+    %br
+    :coderay
+      #!Ruby
+      var1 = 2
+      var2 = '5'
+      puts var1.to_s + var2
+    %br
+    :coderay
+      #!Shell
+      25
+    %p 
+      Aynı şekilde nesnenin sonuna ,
+      %b .to_i 
+      yazarsak
+      %i tamsayıya
+      çevirir.
+    %br
+    %p
+      %b .to_f
+      %i ondalık
+      yapar.  ( hepsi bu kadar değil , diğer çeviricileri sonra göreceğiz…)
+    %br
+    :coderay
+      #!Ruby
+      var1 = 2
+      var2 = '5'
+      puts var1.to_s + var2
+      puts var1 + var2.to_i
+    %br
+    :coderay
+      #!Shell
+      25
+      7
+    %br
+    %h2 Dikkat ; 
+    %p 
+      var1 değeri olan 2 string yapıldı ama değeri hala tamsayı 2 . 
+      Eğer biz  =  ile var1 üzerine yeni bir  atama yapmadığımız sürece var1 değeri
+      tamsayı 2 olarak kalacak.
+    %br
+    %b Daha fazla uygulama : 
+    %br
+    :coderay
+      #!Ruby
+      puts '15'.to_f
+      puts '99.999'.to_f
+      puts '99.999'.to_i
+      puts ''
+      puts '5 is my favorite number!'.to_i
+      puts 'Who asked you about 5 or whatever?'.to_i
+      puts 'Your momma did.'.to_f
+      puts ''
+      puts 'stringy'.to_s
+      puts 3.to_i
+    %br
+    :coderay
+      #!Shell
+      15.0
+      99.999
+      99
 
+      5
+      0
+      0.0
+      stringy
+      3
+    %br
+    %p
+      Yukarıdaki örnekte sizin için bazı süprizler olabilir. 
+      5 ile başlayan cümle tamsayıya çevrilirken başta 5 olduğu için sadece onu aldı. 
+      Ama diğerinde de 5 vardı , ortada olduğu için onu almadı , cümlenin hepsini string gördü
+      ve tamsayıya boşluk olarak çevirdi. 
+    %br
+    %b puts  komutuna diğer bir bakış 
+    %br
+    :coderay
+      #!Ruby
+      puts 20
+      puts 20.to_s
+      puts '20'
+    %br
+    :coderay
+      #!Shell
+      20
+      20
+      20
+    %p 
+      Neden hepsi aynı çıktıyı verdi? Son iki için sorun yok  onlar zaten string veya
+      string e çevrilmiş.  Ama tamsayı 20 nasıl yazıldı tamsayı mı buradaki ? 
+      Aslında siz bir kağıda 2 ve 0  yazdığınızda bir tamsayı değil string yazarsınız.
+      Tamsayı 20 ise sayılabilen bir çokluktur ; el ve ayak parmakları gibi . 
+    %b O zaman işte size puts komutunun en önemli sırrı ! : 
+    %i 
+      Bu komut bir nesneyi yazmadan önce ona 
+      %b .to_s çevrimini otomatik yapar . 
+      puts komutunun sonundaki
+      %b s
+      de bu manaya gelir yani
+      %b put string . 
+    %p 
+      Bu şimdilik önemli değil gibi görünüyor ama ilerde puts komutu ile fotograf ve müzik 
+      dosyalarını kullanırken bu komutun özellikleri ve neler yapabileceğini bilmek 
+      işinize yarayacak. 
+    %br
+    %b gets ve chomp Metotları
+    %p 
+      %i gets
+      in ne yaptığını tahmin edebilirsiniz . 
+      %b gets
+      stringleri alır işleme koyar ( sizin klavyenizden  veya başka bir girdiden değer alır ).
+      Klavye string yazdığı için gets bunları rahatca alır. Siz ENTER e basıncaya kadar
+      yazdığınız string leri alır . 
+    %br
+    :coderay
+      #!Ruby
+      puts gets
+    %br
+    :coderay
+      #!Shell  
+      Is there an echo in here? (yazıp enter e basın)
+    %br
+    :coderay
+      #!Shell  
+      Is there an echo in here?
+    %br
+    %p
+      Şimdi 
+      %i interaktif
+      programlamaya geçelim. Siz isminizi verin , bilgisayar sizi selamlasın : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello there, and what\'s your name?'
+      name = gets
+      puts 'Your name is ' + name + '?  What a lovely name!'
+      puts 'Pleased to meet you, ' + name + '.  :)'
+    %p Sonuç : 
+    :coderay
+      #!Shell
+      Hello there, and what's your name?
+      Chris (enter)
+      Your name is Chris
+      ?  What a lovely name!
+      Pleased to meet you, Chris
+      .  :)
+    %p 
+      Hmmm... oldu fakat 
+      %b '?  What a lovely name!'
+      kısmı bir satır aşağı kaydı . Çünkü gets komutu C,h,r,i,s ile beraber ENTER i de 
+      işleme koydu. Bunu önlemek için 
+      %b chomp
+      kullanacağız . Bu bize string girdikten sonra bastığımız enter in işlem görmemesi 
+      şeklinde fayda sağlayacak : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello there, and what\'s your name?'
+      name = gets.chomp
+      puts 'Your name is ' + name + '?  What a lovely name!'
+      puts 'Pleased to meet you, ' + name + '.  :)'
+    %br
+    :coderay
+      #!Shell
+      Hello there, and what's your name?
+      Chris (enter)
+      Your name is Chris?  What a lovely name!
+      Pleased to meet you, Chris.  :)
+    %br
+    %b Denemeniz için bir kaç şey…
+    %ul
+      %li 
+        Bir kişiye önce adını sonra soyadını soran ve adı ve soyadı ile selamlama mesajı
+        veren bir program yazınız. 
+      %li 
+        Bir kişiye uğurlu sayısını soran ve buna 1 ekledikten sonra bunu en büyük ve
+        en uğurlu sayı olarak ilan eden bir program yazınız. 
+    %br
+    %p Bu örnekleri ve kendinizin alıştırmaları bitince yeni konuya geçin : 
+    %br
+    %br
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/106") < Değişkenler ve Atamalar
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/108") Metotlar >

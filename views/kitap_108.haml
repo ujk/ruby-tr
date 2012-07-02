@@ -12,11 +12,457 @@
     %h4 
       %a(href="/kitap/101")İçindekiler <<<
     %br
-    %h2 Metotlar
+    %h2 Metotlar (Fonksiyonlar)
+    %br
+    %p
+      Şu ana kadar puts ve gets gibi metotları gördük. 
+      (Ödev: Şu ana kadar gördüğümüz metotlardan 10 tanesini yazın.),
+      bunların bazılarının ne yaptığını biliyoruz ama metot olarak tanımlamadık. 
+    %p
+      Ruby dilinde nesneleri ( strings , tamsayılar ve ondalık sayılar …gibi ) 
+      %b isimlere
+      benzetirsek 
+      %i Metotlar
+      da bu dilin 
+      %b FİİLLERİ
+      dir. Normal dilde fiiler tek başına anlam ifade etmez .
+      Örneğin TİK TAK lama fiili  bir şey ifade etmez ta ki bir SAAT bunu yapana kadar.
+      %b "Saat titak lıyor"
+      deriz. Ruby dilinde de 
+      %b clock.tick
+      olarak kodlarız. ( tabi ki burada saati Ruby nesnesi kabul ediyoruz ).
+      Programcılar buna 
+      %i “ saatin TICK metodunu çağırmak “
+      der . 
+    %br
+    %p 
+      Ödevi tamamlayabildiniz mi? Şu metotları kolayca bulmuşsunuzdur : puts, gets, ve  chomp.
+      Ayrıca , to_i, to_f, ve to_s   metotlarını da kolayca buldunuz sanırım. 
+      Peki son dört metodu bulabildiniz mi?  +, -, *, ve /  !
+    %p 
+      Daha önce söylediğimiz gibi her fiil bir isim gerektirir . 
+      Metotlarda bir nesneye ihtiyaç duyar. Genelde metota ait nesneyi belirlemek kolaydır :
+      noktadan önce gelen nesnedir : aynen  clock.tick örneği veya 101.to_s  gibi 
+      ( clock ve 101 burada nesnedir ) . Bazen bu aritmetik işlem metotlarında olduğu gibi 
+      açıkca görünmez :
+      %b 5 + 5 
+      demek aslında
+      %b 5 .+ 5
+      dir .
+    %br
+    :coderay
+      #!Ruby
+      puts 'hello '.+ 'world'
+      puts (10.* 9).+ 9
+    %br
+    :coderay
+      #!Shell
+      hello world
+      99
+    %p 
+      Bunları bu şekilde kullanmayacağız ama nasıl olduğunu bilmemiz önemli. 
+      Bu daha önce bahsettiğimiz “koyun” * 5 doğru bir kod iken  5 * “koyun” kodunun hatalı 
+      olduğunu açıklıyor. Birincisi koyunun 5 defa çarpılacağını (çoğaltılacağını ) söylerken,
+      ikincisi 5 in koyun kadar çoğaltılacağı gibi anlamsız bir komut üretiyor. 
+    %p 
+      Ayrıca puts ve gets metotlarını da açıklamamız gerekiyor. 
+      Onların nesneleri nerede ? Bazen isim vermeden konuşuruz “ çık” , “git” gibi. 
+      Burada üstü kalpalı bir emir ile karşı karşıyayızdır. Ruby dilinde de   puts “git “  
+      derken aslına 
+      %b self.puts “git ”
+      diyoruz. 
+      %i self
+      özel bir değişken oluyor , hangi nesne içinde olursanız olun . 
+      Daha henüz nesne içinde olma kavramını görmedik ama Ruby dili ile programlamada 
+      her zaman büyük bir nesne içindeyizdir … 
+      %b yani Programın kendisi ! 
+      Programımız bu tür metotlara sahip olduğu için şanslıyız : 
+    %br
+    :coderay
+      #!Ruby
+      iCantBelieveIMadeAVariableNameThisLongJustToPointToA3 = 3
+      puts iCantBelieveIMadeAVariableNameThisLongJustToPointToA3
+      self.puts iCantBelieveIMadeAVariableNameThisLongJustToPointToA3
+    %br
+    :coderay
+      #!Shell
+      3
+      3
+    %p 
+      Bunların hepsini tam olarak kavramanız şu an için önemli değil. Sadece şunu bilmeliyiz :
+      önünde bir nokta olsun olmasın her metot bir nesne tarafından icra edilir.
+    %br
+    %h2 Eğlenceli String Metotları 
+    %p
+      Bunları ezberlemenize gerek yok. Unutursanız buradan tekrar bakabilirsiniz. 
+      Stringler ile yapabileceklerinizin bir kısmını öğreteceğiz. Gerçekte ben bile tüm bu 
+      string metotlarının yarısını bile bilmiyorum .  Ama internette bütün metotları 
+      listeleyen ve açıklayan referanslar mevcut. 
+      ( Bu döküman sonunda bu referans adreslerini size de vereceğiz.) . 
+      Bu metotların hepsini bilmek gereksiz tıpkı sözlükteki tüm kelimeleri bilmek gibi .  
+    %p 
+      İlk string metodumuz 
+      %b reverse
+      , bu stringi tersden yazdırıyor : 
+    %br
+    :coderay
+      #!Ruby
+      var1 = 'stop'
+      var2 = 'stressed'
+      var3 = 'Can you pronounce this sentence backwards?'
+      puts var1.reverse
+      puts var2.reverse
+      puts var3.reverse
+      puts var1
+      puts var2
+      puts var3
+    %br
+    :coderay
+      #!Shell
+      pots
+      desserts
+      ?sdrawkcab ecnetnes siht ecnuonorp uoy naC
+      stop
+      stressed
+      Can you pronounce this sentence backwards?
+    %b Dikkat :
+    %p
+      Gördüğünüz gibi reverse metodu stringin orjinalini bozmadı .
+      Sadece yazıldığı kod satırında uygulandı. O nedenle var1 değişkeni hala “stop” olarak kaldı.
+    %p
+      Diğer metodumuz
+      %b length
+      , boşluklar dahil !!!! string deki karakter sayısını verir . 
+    %br
+    :coderay
+      #!Ruby
+      puts 'What is your full name?'
+      name = gets.chomp
+      puts 'Did you know there are ' + name.length + ' characters in your name, ' + name + '?'
+    %br
+    :coderay
+      #!Shell 
+      What is your full name?
+      Christopher David Pine (enter)
+      #<TypeError: can't convert Fixnum into String>
+    %p Ama neden hata verdi ? Bulabildiniz mi? 
+    %p length bir sayı verir sonuçta ama biz string istiyoruz. Kolay  .to_s metodunu ekliyoruz : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'What is your full name?'
+      name = gets.chomp
+      puts 'Did you know there are ' + name.length.to_s + ' characters in your name, ' + name + '?'
+    %br
+    :coderay
+      #!Shell
+      What is your full name?
+      Christopher David Pine
+      Did you know there are 22 characters in your name, Christopher David Pine?
+    %p 
+      Ama sonuç bu olmamalıydı ! Hayır sonuç doğru bu ismimizdeki ve soyadımızdaki karakterler
+      sayısını verdi harf sayısını değil. 
+      %i O yüzden aradaki boşluklar da karakter olarak sayıldı . 
+    %p 
+      Siz de birinci , ikinci adınızı ve soyadınızı ayrı ayrı soran ve bunların harf 
+      sayılarını toplayıp veren programı yazınız. 
+    %p Diğer string metotlarından bazısı büyük küçük harf dönüşümü yapar : 
+    %p
+      %b upcase : 
+      küçük harflerin hepsini büyük harf e dönüştürür. 
+    %p 
+      %b downcase :
+      büyük harflerin hepsini küçük harf e dönüştürür.
+    %p
+      %b swapcase : 
+      küçük harfleri büyük harf e , büyük harfleri küçük harf e dönüştürür . 
+    %p
+      %b capitalize : 
+      sadece stringin ilk karakterini büyük harf e dönüştürür (eğer harf ise), 
+      diğerlerini küçük harf yapar.
+    %br
+    :coderay
+      #!Ruby
+      letters = 'aAbBcCdDeE'
+      puts letters.upcase
+      puts letters.downcase
+      puts letters.swapcase
+      puts letters.capitalize
+      puts ' a'.capitalize
+      puts letters
+    %br
+    :coderay
+      #!Shell
+      AABBCCDDEE
+      aabbccddee
+      AaBbCcDdEe
+      Aabbccddee
+       a
+      aAbBcCdDeE
+    %p 
+      %b puts ' a'.capitalize,
+      satırına bakalım değişme neden olmamış : ilk karakter dedik ilk harf değil 
+      burada ilk karakter boşluk . Acaba ilk karakter rakam olsaydı ? 
+      Rakamların büyük yazılımı var mı ? Kendiniz deneyin bakalım.
+    %p  
+      Yine buradaki metotlarda orjinal nesne de değişiklik yapmazlar. 
+      İleride değişiklik yapanları da göreceğiz.
+    %br
+    %p
+      Son olarak göreceğimiz string metotları  görsel şekillendirmelerde işimize yarar.
+    %p
+      %b center  :
+      stringi satırda ortalatmak için başına ve sonuna boşluklar ekler. 
+      Burada satır genişliğini siz belirlersiniz. Bir şiirin mısralarını ortalatmak isterseniz : 
+    %br
+    :coderay
+      #!Ruby
+      lineWidth = 50
+      puts(                'Old Mother Hubbard'.center(lineWidth))
+      puts(               'Sat in her cupboard'.center(lineWidth))
+      puts(         'Eating her curds an whey,'.center(lineWidth))
+      puts(          'When along came a spider'.center(lineWidth))
+      puts(         'Which sat down beside her'.center(lineWidth))
+      puts('And scared her poor shoe dog away.'.center(lineWidth))
+    %br
+    :coderay
+      #!Shell
+                Old Mother Hubbard                
+               Sat in her cupboard                
+            Eating her curds an whey,             
+             When along came a spider             
+            Which sat down beside her             
+        And scared her poor shoe dog away.        
+    %p
+      Hmmm... Biraz tembellik yaptım. Kafiyelerin (uyakların ) altalta gelmesi olmadı .
+      Mısraların başına koyduğumuz boşluklarla sizde oynayarak değişik satır 
+      ortalama şekilleri elde edin. Burada başa yazdığım ve satır genişliğini
+      tanımladığım bölüm önemli , ileride satır genişliğini değiştirmek istersem sadece
+      bu değer ile oynamam yetecek. Yoksa şiirin her satırına değer yazsaydım bunları tek tek 
+      değiştirmem gerekecekti . Bazen tembellik insanı yaratıcı fikirlere zorlayabiliyor ! 
+    %p 
+      Diğer iki string fomatlama metodu :
+      %ul
+        %li
+          %b ljust ( left justify ) :
+          stringi satırın soluna yaslar.
+        %li
+          %b rjust (right justify ) : 
+          stringi satırın sağına yaslar. 
+    %br
+    :coderay
+      #!Ruby
+      lineWidth = 40
+      str = '--> text <--'
+      puts str.ljust  lineWidth
+      puts str.center lineWidth
+      puts str.rjust  lineWidth
+      puts str.ljust (lineWidth/2) + str.rjust (lineWidth/2)
+    %br
+    :coderay
+      #!Shell
+      --> text <--                            
+                    --> text <--              
+                                  --> text <--
+      --> text <--                --> text <--
+    %br
+    %h2 Denemeniz için … 
+    %p
+      %ul
+        %li Kızgın bir patron programı yazın. Size ne istediğinizi kabaca sorsun. 
+        Siz ne söylerseniz söyleyin söylediğinizi tekrarlayıp ,itiraz edip reddetsin ve sizi işten kovsun.
+        Örnek : “zam istiyorum” dediğinizde , şöyle diyebilir:
+        “ne demek istiyon hemşerim ? –zam istiyorum – ha ?!? defol…kovuldun !! 
+        %li Aşağıdaki çıktıyı verecek bir İÇİNDEKİLER tablosu programı yazın. 
+    %br
+    :coderay
+      #!Shell
+                           Table of Contents                
+                                                 
+      Chapter 1:  Numbers                        page 1
+      Chapter 2:  Letters                       page 72
+      Chapter 3:  Variables                    page 118
+    %br
+    %h2 İleri Matematik 
+    %p 
+      (Bu bölüm isteğe bağlıdır. İleri matematik konuları ile ilgilenmiyorsanız bu kısmı atlayıp 
+      bir sonraki konuya geçebilirsiniz. ==>> Akış kontrolleri
+    %p 
+      Benim önerim 
+      %i Rastgele Sayılar
+      bölümüne bakmanız iyi olacaktır. 
+    %b Daha Fazla İşlem 
+    %p
+      Diğer iki işlem metodu ;
+      %ul
+        %li
+          %b  **  (exponentiation : üslü ifade)
+        %li
+          %b  %   (modulus : bölümden kalan). 
+    %p
+      Ruby dilinde “beşin karesi” dediğimizde bunu  5**2 şeklinde yazarız. 
+      Üslü ifade olarak ondalık sayılar da kullanılabilir. 
+      Beşin karekökünü yazmak için 5**0.5 yazmamız yeterlidir. 
+    %p
+      %i % metodunu bölünden sonra kalanı bulmak için kullanırız . 
+      Mesela 7 yi 3 e bölersek 2 buluruz ve 1 de kalandır ( tamsayılarda tabi ki) . 
+    %br
+    :coderay
+      #!Ruby
+      puts 5**2
+      puts 5**0.5
+      puts 7/3
+      puts 7%3
+      puts 365%7
+    %br
+    :coderay
+      #!Shell
+    %br
+    :coderay
+      #!Shell
+      25
+      2.23606797749979
+      2
+      1
+      1
+    %p
+      Son örnek artık olmayan yıllar ( artık yıllar kuralını ileride göreceğiz ) 
+      52 hafta ve +1 gündür. Bu yıllarda doğum gününüz salıya geldi ise ertesi yıl
+      çarşambaya gelecektir. Modulus metodunda ondalık sayılar da kullanılabilir .
+      Daha hassas sonuçlar için bu yapılabilir. Bunun uygulamalarını size bırakıyoruz . 
+    %p
+      Son olarak 
+      %b abs ( mutlak değer )
+      metodumuz var. Basitçe sayının mutlak değerini verir : 
+    %br
+    :coderay
+      #!Ruby
+      puts((5-2).abs)
+      puts((2-5).abs)
+    %br
+    :coderay
+      #!Shell
+      3
+      3
+    %br
+    %h2 Rastgele Sayılar
+    %p 
+      Ruby içinde iyi bir rastgele sayı üreteci ile gelir.  
+      Metodumuz 
+      %b rand .
+      Bunu tek başına kullanırsanız 0.0 – 1.0 arasında ondalık bir sayı üretir.
+      Yanına bir sayı koyduğunuzda örneğin 5 ; 0 ile 4 arasında 5 tamsayı üretir.
+      Buradaki ondalık ve tamsayı üretme  farkını iyi anlayalım : 
+    %br
+    :coderay
+      #!Ruby
+      puts rand
+      puts rand
+      puts rand
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(1))
+      puts(rand(1))
+      puts(rand(1))
+      puts(rand(99999999999999999999999999999999999999999999999999999999999))
+      puts('The weatherman said there is a '+rand(101).to_s+'% chance of rain,')
+      puts('but you can never trust a weatherman.')
+    %br
+    :coderay
+      #!Shell
+      0.866769322351658
+      0.155609260113273
+      0.208355946789083
+      61
+      46
+      92
+      0
+      0
+      0
+      22982477508131860231954108773887523861600693989518495699862
+      The weatherman said there is a 47% chance of rain,
+      but you can never trust a weatherman.
+    %p
+      Gördüğünüz gibi 0 – 100 arası sayı elde ekmek için  rand(101) kullandık. 
+      rand(1) her zaman 0 üretti ( 0 dan büyük ama 1 den küçük tamsayı var mı? ).
+      Bu metot ile üretilecek sayıların hangi aralıkta bulunacağını önceden iyi tahmin
+      edememek programlamada büyük hatalara sebep olabilir. Benim cd çalarım “rastgele çal”
+      dediğimde her parçayı çaldığı halde sondaki parçayı asla çalmıyordu. 
+    %p
+      Bazen aynı programın başka yerlerinde daha önce üretirdiğiniz sayıları 
+      tekrar aynı sıra ile ürettirmek isteyebilirsiniz . 
+      Bunun için bir başlangıç değeri tanımlamak gerekir bunu 
+      %b srand
+      ile yaparız : 
+    %br
+    :coderay
+      #!Ruby
+      srand 1776
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts ''
+      srand 1776
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+      puts(rand(100))
+    %br
+    :coderay
+      #!Shell
+      24
+      35    
+      36
+      58
+      70
+
+      24
+      35
+      36
+      58
+      70
+    %p
+      Aynı sayıyı (1776) verdiğiniz sürece aynı sayıları üretecektir. 
+      Daha sonra tekrar farklı sayılar üretmesini isterseniz  
+      %b srand 0
+      demeliyiz. Bu durumda bilgisayar ilginç bir sayıyı referans alır ;
+      %i bilgisayar saatinin milisaniye cinsinden değerini . 
+    %br
+    %h2 Math Nesnesi 
+    %br
+    :coderay
+      #!Ruby
+      puts(Math::PI)
+      puts(Math::E)
+      puts(Math.cos(Math::PI/3))
+      puts(Math.tan(Math::PI/4))
+      puts(Math.log(Math::E**2))
+      puts((1 + Math.sqrt(5))/2)
+    %br
+    :coderay
+      #!Shell
+      3.14159265358979
+      2.71828182845905
+      0.5
+      1.0
+      2.0
+      1.61803398874989
+    %p
+      Burada yeni bir noktalama işareti dikkatimizi çekiyor
+      %b :: .
+      Buna
+      %b scope operator
+      deniyor. 
+      %b İçerik ( alan ) operatörü
+      gibi çevirebiliriz. Daha fazlası şu an için gerekli değil. 
+    %br
+    %p Şimdi diğer bölüme geçme zamanı :
     %br
     %br
-    %br
-    %h4 sayfa hazırlanıyor...
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/107") < Genel Tekrar

@@ -14,10 +14,413 @@
     %br
     %h2 Akış Kontrol
     %br
+    %p
+      Herşeyin bir araya toplandığı noktadayız. 
+      Bu bölüm öncekinden kısa olmasına rağmen programlamada önünüze yeni bir yol 
+      açabilecek önemdedir. Bu bölümle birlikte gerçek interaktif kodlar yazmaya başlayacağız.
+      Ama önce , kullanacağımız bazı metot ve nesneleri görelim : 
+    %br
+    %h2 Karşılaştırma Metotları 
+    %p
+      Burayı hızlıca geçip daha ilginç konusu olan Dallanma ( Branching ) ya bakacağız.
+      Bir nesnenin diğerinden küçük veya büyük olmasını  
+      %b  " < "   ve  " > "  karşılaştırma metodları
+      ile yapıyoruz : 
+    %br
+    :coderay
+      #!Ruby
+      puts 1 > 2
+      puts 1 < 2
+    %br
+    :coderay
+      #!Shell
+      false
+      true
+    %p 
+      Ayrıca 
+      %b büyük veya eşit
+      yada 
+      %b küçük veya eşit
+      karşılaştırmalarını da 
+      %b " >= "  ve  " <= "
+      ile yapıyoruz : 
+    %br
+    :coderay
+      #!Ruby
+      puts 5 >= 5
+      puts 5 <= 4
+    %br
+    :coderay
+      #!Shell
+      true
+      false
+    %p
+      Son olarak
+      %b eşit : = =
+      ve 
+      %b eşit değil  !=  
+      karşılaştırmalarımız var . Burada matematik işlemlerinde kullandığımız = ile 
+      karşılaştırma eşittiri farklı . = de bir değişkene nesne (değer)  ataması yaparken ,
+      %i = = ile iki nesne eşitlik açısından karşılaştırılıyor. 
+    %br
+    :coderay
+      #!Shell 
+      a = b
+    %p dediğimizde  b nin değerini a ya da atamış oluruz .
+    %br
+    :coderay
+      #!Shell
+      a = = b
+    %p 
+      dediğimizde ise a ve b nin programın öncesinde sahip oldukları değerlerin 
+      eşitliğini karşılaştırırız. 
+    %br
+    :coderay
+      #!Ruby
+      puts 1 == 1
+      puts 2 != 1
+    %br
+    :coderay
+      #!Shell
+      true
+      true
+    %p
+      Tabiki string ler de karşılaştırılabilir. Bu karşılaştırma sözlükte dizilişlerinin 
+      önceliğine göre yapılır .  Buna  
+      %i lexicographical  ordering ( A dan Z ye karşılaştırma , sıralama  )
+      denilir .  Sözlükte “ kedi” “ köpek ”den önce sıralanmıştır  : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'cat' < 'dog'
+    %br
+    :coderay
+      #!Shell
+      true
+    %p 
+      Bilgisayarlar harfleri sıralarken öncelik BÜYÜK HARF sonra Küçük Harflerdir .
+      Bu nedenle sözlüklerdekinin aksine “Zürafa” bilgisayarda “arı” dan önce sıralanır.
+      Bu nedenle sözlük sıralarına göre bir karşılaştırma yapmadan önce 
+      %i karşılaştırılacak string ler downcase ( yada upcase veya capitalize ) ile aynı hale getirilmelidir. 
+    %p 
+      Son not : Karşılaştırma sonucunda elde ettiğimiz true ve false ler 
+      %i “true” ve “false” gibi STRING DEĞİLDİR. 
+      Bunlar özel nesnelerdir. Bunları devamlı kullanacağız . 
+      Tabiki .to_s ile string olabilirler zaten o yüzden puts ile sonuç verirken 
+      true çıktı olarak görünür ( puts sonucu string olarak döndürüyordu ; 
+      puts un sırrını unutmadık değil mi ? ) . 
+    %br
+    %h2 Dallanma ( Branching )
+    %p Basit ama güçlü bir kavramdır Dallanma , hemen örneğe bakalım : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello, what\'s your name?'
+      name = gets.chomp
+      puts 'Hello, ' + name + '.'
+      if name == 'Chris'
+        puts 'What a lovely name!'
+      end
+    %br
+    :coderay
+      #!Shell
+      Hello, what's your name?
+      Chris (enter)
+      Hello, Chris.
+      What a lovely name!
+    %p
+      Eğer farklı isim girseydik :
+    %br
+    :coderay
+      #!Shell
+      Hello, what's your name?
+      Chewbacca (enter)
+      Hello, Chewbacca.
+    %br
+    %p
+      if den sonra gelen şart doğru ise if….end arasındaki kod çalışır, yanlış ise çalışmaz 
+      ( end den sonraki koda atlar ). 
+    %p
+      if…end arasının içerden yazılması kodun takibi açısından bir kolaylık sağlamak içindir.
+      Bunu alışkanlık haline getirin. Bu kod için çok gerekli değil ama dallanmaların 
+      çok ve bazen içiçe !!! olduğu kodlarda çok kolaylık sağlayacaktır . 
+    %p
+      Genelde kodlarda bir şart doğru işe bir işin yanlış ise başka bir işin yapılması istenir.
+      Bunu için
+      %b else
+      kullanıyoruz :  
+    %br
+    :coderay
+      #!Ruby
+      puts 'I am a fortune-teller.  Tell me your name:'
+      name = gets.chomp
+      if name == 'Chris'
+        puts 'I see great things in your future.'
+      else
+        puts 'Your future is... Oh my!  Look at the time!'
+        puts 'I really have to go, sorry!'
+      end
+    %br
+    :coderay
+      #!Shell
+      I am a fortune-teller.  Tell me your name:
+      Chris (enter)
+      I see great things in your future.
+    %p 
+      Şimdi başka bir isim girelim :   
+    %br
+    :coderay
+      #!Shell
+      I am a fortune-teller.  Tell me your name:
+      Ringo (enter)
+      Your future is... Oh my!  Look at the time!
+      I really have to go, sorry!
+    %p
+      Dallanma ile kod içinde bir yol ayrımı ortaya çıkar isim “Chris” 
+      ise bir yola değilse diğer yola gitmemizi söyler. 
+    %p
+      Aynı ağaç dallarında olduğu gibi kodlarda bir dallanma kendi içinde 
+      tekrar dallara ayrılabilir : 
+    %br
+    :coderay
+      #!Ruby    
+      puts 'Hello, and welcome to 7th grade English.'
+      puts 'My name is Mrs. Gabbard.  And your name is...?'
+      name = gets.chomp
+
+      if name == name.capitalize
+        puts 'Please take a seat, ' + name + '.'
+      else
+        puts name + '?  You mean ' + name.capitalize + ', right?'
+        puts 'Don\'t you even know how to spell your name??'
+        reply = gets.chomp
+  
+          if reply.downcase == 'yes'
+            puts 'Hmmph!  Well, sit down!'
+          else
+            puts 'GET OUT!!'
+          end
+      end
+    %br
+    :coderay
+      #!Shell
+      Hello, and welcome to 7th grade English.
+      My name is Mrs. Gabbard.  And your name is...?
+      Chris (enter)
+      chris?  You mean Chris, right?
+      Don't you even know how to spell your name??
+      yes
+      Hmmph!  Well, sit down!
+    %p
+      Şimdi büyük harf ile deneyelim…  
+    %br
+    :coderay
+      #!Shell
+      Hello, and welcome to 7th grade English.
+      My name is Mrs. Gabbard.  And your name is...?
+      Chris (enter)
+      Please take a seat, Chris.
+    %p 
+      Kodları yazarken if…else…end lerin fazla olması hangisi hangisine ait karışabilir.
+      Tavsiyemiz bunları başta baraber yazıp sonra içlerinin doldurulması olacaktır. 
+      Yani kod önce şöyle görünecek : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello, and welcome to 7th grade English.'
+      puts 'My name is Mrs. Gabbard.  And your name is...?'
+      name = gets.chomp
+
+      if name == name.capitalize
+      else
+      end
+    %p 
+      Sonra dolduracağım aralara açıklama satırı ekleyebilirim. 
+      Bilgisayarın işleme almadığı ama kodun okunmasını kolaylaştırması  için gereken
+      yerlere açıklama satırları ekleyebiliriz bunun için başına 
+      %b #
+      koymamız yeterlidir. 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello, and welcome to 7th grade English.'
+      puts 'My name is Mrs. Gabbard.  And your name is...?'
+      name = gets.chomp
+
+      if name == name.capitalize
+      #  She's civil.
+      else
+      #  She gets mad.
+      end
+    %br
+    %h2 Döngüler ( Looping ) 
+    %p
+      Bilgisayarlardan bazen aynı işlemi tekrar tekrar yapmalarını isteriz . 
+      Bunu bilgisayardan isterken tekrarlama sayısını ( veya ölçüsünü ) ve durma 
+      noktasını (şartını ) da belirtmeliyiz. Bilgisayarlar sıkılmazlar nerede duracaklarını
+      söylemez isek durmazlar. Döngülerle de bilgisayara belli şart veya şartlar olduğu sürece
+      döngü içini tekrarla şart olmayınca döngüyü sonlandır demeliyiz : 
+    %br
+    :coderay
+      #!Ruby
+      command = ''
+      while command != 'bye'
+      puts command
+      command = gets.chomp
+      end
+      puts 'Come again soon!'
+    %br
+    :coderay
+      #!Shell
+      
+      Hello? (enter)
+      Hello?
+      Hi! (enter)
+      Hi!
+      Very nice to meet you. (enter)
+      Very nice to meet you.
+      Oh... how sweet! (enter)
+      Oh... how sweet!
+      Bye (enter)
+      Come again soon!
+    %p
+      Bu bir döngüdür. 
+      %i Çıktının en başının boş satır olduğuna dikkat edin . 
+      Bu puts un ilk döngüde çalıştırılması ile oluşur. Bu boş satırı yazdırmadan da 
+      aynı çıktıyı alabilir miydik ? Deneyin . 
+    %p
+      Döngüler bir çok ilginç şeyi yapmamızı sağlar. Ama bilgisayarın sonsuz düngüye girme
+      ihtimalı herzaman vardır. 
+      %i Böyle bir durumda Ctrl ve C tuşuna basın !!! 
+      Yada döngünün hangi şartta duracağını kodlamayı unutmayın. 
+    %br
+    %h2 Mantıkla ilgili  öneriler  
+    %p
+      İlk dallanma programımıza dönersek . Karım KATY bu kodda kendi isminin övülmesini 
+      göremez ise kızabilir. Onu da kodumuza ekleyelim : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello, what\'s your name?'
+      name = gets.chomp
+      puts 'Hello, ' + name + '.'
+      if name == 'Chris'
+        puts 'What a lovely name!'
+      else
+        if name == 'Katy'
+          puts 'What a lovely name!'
+        end
+      end
+    %br
+    :coderay
+      #!Shell
+      Hello, what's your name?
+      Katy (enter)
+      Hello, Katy.
+      What a lovely name!
+    %p
+      Evet çalıştı , ama iyi bir kod olmadı . Neden ? Programlamada ilk öğrendiğim kural K T E :
+      Kendini Tekrar Etme dir. Bu kodumuzda  puts 'What a lovely name!'  satırını iki defa yazdık . Bu neden önemli? İki defa aynı şeyi yazarken birinde hata yapabilirdim , veya daha sonra bir kelimeyi değiştirmek isteseydim her ikisinden de değiştirecektim ( hatırlayın ben tembel bir programcıyım ) : 
+    %br
+    :coderay
+      #!Ruby
+      puts 'Hello, what\'s your name?'
+      name = gets.chomp
+      puts 'Hello, ' + name + '.'
+      if (name == 'Chris' or name == 'Katy')
+      puts 'What a lovely name!'
+      end
+    %br
+    :coderay
+      #!Shell
+      Hello, what's your name?
+      Katy (enter)
+      Hello, Katy.
+      What a lovely name!
+    %p
+      Daha iyi. Burada 
+      %ul
+        %li
+          %b Mantıksal Operatör (logical operators) olarak  
+          %i "or"
+          kullandık . 
+        Diğer operatörler  
+        %li
+          %b "and"  ve  "not" . 
+      %i Bunları kullanırken parantez içine yazmak iyi bir alışkanlıktır : 
+    %br
+    :coderay
+      #!Ruby
+      iAmChris  = true
+      iAmPurple = false
+      iLikeFood = true
+      iEatRocks = false
+      puts (iAmChris  and iLikeFood)
+      puts (iLikeFood and iEatRocks)
+      puts (iAmPurple and iLikeFood)
+      puts (iAmPurple and iEatRocks)
+      puts
+      puts (iAmChris  or iLikeFood)
+      puts (iLikeFood or iEatRocks)
+      puts (iAmPurple or iLikeFood)
+      puts (iAmPurple or iEatRocks)
+      puts
+      puts (not iAmPurple)
+      puts (not iAmChris )
+    %br
+    :coderay
+      #!Shell
+      true
+      false
+      false
+      false
+      
+      true
+      true
+      true
+      false
+      
+      true
+      false
+    %p
+      Burada  
+      %i and
+      kullanımında bir zorluk yok  ( sadece true true olduğunda true ). Ama 
+      %i or
+      karıştırılabilir.  İngilizcede or “ biri veya diğeri (ama ikisi birden değil )
+      manasındadır. Mesela anneniz kek mi or (veya) pasta mı diye sorduğunda her ikisinide
+      isteyip istemediğini kastetmez. Bilgisayar ise or ile biri mi? , diğeri mi? 
+      yoksa her ikisi mi? ( birinin true olması yeterli ) demek ister . 
+      Bu yüzden bilgisayarlar annenizden daha eğlencelidirler. 
+    %br
+    %h2 Denemeniz için  
+    %p
+      %ul
+        %li 
+          "99 bottles of beer on the wall..."  bu sözleri : "99 Bottles of Beer on the Wall."
+          şeklinde yazdıracak programı yazın.
+        %li
+          Kulağı duymayan büyükanne programı yazın. Büyük harflarle söylenenler dışında her şeye
+          “HUH?!  SPEAK UP, SONNY! “ diye cevap versin . Büyük harlerle (bağırdığınızı düşünsün )
+          cevap vermişseniz ; “ NO, NOT SINCE 1938!” diye cevaplasın. Daha gerçekci 
+          olması için büyükannenizin her seferinde farklı tarihler ( 1930 ve 1950 arası mesela )
+          söylemesini kodlayın . 
+          Siz “BYE” deyinceye kadar program tekrarlasın .
+        %li
+          Büyükanne programınızı geliştirin . Sizin gitmenizi istemeyen büyükanne aynı satırda
+          3 defa “BYE BYE BYE” yazmadığınız sürece sizi duymasın . 
+        %li
+          Artık yıllar ( 366 gün ) . Gireceğimiz iki yıl aralığında ( bu girilen yıllar da dahil )
+          artık yılları bize listeleyen bir program yazın. 
+        %i 
+          Artık yıl olma kuralı  :
+          %p A.  4 ile kalansız bölünebilen yıllar ( 1984 ve 2004 gibi ). 
+          %p B. 100 ile kalansız bölünebilen yıllar hariç ( 1800 ve  1900 gibi ) .
+          %p C. 400 ile kalansız bölünenler de artık yıldır. ( 1600 ve 2000 gibi ) . 
+    %br
+    %p Şimdi biraz dinlenin ve diğer bölüme geçin :  === >>>   Diziler
     %br
     %br
-    %h4 sayfa hazırlanıyor...
-    %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/108") < Metotlar
       %a.btn.btn-success.btn-large.pull-right(href="/kitap/110") Diziler ve Tekrarlayıcılar >
