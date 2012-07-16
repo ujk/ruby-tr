@@ -14,9 +14,281 @@
     %br
     %h2 Diziler ve Tekrarlayıcılar
     %br
+    %p
+      Şöyle bir program yazmamız istensin : 
+      İstediğimiz sayıda ( çok fazla ) her satıra bir kelime girelim ve biz ENTER e basana kadar
+      veya boş satır girene kadar devam etsin. Sonra bu girilen kelimeler alfabetik sırada
+      bize sıralansın. Bu şu ana kadar öğrendiklerimiz ile yapılabilecek kadar kolay değil.
+      Burada girilen kelimeleri saklayabileceğimiz ve takip edebileceğimiz bir yol bulmalıyız ki
+      bunlar diğer değişkenlerimiz ile karışmasın.
+    %p 
+      Bunları sıraya koyacağımız ve saklayabileceğimiz listelere 
+      %b DİZİLER (Arrays ) 
+      diyoruz : 
     %br
+    :coderay
+      #!Ruby
+      []
+      [5]
+      ['Hello', 'Goodbye']
+
+      flavor = 'vanilla'             #  Tabiki bu bir dizi değil...
+      [89.9, flavor, [true, false]]  #  ...bu ise dizi.
     %br
-    %h4 sayfa hazırlanıyor...
+    %p 
+      Birincisi bir boş dizi , diğer dizi tek bir sayıya sahip , üçüncü dizi iki adet stringe sahip.
+      Dördüncü ise basit bir atama deyimi . Sonuncu ise üç elemanlı bir dizi 
+      (dikkat 
+      %i dört elemanlı değil üç elemanlı
+      ) çünkü son eleman iki elemanlı başka bir dizi ama bu ana dizi içinde tek eleman gibi .
+      Değişkenlerin nesne olmadığını hatırlayalım. Son dizinin elemanları ; bir ondalık sayı ,
+      bir string ve bir dizidir. Önceki satırdaki flavor değişkenine başka bir değer atasak 
+      bile dizin içi değişmez. 
+    %p
+      Dizideki her nesneyi bulmamızı kolaylaştırmak için her bölüme bir indeks sayısı verilmiştir. 
+      Programcılar ve matematikciler saymaya sıfırdan başlarlar . 
+      Dizilerdeki birinci sıradaki nesnenin indeksi sıfırdan başlar. 
+    %br
+    :coderay
+      #!Ruby
+      names = ['Ada', 'Belle', 'Chris']
+      puts names
+      puts names[0]
+      puts names[1]
+      puts names[2]
+      puts names[3]  #  This is out of range.
+    %br
+    :coderay
+      #!Shell
+      Ada
+      Belle
+      Chris
+      Ada
+      Belle
+      Chris
+      nil
+    %br
+    %p
+      %b puts names 
+      komutu names dizisi içindeki nesneleri yazdırdı. 
+      %b puts names[0] 
+      komutu names dizisinin ilk elemanını 
+      %b puts names[1]
+      komutu ikinci elemanını…. 
+      Eminimki karışık görünüyor ama kullandıkça alışacağız. Sadece şöyle düşünelim : 
+      saymaya sıfırdan başlayacağız ve birinci , ikinci diyerek nesneleri tanımlamayacağız. 
+    %p
+      Sonuncu kodda puts names[3] bir hata mesajı beklerdik ama nil ( hiçbirşey yok , boş ) 
+      gibi bir çıktı verdi. names[3] dizisinin (dördüncü) elemanı yoktur. 
+      %b
+        nil
+        %i özel bir nesnedir
+        ve 
+        %i işlem sonucunda başka bir nesne yok ise çıkar. 
+    %p
+      Dizilerin bu şekilde indekslenmesi gözünüzü korkutmasın , indeksleri kullanmadan da 
+      işlemlerimizi yapabileceğimiz dizi metotlarını tanıyacağız şimdi : 
+    %p
+      %b Not :
+      Bu aşamadan sonraki konular ve bölümler Ruby programlama dilinin üstünlüklerinin daha çok
+      hissedileceği , esnekliğin , kısa kod yazmanın vs öne çıktığı bölümler ve Neden RUBY ?
+      nin cevabını bulabileceğiniz kısımlar. Daha yoğun ve uzun ( diğer dillerde daha uzun yazmak
+      gerekirdi , onlara göre yine de kısa )  kodlar örneklerde gösterileceği için acele etmeden
+      ve mutlaka kendiniz de kodları yazarak ( hatta ufak değişikler yaparak çıktılarını görerek )
+      çalışmanızı tavsiye ediyorum…
+      %i Niyazi ATEŞ
+    %br
+    %h3 Metot :  each 
+    %p 
+      %i each
+      dizinin elemanlarının her birinin üstünde  tek tek bir uygulamayı yaptırmamızı sağlar.
+      Örneğin dizi içindeki dünya dillerinin her birine iyi bir şeyler demek için : 
+    %br
+    :coderay
+      #!Ruby
+      languages = ['English', 'German', 'Ruby']
+      languages.each do |lang|
+        puts 'I love ' + lang + '!'
+        puts 'Don\'t you?'
+      end
+      puts 'And let\'s hear it for C++!'
+      puts '...'
+    %br
+    :coderay
+      #!Shell
+      I love English!
+      Don't you?
+      I love German!
+      Don't you?
+      I love Ruby!
+      Don't you?
+      And let's hear it for C++!
+      ...
+    %p 
+      Böylece yukarıda indeks sayılarını kullanmadan bir dizi içindeki nesneleri kullanarak bir
+      işlem gerçekleştirdik. Kodun ikinci satırını söyle okuyabiliriz : 
+      %i
+        “languages dizisinin her elemanını lang değişkenine gönder ve bunlara do…end arasındaki
+        komutları uygula “. 
+    %p
+      Bunun bir önceki bölümde gördüğümüz döngülere benzediğini söyleyebilirsiniz , doğrudur.
+      Ama aralarındaki farkı açıklayalım : 
+      %i each bir metotdur.
+      Döngülerdeki while…end , do…end ve if else … vs ise 
+      %i Ruby dilinin temel işlemleridir ( = ve parantezler gibi ) .
+      Bunları dilimizdeki noktalama işaretlerine benzetebiliriz. 
+    %p
+      Dizilerdeki bu döngülere benzeyen metotlara  ( each gibi )
+      %b tekrarlayıcılar  (iterators )
+      denir. 
+      %b
+        %i 
+          Burada önemli olan tekrarlayıcılardan sonra mutlaka do…end kullanılır ,
+          while ve if döngülerinde bu olmaz.
+    %br
+    %p 
+      Başka bir tekrarlayıcı da şudur:
+      %b times
+      %i ( ama bu dizi metodu değil bir tamsayı metodudur ) :  
+    %br
+    :coderay
+      #!Ruby
+      3.times do
+        puts 'Hip-Hip-Hooray!'
+      end
+    %br
+    :coderay
+      #!Shell
+      Hip-Hip-Hooray!
+      Hip-Hip-Hooray!
+      Hip-Hip-Hooray!
+    %br
+    %h3 Diğer Dizi Metotları  
+    %p
+      Buraya kadar sadece
+      %i each
+      metodunu öğrendik. Bunun dışında en az string metotları kadar dizi metodu vardır.
+      Aslında bunların bir çoğuda stringlerde yaptığı işin aynısını yapar 
+      ( length, reverse, +, and *) gibi . Tek farkla 
+      %i 
+        dizilerde bu metotlar dizi içindeki nesnelere işlem yaparlar 
+        (mesela  length : dizideki eleman sayısını verir , string de ise karakter sayısını 
+        ( harf sayısını değil ! ) veriyordu ) . 
+    %br
+    %p
+      Diğer metotlar
+      %b last
+      ve
+      %b join
+      gibi dizilere özel metotlardır.
+    %p
+      Aynı şekilde
+      %b push
+      ve
+      %b pop
+      da dizilerin metodudurlar ve diziyi değiştirirler
+      %b
+        %i ( önemli ).
+    %br
+    %p
+      Önce
+      %b to_s
+      ve
+      %b join
+      metotlarına bakalım . Bu ikisi aynıdır. Sadece join dizi nesnelerinin arasına string yerleştirir : 
+    %br
+    :coderay
+      #!Ruby
+      foods = ['artichoke', 'brioche', 'caramel']
+      puts foods
+      puts
+      puts foods.to_s
+      puts
+      puts foods.join(', ')
+      puts
+      puts foods.join('  :)  ') + '  8)'
+      200.times do
+      puts []
+      end
+    %br
+    :coderay
+      #!Shell
+      artichoke
+      brioche
+      caramel
+
+      artichokebriochecaramel
+
+      artichoke, brioche, caramel
+
+      artichoke  :)  brioche  :)  caramel  8) #neden böyle oldu? 
+      # join sadece nesnelerin arasına STRING yerleştirir. +' 8)' o yüzden sona eklendi
+      # değişik şekillerde siz de irb konsolunuzda bunları bolca deneyin...
+
+
+
+    %p
+      Gördüğünüz gibi puts dizilerde farklı davrandı . Dizinin her elemanına uygulandı. 
+      Bu yüzden kod sonundaki 200 defa boş dizi için puts bir şey yazmadı . 
+      Siz de , dizi içinde dizi olursa puts nasıl davranacak ? kod yazarak deneyin.
+    %p Fark ettiniz mi boş satır yapmak istediğimde boş string yerine sadece puts yazdım.
+    %br
+    %p
+      Şimdi de 
+      %b push, pop,
+      ve
+      %b last
+      metotlarına bakalım .
+      %i push ve pop birbirinin tersi işlem yapar. 
+      %b push
+      dizinin sonuna nesne ekler , 
+      %b pop
+      dizinin son elemanını diziden hem çıkarır hem size bildirir . 
+      %b last
+      ise pop gibi işlem yapar 
+      %i sadece son elemanı size bildirir ama diziden çıkarmaz.
+    %br
+    %i Tekrarlamak gerekirse  push ve pop dizilerin nesne içeriğini değiştiriler : 
+    %br
+    :coderay
+      #!Ruby
+      favorites = []
+      favories.push 'raindrops on roses'
+      favorites.push 'whiskey on kittens'
+
+      puts favorites[0]
+      puts favorites.last
+      puts favorites.length
+
+      puts favorites.pop
+      puts favorites
+      puts favorites.length
+    %br
+    :coderay
+      #!Shell
+      raindrops on roses
+      whiskey on kittens
+      2
+      whiskey on kittens
+      raindrops on roses
+      1
+    %br
+    %h3 Denemeniz için
+    %br
+    %ul
+      %li 
+        Bu bölümün başında sorduğumuz dizi elemanlarını alfabetik sıralama sorusunu şimdi yapmaya
+        çalışın. 
+        %i İpucu : 
+        Kullanışlı bir dizi metodu olan 
+        %b sort
+        kullanabilirsiniz .
+      %li
+        Aynı problemi sort metodu kullanmadan nasıl yapardınız ?
+        ( stringlerde ki > ,  < olabilir mi? each metodu yardımı ile …)
+      %li Metotlar bölümünde yaptığımız “İçindekiler Tablosu” nu dizi kullanarak yapın. 
+    %br
+    %p Az çok metotlar konusunu öğrendik . Şimdi kendi metotlarımızı oluşturalım !
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/109") < Akış Kontrol

@@ -14,9 +14,736 @@
     %br
     %h2 Kendi Metotlarımızı Yazalım
     %br
+    %p
+      Döngüler ve Tekrarlayıcılarda gördüğümüz gibi aynı kodu defalarca çalıştırmamız mümkün. 
+      Şimdide aynı şeyi defalarca yaptırmak istediğimizi fakat bu defa bunu programın farklı 
+      yerlerinden çağırarak nasıl yapabileceğimizi düşünelim. 
+      Örnek olarak bir psikoloji öğrencisinin hazırladığı soru listesi üzerinden bunu deneyelim.
+      Şöyle sorular olsun  : 
     %br
+    :coderay
+      #!Ruby
+      puts 'Hello, and thank you for taking the time to'
+      puts 'help me with this experiment.  My experiment'
+      puts 'has to do with the way people feel about'
+      puts 'Mexican food.  Just think about Mexican food'
+      puts 'and try to answer every question honestly,'
+      puts 'with either a "yes" or a "no".  My experiment'
+      puts 'has nothing to do with bed-wetting.'
+      puts
+      
+      #  Biz soruları soracağız ama cevapları önemsemiyoruz.
+      
+      goodAnswer = false
+      while (not goodAnswer)
+        puts 'Do you like eating tacos?'
+        answer = gets.chomp.downcase
+        if (answer == 'yes' or answer == 'no')
+          goodAnswer = true
+        else
+          puts 'Please answer "yes" or "no".'
+        end
+      end
+      
+      goodAnswer = false
+      while (not goodAnswer)
+        puts 'Do you like eating burritos?'
+        answer = gets.chomp.downcase
+        if (answer == 'yes' or answer == 'no')
+          goodAnswer = true
+        else
+          puts 'Please answer "yes" or "no".'
+        end
+      end
+      
+      #  Bu cevaba dikkat ediyoruz şimdi.
+      goodAnswer = false
+      while (not goodAnswer)
+        puts 'Yatağınızı ıslattınız mı?'
+        answer = gets.chomp.downcase
+        if (answer == 'yes' or answer == 'no')
+          goodAnswer = true
+          if answer == 'yes'
+            wetsBed = true
+          else
+            wetsBed = false
+          end
+        else
+          puts 'Please answer "yes" or "no".'
+        end
+      end
+      
+      goodAnswer = false
+      while (not goodAnswer)
+        puts 'Do you like eating chimichangas?'
+        answer = gets.chomp.downcase
+        if (answer == 'yes' or answer == 'no')
+          goodAnswer = true
+        else
+          puts 'Please answer "yes" or "no".'
+        end
+      end
+      
+      puts 'Just a few more questions...'
+      
+      goodAnswer = false
+      while (not goodAnswer)
+        puts 'Do you like eating sopapillas?'
+        answer = gets.chomp.downcase
+        if (answer == 'yes' or answer == 'no')
+          goodAnswer = true
+        else
+          puts 'Please answer "yes" or "no".'
+        end
+      end
+      
+      #  daha birçok soru sorabiliriz yemekler hakkında.
+      
+      puts
+      puts 'DEBRIEFING:'
+      puts 'Thank you for taking the time to help with'
+      puts 'this experiment.  In fact, this experiment'
+      puts 'has nothing to do with Mexican food.  It is'
+      puts 'an experiment about bed-wetting.  The Mexican'
+      puts 'food was just there to catch you off guard'
+      puts 'in the hopes that you would answer more'
+      puts 'honestly.  Thanks again.'
+      puts
+      puts wetsBed
     %br
-    %h4 sayfa hazırlanıyor...
+    :coderay
+      #!Shell
+      Hello, and thank you for taking the time to
+      help me with this experiment.  My experiment
+      has to do with the way people feel about
+      Mexican food.  Just think about Mexican food
+      and try to answer every question honestly,
+      with either a "yes" or a "no".  My experiment
+      has nothing to do with bed-wetting.
+      
+      Do you like eating tacos?
+      yes
+      Do you like eating burritos?
+      yes
+      Yatağınızı ıslattınız mı?
+      no way!
+      Please answer "yes" or "no".
+      Yatağınızı ıslattınız mı?
+      NO
+      Do you like eating chimichangas?
+      yes
+      Just a few more questions...
+      Do you like eating sopapillas?
+      yes
+      
+      DEBRIEFING:
+      Thank you for taking the time to help with
+      this experiment.  In fact, this experiment
+      has nothing to do with Mexican food.  It is
+      an experiment about bed-wetting.  The Mexican
+      food was just there to catch you off guard
+      in the hopes that you would answer more
+      honestly.  Thanks again.
+      
+      false
+    %br
+    %p
+      Birçok tekrarı olan uzun bir program. (Meksika yemekleri ile ilgili olan bölümler aynı sadece
+      yatak ıslatma sorusu biraz farklı.) Kodlamada tekrar iyi bir şey değildir. Yine de yukarıdaki 
+      kodları bir döngü içine yada tekrarlayıcı içine alamayız çünkü sorular arasında duruma göre 
+      farklı işlemler yapmamız gerek. Bu durumlarda en iyi yol 
+      %b METOT(fonksiyon)
+      yazmaktır : 
+    %br
+    :coderay
+      #!Ruby
+      def sayMoo
+        puts 'mooooooo...'
+      end
+    %p
+      Bu şekilde yazdık ama program çalışmadı. Çalışmaz çünkü burada sadece metodumuzu tanımladık ,
+      ona yapmasını söylemedik. 
+    %br
+    :coderay
+      #!Ruby
+      def sayMoo
+        puts 'mooooooo...'
+      end
+      sayMoo
+      sayMoo
+      puts 'coin-coin'
+      sayMoo
+      sayMoo
+    %br
+    :coderay
+      #!Shell
+      mooooooo...
+      mooooooo...
+      coin-coin
+      mooooooo...
+      mooooooo...
+    %p Evet bu daha iyi. (Fransızca bilmeyenler için araya bir ördek koyduk ve Fransızca vak vak diyor. 
+    %p
+      Böylece metodumuzu 
+      %b sayMoo
+      olarak tanımladık. (metot isimleri değişken isimleri gibi küçük harf ile başlar ,
+      bunun bazı istisnaları vardır + ve = = metotlarında olduğu gibi ) 
+    %p 
+      Peki tüm metotlar bir nesne ile ilişkilendirilir mi? Evet , yukarıdaki örnekte olduğu gibi 
+      bazen 
+      %i ( puts ve gets gibi )
+      programın tümü ile ilgili nesnelere bağlanırlar. Sonraki bölümde metotların diğer nesnelere
+      nasıl bağlanacağını göreceğiz ama önce : 
+    %br
+    %h3 Metot Parametreleri 
+    %p
+      Farkına varmışsınızdır bazı metotlar 
+      %i (gets, to_s, reverse... gibi) 
+      sadece bir nesne üzerinden çağrılır . Ama diğerleri ( +, -, puts...) metodun nesneye ne
+      şekilde uygulanacağını belirten parametrelerle kullanılırlar. Mesela 5+, diyebilir misiniz? 
+      5 eklenecek dediniz ama neye eklenecek belirtmeniz gerekir. 
+    %br
+    %p
+      Önceki metodumuz olan sayMoo ya bir parametre ekleyelim  
+      (moos ların sayısını biz verelim mesela ), şöyle yapabiliriz : 
+    %br
+    :coderay
+      #!Ruby
+      def sayMoo numberOfMoos
+        puts 'mooooooo...'*numberOfMoos
+      end
+
+      sayMoo 3
+      puts 'oink-oink'
+      sayMoo  #  bu hata verecektir çünkü parametresiz yazılmış.
+    %br
+    :coderay
+      #!Shell
+      mooooooo...mooooooo...mooooooo...
+      oink-oink
+      #<ArgumentError: wrong number of arguments (0 for 1)>
+    %p
+      %b numberOfMoos
+      bir değişkendir ve metodun parametresini içinde tutar. Metodu tanımlarken parametre
+      kullanacağımızı başta tanımladık ve girdiler sırasında bunun girilmesi gerekli hale geldi.
+      Tanımladığımız halde parametre girmezsek bilgisayarımız bunu hata olarak algılar. 
+    %p
+      Daha öncede dediğimiz gibi nesneleri cümledeki isimlere , metotları da fiillere benzetirsek
+      %i 
+        parametreleri de 
+        %b ZARF
+        lara benzetebiliriz. Zarflar ; Yüklemin (metodun) zamanını, durumunu, miktarını, yönünü,
+        koşulunu vb. bildiren öğelerdir. 
+    %br
+    %h3 Local (yerel) Değişkenler 
+    %p Aşağıdaki örnek kodda iki değişkenimiz var :  
+    %br
+    :coderay
+      #!Ruby
+      def doubleThis num
+        numTimes2 = num*2
+        puts num.to_s+' doubled is '+numTimes2.to_s
+      end
+      doubleThis 44
+    %br
+    :coderay
+      #!Shell
+      44 doubled is 88
+    %br
+    %p
+      Değişkenlerimiz num ve numTimes2. Bunların ikiside doubleThis metodu içinde tanımlı. 
+      Bu nedenle bunlara local (yerel) değişkenler diyoruz. Bunun anlamı metot içinde değer alır
+      dışarıya çıkamazlar , çıkarılamazlar. Çıkarmayı deneyelim : 
+    %br
+    :coderay
+      #!Ruby
+      def doubleThis num
+        numTimes2 = num*2
+        puts num.to_s+' doubled is '+numTimes2.to_s
+      end
+
+      doubleThis 44
+      puts numTimes2.to_s
+    %br
+    :coderay
+      #!Shell
+      44 doubled is 88
+      #<NameError: undefined local variable or method `numTimes2' for #<StringIO:0x82ba21c>>
+    %p
+      Undefined local variable (tanımsız yerel değişken)... 
+      Aslında biz değişkeni tanımladık ama değişkeni metot dışında çağırmaya kalkınca hata verdi. 
+      Bu özellik ilk başta zahmetli ve elverişsiz gibi görünsede iyi bir durumdur. 
+      Metot içindeki değişkenlere ulaşamamak demek aynı zamanda o değişkenlerin de metot dışındaki
+      değişkenlerinizle karışmayacağı anlamına gelir : 
+    %br
+    :coderay
+      #!Ruby
+      def littlePest var
+        var = nil
+        puts 'HAHA!  I ruined your variable!'
+      end
+
+      var = 'You can\'t even touch my variable!'
+      littlePest var
+      puts var
+    %br
+    :coderay
+      #!Shell
+      HAHA!  I ruined your variable!
+      You can't even touch my variable!
+    %p
+      Gerçekte yukarıdaki kodda aynı isimde iki farklı değişken 
+      %b var
+      kullanıldı. Bir tanesi metot  
+      %i littlePest
+      içinde , diğeri de metot dışında. littlePest var metodunu çağırdığımızda , 
+      metot içindeki var değerini alır ve bu dışardaki var değişkenini etkilemediği için onu
+      çağırdığımızda ( puts var ) metot dışındaki değeri ile gelir. 
+    %br
+    %h3 Değer Döndürmeler 
+    %p
+      Bazı metotları çağırdığımızda bize bir değer üretirler. Mesela 
+      %i gets bir string döndürür (yazdığımız string i ) 
+      ve
+      %i 5 + 3 de ki + metodu, (ki doğrusu 5.+(3)) 8 döndürür. 
+      Matematik işlem metotları sayılar için sayı döndürür , string ler için string döndürür. 
+    %p
+      Şunu anlamamız çok önemli : metotların çağrıldıkları yerde döndürdükleri değer ile programın
+      çıktısı ( puts un yaptığı gibi) farklı şeylerdir. 5 + 3 bize 8 i döndürür bu çıktı olarak 8 değildir. 
+      Öyleyse puts metodu aslında ne döndürür ? Bunu daha önce düşünmedik , şu koda bir bakalım : 
+    %br
+    :coderay
+      #!Ruby
+      returnVal = puts 'This puts returned:'
+      puts returnVal
+    %br
+    :coderay
+      #!Shell
+      This puts returned:
+      nil
+    %p
+      İlk puts bize nil (boş) değer döndürdü. Test edemesek de ikinci puts da bize aynısını döndürür.
+      Puts her zaman “boş” ( nil / null) değer döndürür. Her metot “boş” da olsa mutlaka bir değer döndürür. 
+      Biraz ara verin sonra ilk metodumuz olan sayMoo nun ne döndürdüğünü bulan bir kod yazın. 
+      Süpriz oldu mu? Evet nasıl çalıştı ,
+      %i bir metod da döndürülecek değer metodun son satırındadır. sayMoo metodunda olduğu gibi , 
+      dönen değer puts 'mooooooo...'*numberOfMoos dur ve bu da nil “boş” dur. Çünkü puts herzaman nil döndürür.
+      %i 
+        Eğer biz metodumuzun bize  
+        %b 'yellow submarine'
+        diye bir string döndürmesini istiyorsak bunu sona koymalıyız : 
+    %br
+    :coderay
+      #!Ruby
+      def sayMoo numberOfMoos
+        puts 'mooooooo...'*numberOfMoos
+        'yellow submarine'
+      end
+      x = sayMoo 2
+      puts x
+    %br
+    :coderay
+      #!Shell
+      mooooooo...mooooooo...
+      yellow submarine
+    %p
+      Şimdi en baştaki psikoloji deneyimize geri dönelim ve soruları bize soracak bir metot kodu yazalım.
+      Burada soruları metodumuza parametre olarak vereceğiz ve EVET cevapları için TRUE , 
+      HAYIR cevapları için FALSE değerini döndüreceğiz. 
+      ( aslında cevapların evet hayır olaması ile ilgilenmiyoruz ama metodumuzun cevabı döndürmesi gene de iyi bir fikir. 
+      Bu metotu “yatağınızı ıslattınız mı?” sorusu için de kullanacağız.) 
+      Kodu kısaltmak için başta ve sondaki laf kısımlarını şimdi almayacağız : 
+    %br
+    :coderay
+      #!Ruby
+      def ask question
+        goodAnswer = false
+        while (not goodAnswer)
+          puts question
+          reply = gets.chomp.downcase
+          
+          if (reply == 'yes' or reply == 'no')
+            goodAnswer = true
+            if reply == 'yes'
+              answer = true
+            else
+              answer = false
+            end
+          else
+            puts 'Please answer "yes" or "no".'
+          end
+        end
+        
+        answer  #  Bu bizim döndürdüğümüz değer (true veya false).
+      end
+      
+      puts 'Hello, and thank you for...'
+      puts
+      
+      ask 'Do you like eating tacos?'      #  We ignore this return value.
+      ask 'Do you like eating burritos?'
+      wetsBed = ask 'Yatağınızı ıslattınız mı?'  #  We save this return value.
+      ask 'Do you like eating chimichangas?'
+      ask 'Do you like eating sopapillas?'
+      ask 'Do you like eating tamales?'
+      puts 'Just a few more questions...'
+      ask 'Do you like drinking horchata?'
+      ask 'Do you like eating flautas?'
+      
+      puts
+      puts 'DEBRIEFING:'
+      puts 'Thank you for...'
+      puts
+      puts wetsBed
+    %br
+    :coderay
+      #!Shell
+      Hello, and thank you for...
+      
+      Do you like eating tacos?
+      yes
+      Do you like eating burritos?
+      yes
+      Yatağınızı ıslattınız mı?
+      no way!
+      Please answer "yes" or "no".
+      Yatağınızı ıslattınız mı?
+      NO
+      Do you like eating chimichangas?
+      yes
+      Do you like eating sopapillas?
+      yes
+      Do you like eating tamales?
+      yes
+      Just a few more questions...
+      Do you like drinking horchata?
+      yes
+      Do you like eating flautas?
+      yes
+      
+      DEBRIEFING:
+      Thank you for...
+      
+      false
+    %p
+      Fena olmadı değil mi? Birkaç soru daha ekleyebiliriz ve bunu yapmak önceki koda göre daha kolay şimdi .
+      Yine de biraz daha kodu kısaltabiliriz . Bu tembel bir programcının rüyası . 
+    %br
+    %h3 Bir Büyük Örnek Daha 
+    %p
+      Başka bir metot örneği yapmamız faydalı olabilir. Buna ingilizce sayılar (englishNumber) diyelim. 
+      Mesela 22 olarak girdiğimiz rakamı bize string olarak 'twenty-two' şeklinde döndürsün . 
+      Şimdilik sadece 0 – 100 arasındaki sayılar için bunu kodlayalım. (isterseniz Türkçe okunuşlarını verecek bir kodlama da yapabilirsiniz) 
+      %b NOT:
+      Bu kodu yazarken iki yenilik öğreneceğiz . Birincisi 
+      %i return
+      anahtar kelimesini kullanacağız ve ikinci olarak dallanmalarla ilgili 
+      %i elsif
+      teriminin kullanımını göreceğiz. 
+    %br
+    :coderay
+      #!Ruby    
+      def englishNumber number
+        #  sadece 0 – 100 arasındaki sayıları istiyoruz.
+        if number < 0
+          return 'Please enter a number zero or greater.'
+        end
+        if number > 100
+          return 'Please enter a number 100 or lesser.'
+        end
+        
+        numString = ''  #  bu döndüreceğimiz string.
+        
+        #  "left" hala kalan sayıları tutmak için tanımladık.
+        #  "write" o an yazdırdığımız sayılar için tanımladık.
+        #  write and left... anladınız di mi :)
+        left  = number
+        write = left/100          #  Yüzler basamağındaki sayı için
+        left  = left - write*100  #  Yüzler basamağından sonra kalan.
+        
+        if write > 0
+          return 'one hundred'
+        end
+        
+        write = left/10          #  Onlar basamağını ayırıyoruz
+        left  = left - write*10  #  Onlar basamağında kalacak rakam için.
+        
+        if write > 0
+          if write == 1  #  Uh-oh...onlar basamağında 1 varsa özel durumu yazalım
+            #  ingilizcede oniki "tenty-two" denmez "twelve" denir,
+            #  o zaman 11 – 19 arasını ayrıca tanımlıyoruz.
+            if    left == 0
+              numString = numString + 'ten'
+            elsif left == 1
+              numString = numString + 'eleven'
+            elsif left == 2
+              numString = numString + 'twelve'
+            elsif left == 3
+              numString = numString + 'thirteen'
+            elsif left == 4
+              numString = numString + 'fourteen'
+            elsif left == 5
+              numString = numString + 'fifteen'
+            elsif left == 6
+              numString = numString + 'sixteen'
+            elsif left == 7
+              numString = numString + 'seventeen'
+            elsif left == 8
+              numString = numString + 'eighteen'
+            elsif left == 9
+              numString = numString + 'nineteen'
+            end
+            #  Şimdi onlar basamağını tanımlıyoruz,
+            #  we have nothing left to write.
+            left = 0
+          elsif write == 2
+            numString = numString + 'twenty'
+          elsif write == 3
+            numString = numString + 'thirty'
+          elsif write == 4
+            numString = numString + 'forty'
+          elsif write == 5
+            numString = numString + 'fifty'
+          elsif write == 6
+            numString = numString + 'sixty'
+          elsif write == 7
+            numString = numString + 'seventy'
+          elsif write == 8
+            numString = numString + 'eighty'
+          elsif write == 9
+            numString = numString + 'ninety'
+          end
+          
+          if left > 0
+            numString = numString + '-'
+          end
+        end
+        
+        write = left  #  Birler basamağını bulacağız
+        left  = 0     #  Birler basamağında kalanlar.
+        
+        if write > 0
+          if    write == 1
+            numString = numString + 'one'
+          elsif write == 2
+            numString = numString + 'two'
+          elsif write == 3
+            numString = numString + 'three'
+          elsif write == 4
+            numString = numString + 'four'
+          elsif write == 5
+            numString = numString + 'five'
+          elsif write == 6
+            numString = numString + 'six'
+          elsif write == 7
+            numString = numString + 'seven'
+          elsif write == 8
+            numString = numString + 'eight'
+          elsif write == 9
+            numString = numString + 'nine'
+          end
+        end
+        
+        if numString == ''
+          #  "numString" in boş olabileceği tek durum ,
+          #  eğer "number" sıfır 0 ise.
+          return 'zero'
+        end
+        
+        #  baştan buraya kadar yazılanlar tek bir metottur.
+        #  bu yüzden en son satırda döndüreceğimiz değer "numString" olmalıdır.
+        numString
+      end
+      
+      puts englishNumber(  0)
+      puts englishNumber(  9)
+      puts englishNumber( 10)
+      puts englishNumber( 11)
+      puts englishNumber( 17)
+      puts englishNumber( 32)
+      puts englishNumber( 88)
+      puts englishNumber( 99)
+      puts englishNumber(100)
+    %br
+    :coderay
+      #!Shell
+      zero
+      nine
+      ten
+      eleven
+      seventeen
+      thirty-two
+      eighty-eight
+      ninety-nine
+      one hundred
+    %p
+      İyi ama benim beğenmediğim birkaç şey var bu kodda . Öncelikle çok fazla tekrar var. 
+      Ayrıca 100 den sonraki sayıları kapsamıyor. Üçüncü olarak çok fazla özel durum var ve çok fazla return ( dönüş ) var. 
+      Dizilerin yardımı ile kodu biraz toparlayalım : 
+    %br
+    :coderay
+      #!Ruby
+      def englishNumber number
+        if number < 0  #  negatif sayı olmayacak
+          return 'Please enter a number that isn\'t negative.'
+        end
+        if number == 0
+          return 'zero'
+        end
+        
+        #  başka özel durum yok return de yok!
+        
+        numString = ''  #  döndüreceğimiz string.
+        
+        onesPlace = ['one',     'two',       'three',    'four',     'five',
+                     'six',     'seven',     'eight',    'nine']
+        tensPlace = ['ten',     'twenty',    'thirty',   'forty',    'fifty',
+                     'sixty',   'seventy',   'eighty',   'ninety']
+        teenagers = ['eleven',  'twelve',    'thirteen', 'fourteen', 'fifteen',
+                     'sixteen', 'seventeen', 'eighteen', 'nineteen']
+        
+        #  "left" kalan basamaklardaki yazdırmadığımız sayılar.
+        #  "write" o an yazdıracağımız sayılar.
+        #  write and left... anladınız mı?  :)
+        left  = number
+        write = left/100          #  yüzler basamağı?
+        left  = left - write*100  #  yüzler basamağı.
+        
+        if write > 0
+          #  işte burası can alıcı nokta:
+          hundreds  = englishNumber write
+          numString = numString + hundreds + ' hundred'
+          #  buna "recursion" özyineleme diyoruz.
+          # metot kendi içinde kendini çağırıyor
+          #  ama “number” yerine “write” ı paramaetre olarak verdik
+          #  "write" bu aşamada bize yüzler basamağını veriyor
+          #  sonra bunu yani "hundreds" ı "numString" e ekliyoruz,
+          #  ve  'hundred' stringini ilave ediyoruz. Mesela 
+          #  englishNumber olarak 1999 alalım (böylece "number" = 1999),
+          #  sonra "write" 19 olur, ve "left" 99 olur.
+          #  buradan sonrası kolay englishNumber
+          #  'nineteen' olur ve sonuna ' hundred' gelir,
+          #  ve geriye kalan englishNumber 'ninety-nine' olur.
+          
+          if left > 0
+            #  araya boşluk koymadan yazılmaz'two hundredfifty-one'... olmaz
+            numString = numString + ' '
+          end
+        end
+        
+        write = left/10          #  onlar basamağı?
+        left  = left - write*10  #  onlar basamağındaki sayı.
+        
+        if write > 0
+          if ((write == 1) and (left > 0))
+            #  “twelve” yerine "tenty-two" yazamayız,
+            #  özel durumu tanımlıyalım o zaman.
+            numString = numString + teenagers[left-1]
+            #  "-1" yaptık çünkü dizi indeksinde teenagers[3] 14 dür , 13 değil.
+            
+            #  birler basamağını daha önce elde ettiğimiz için,
+            #  yazacak bir şey kalmadı.
+            left = 0
+          else
+            numString = numString + tensPlace[write-1]
+            #  "-1" yaptık çünkü tensPlace[3] 40 dır , 30 değil.
+          end
+          
+          if left > 0
+            # örneğin 'sixtyfour'...yazamayız araya boşluk koyalım
+            numString = numString + '-'
+          end
+        end
+        
+        write = left  #  birler basamağında kalanlar?
+        left  = 0     #  onları bulalım.
+        
+        if write > 0
+          numString = numString + onesPlace[write-1]
+          #  "-1" yaptık çünkü onesPlace[3] 4 dür 3 değil.
+        end
+        
+        #  son olarak "numString" döndürüyoruz...
+        numString
+      end
+      
+      puts englishNumber(  0)
+      puts englishNumber(  9)
+      puts englishNumber( 10)
+      puts englishNumber( 11)
+      puts englishNumber( 17)
+      puts englishNumber( 32)
+      puts englishNumber( 88)
+      puts englishNumber( 99)
+      puts englishNumber(100)
+      puts englishNumber(101)
+      puts englishNumber(234)
+      puts englishNumber(3211)
+      puts englishNumber(999999)
+      puts englishNumber(1000000000000)
+    %br
+    :coderay
+      #!Shell
+      zero
+      nine
+      ten
+      eleven
+      seventeen
+      thirty-two
+      eighty-eight
+      ninety-nine
+      one hundred
+      one hundred one
+      two hundred thirty-four
+      thirty-two hundred eleven
+      ninety-nine hundred ninety-nine hundred ninety-nine
+      one hundred hundred hundred hundred hundred hundred
+    %p
+      Evet bu daha iyi oldu. Bu kod biraz zor anlaşıldığı için araya fazla yorumlar ekledik. 
+      Büyük sayılar için de program çalışır. Ama mesela 1 trilyon sayısı için “bir trilyon” yada 
+      “bir milyon-milyon” şeklinde bir veri döndürse daha iyi olur. Bunu kendiniz deneyin. 
+    %br
+    %h3 Denemeniz için  
+    %ul
+      %li
+        englishNumber kodumuzu geliştirelim. 1000 sayısını  'ten hundred' yerine “one thousand” olarak versin
+        ve 10.000 sayısını  'one hundred hundred' yerine “ten thousand” olarak versin. 
+      %li
+        englishNumber kodumuzu daha da genişletip “milyon,milyar ve trilyonlar” için uygulamaya çalışın.
+        Hatta bu uygulamayı Türkçe okunuşlarını elde etmek için uygulayın. 
+      %li
+        Yılların okunuşları için (ingilizcede) yukarıdaki kodu deneyin. 
+        Biliyorsunuz ingilizcede yıllar ikili okunur ve araya “and” konur . 
+        Örn. 1976 “nineteen hundred and seventy six”.                                  
+      %li
+        "Ninety-nine bottles of beer..." englishNumber koduna benzer kodları kullanarak şu meşhur şarkıyı yazı ile yazın: 
+        %hr
+        %p 
+          99 bottles of beer on the wall, 99 bottles of beer.
+          %p Take one down and pass it around, 98 bottles of beer on the wall.
+        %hr  
+        %p
+          98 bottles of beer on the wall, 98 bottles of beer.
+          %p Take one down and pass it around, 97 bottles of beer on the wall.
+        %hr  
+        %p
+          97 bottles of beer on the wall, 97 bottles of beer.
+          %p Take one down and pass it around, 96 bottles of beer on the wall...........................
+        %hr
+        Bu şarkının programlamacılıkla ilgisini merak edenler bu adrese baksın : 
+        %a(href="http://99-bottles-of-beer.net" target="_blank") http://99-bottles-of-beer.net
+    %hr
+    %p
+      %b Tebrikler!
+      Bundan sonra artık siz de gerçek bir programcısınız! 
+      Büyük programları en baştan oluşturacak her şeyi öğrendiniz. 
+    %p Tabiki her şeyi en baştan yapmak çok yavaş bir süreçtir. 
+    %p Başkasının daha önce yazdığı kodu tekrar yazmak için neden zaman harcayalım ?
+    %p E-mail gönderen bir program yazmak ister miydiniz? 
+    %p Dosyaları bilgisayarınıza kaydeden ve yükleyen bir program ? 
+    %p Yada benim burada yaptığım gibi; örnek kodların kendi içinden çalıştırılıp test edildiği bir programlama dili tutoriali yazmayı ister misiniz ?
+    %p Ruby dili çok çeşitli nesnelere sahiptir , bu bize iyi programları hızlı yazmamızı sağlar.
+    %br
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/110") < Diziler ve Tekrarlayıcılar

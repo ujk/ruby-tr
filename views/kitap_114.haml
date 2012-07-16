@@ -14,9 +14,126 @@
     %br
     %h2 Bu Derslerden Sonrası ...
     %br
+    %p Şimdi ne yapalım ?
+    %p Kafamıza takılan soruları kime sorabiliriz? 
+    %p Web sayfası açan, mail gönderen yada bir fotografı yeniden boyutlandıran bir program yazmak istersek ne yapacağız? 
+    %p Ruby yardımı alabileceğiniz birçok yer var . 
+    %p Benim için herzaman yardım alacağım üç önemli kaynak var. 
+    %p Eğer ufak bir problemim varsa kodumu yazarak hemen deneyebileceğim irb kullanırım. 
+    %p Biraz daha büyük problemim varsa pickaxe kitabıma bakarım. 
+    %p Beni aşan bir problem varsa ruby-talk listelerine sorarım. 
     %br
+    %h3 IRB: İnteraktif Ruby 
+    %p Ruby kurduysanız zaten irb vardır. Kullanmak için konsol ekranınızı ( windows için dos prompt ) açın ve irb yazın. 
+    %p
+      Buradan bütün Ruby kodlarını , özellikle kısa ve hemen sonucunu almak istediklerinizi yazabilirsiniz.
+      1 + 2 yazın ve enter bu kadar size 3 verecektir. (puts kullanmanıza gerek yok.) 
+      Bunu cüce bir Ruby hesap makinası gibi düşünün , kodu yazın ve hemen sonucu görün.  
     %br
-    %h4 sayfa hazırlanıyor...
+    %h3 Pickaxe: "Programming Ruby" 
+    %p 
+      Bir Ruby programlamacısının başucu kitabı "Programming Ruby, The Pragmatic Programmer's Guide", by David Thomas and Andrew Hunt (the Pragmatic Programmers).
+      Windows sisteminize Ruby kurduğunuzda bu kitap da dizininizde yer alır. 
+    %p
+      Bu kitapda temel düzeyden , en gelişmiş düzeye kadar her konu vardır. 
+      Her programlama dilinin keşke böyle bir kitabı olsa. Kitabın sonunda her sınıfın metodları 
+      ile ilgili geniş bir bölüm ve örnekler vardır. 
+    %p Neden ismi  "the pickaxe"? Kitabın kapağında resmi var.  
+    %br
+    %p Ruby - Talk : Ruby Mail Listesi
+    %br
+    %p Üye olup Ruby topluluğu ile paylaşım yapabileceğiniz dünya çapında e-posta grubu . 
+    %p Daha fazlası için üye olun ve inceleyin.
+    %br
+    %h3 Tim Toady 
+    %p
+      Son olarak derslerde de sık sık bahsetmeye çalıştığım bir kavramdan bahsedeyim :
+      %b TMTOWTDI ("Tim Toady" olarak söylenir): 
+    %p There's More Than One Way To Do It (bir şeyi yapmanın birden çok yolu vardır). 
+    %p Şimdi kimileri bu TMTOWTDI nin çok mükemmel olduğundan kimisi de tam tersi şeylerden bahsedecektir.
+    %p 
+      Ben bu kadar ısrarcı olmayacağım ama bu bir programlama dili öğretirken bunun çok kötü bir yol 
+      olduğunu söylemeliyim (bir şeyi yapmanın bir yolunu öğrenmek yeterince karışık ve zorlayıcı olmasaydı).  
+    %p
+      Yinede şimdi bu dersler bitti ve ileriye doğru gittikce başka kaynaklardan çok değişik kodlar 
+      ister istemez göreceksiniz. Mesela ben bir string yapmak için bunu tırnaklar “..” içine yazmak 
+      dışında beş farklı yolla bunu yapabilirim. Bu derslerde size bu altı yolun en basitini gösterdik. 
+    %br
+    %p
+      Derslerde dallanmalar konusunda if gördük ama 
+      %b unless (eğer değilse)
+      görmedik. Şimdi bunu irb üzerinde görelim : 
+    %p
+      %i Burada akıllıca bir kısaltma daha göreceğiz  if, unless, ve while nin tek satırda nasıl yazılabileceğini : 
+    %br
+    :coderay
+      #!Ruby
+      #  buradaki kelimeleri ingilizce sanıp türkçeye çevirmeye çalışmayın
+      #  English-like babble.  Cool, huh?
+      puts 'grobably combergearl kitatently thememberate' if 5 == 2**2 + 1**1
+      puts 'enlestrationshifter supposine follutify blace' unless 'Chris'.length == 5
+    %br
+    :coderay
+      #!Shell
+      grobably combergearl kitatently thememberate
+    %br
+    %p
+      Son olarak blok alan (procs değil) metodları oluşturmanın başka bir yolu daha var. 
+      Bizim gördüğümüz olayda,  blok oluşturulur ve proc içinde 
+      %b &blok
+      işaretiyle tanımladığımız fonksiyonun parametresi içine koyarız. 
+      Sonra blok çağırmak için sadece 
+      %b block.call
+      yazmamız yeterli olur.
+    %p
+      Bunun daha kısa bir yolu var (her ne kadar bu kısa yolun karmaşık olduğunu düşünsemde).
+      Normal öğrendiğimiz şekli ile kod şöyle : 
+    %br
+    :coderay
+      #!Ruby
+      def doItTwice(&block)
+        block.call
+        block.call
+      end
+      
+      doItTwice do
+        puts 'murditivent flavitemphan siresent litics'
+      end
+    %br
+    :coderay
+      #!Shell
+      murditivent flavitemphan siresent litics
+      murditivent flavitemphan siresent litics
+    %p
+      ama daha kısasını isterseniz : 
+    %br
+    :coderay
+      #!Ruby
+      def doItTwice
+        yield
+        yield
+      end
+      
+      doItTwice do
+        puts 'buritiate mustripe lablic acticise'
+      end
+    %br
+    :coderay
+      #!Shell
+      buritiate mustripe lablic acticise
+      buritiate mustripe lablic acticise
+    %p
+      Ne düşünüyorsunuz ? 
+      %b yield !
+      kullanmak daha iyi mi?
+    %p 
+      %b TMTOWTDI
+      böyle bir şey , herkes istediği kodu kendine kolay geleni tercih edebilir.
+    %br
+    %h3 SONUÇ
+    %p 
+      Bu öğrendiklerinizi iyilik yolunda kullanın . :-)
+    %br
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/113") < Bloklar ve Procs

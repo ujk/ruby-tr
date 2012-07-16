@@ -14,9 +14,544 @@
     %br
     %h2 Sınıflar (Classes)
     %br
+    %p
+      Şu ana kadar nesnelerle ilgili birçok çeşit ve sınıf gördük : string ler, tam sayılar, 
+      ondalık sayılar , diziler ve bazı özel nesneler (true, false, ve nil) . 
+      Ruby de bu nesne sınıfları Büyük harfle başlar: String, Integer, Float, Array... vs. 
+      Genel olarak bir sınıfa ait bir nesne oluştururken .new kullanırız :
     %br
+    :coderay
+      #!Ruby
+      a = Array.new  + [12345]  #  Dizi ekleme.
+      b = String.new + 'hello'  #  String ekleme.
+      c = Time.new
+
+      puts 'a = '+a.to_s
+      puts 'b = '+b.to_s
+      puts 'c = '+c.to_s
     %br
-    %h4 sayfa hazırlanıyor...
+    :coderay
+      #!Shell
+      a = 12345
+      b = hello
+      c = Tue Apr 14 16:29:20 GMT 2009
+    %br
+    %p
+      Normalde dizi ve string oluştururken sadece [...] ve '...' kullandığımız için .new seyrek kullanılır.
+      (Yukarıdaki örnekten tam anlaşılmasa da aslında , String.new boş bir string açar , Array.new de boş bir dizi açar ) 
+    %p
+      Sayılar özel istisnaya sahiptir : Integer.new. gibi bir kod tamsayı sınıfı içinde nesne oluşturmak 
+      için kullanılmaz doğrudan tamsayının kendisi yazılır. 
+    %br
+    %h3 Time Sınıfı 
+    %p 
+      Bu Time sınıfı ne işe yarar ? Time nesneleri bize zaman hesaplamaları oluşturmada yardımcı olur. 
+      Yeni zaman değerleri elde etmek için sayılar ekler veya çıkarırız : mesela zamana 1.5 eklersek
+      1.5 saniye ilave edilmiş yeni zaman elde ederiz : 
+    %br
+    :coderay
+      #!Ruby
+      time  = Time.new   #  bu sayfa yazılırken oluşturulan zaman.
+      time2 = time + 60  #  1 dakika sonrasını hesaplatıyoruz.
+
+      puts time
+      puts time2
+    %br
+    :coderay
+      #!Shell
+      Tue Apr 14 16:29:20 GMT 2009
+      Tue Apr 14 16:30:20 GMT 2009
+    %p Kendiniz özel bir zaman girmek için : Time.mktime kodunu kullanırız : 
+    %br
+    :coderay
+      #!Ruby
+      puts Time.mktime(2000, 1, 1)          #  Y2K.
+      puts Time.mktime(1968, 5, 15, 10, 11)  #  Doğum günüm.
+    %br
+    :coderay
+      #!Shell
+      Sat Jan 01 00:00:00 GMT 2000
+      Wed May 15 10:11:00 GMT 1968
+    %p
+      Karşılaştırma metotları kullanarak zaman değerlerini birbiri ile karşılaştırabiliriz 
+      (erken olan zaman sonraki zamana göre küçüktür ), ve bir zamandan diğerini çıkarabiliriz , 
+      elde edeceğimiz değer saniye olarak iki zamanın farkıdır. Bunlarla ilgili denemeleri kendiniz yapınız. 
+    %br
+    %h3 Bunları Deneyin 
+    %ul
+      %li Bir milyar saniye ?... Doğduğunuz zamandan şimdiye geçen ömrünüzü saniye olarak hesaplayın. 
+      %li Arkadaşlarınızın doğum günlerini öğrenip yıllarını hesaplayın. 
+    %br
+    %h3 The Hash Sınıfı 
+    %p
+      Bir diğer yararlı sınıfımız da Hash sınıfıdır. Hash lar dizilere çok benzer :
+      Hash lar anahtar ve değer verilerine sahiptir. Anahtar verileri dizilerdeki indekslere benzer ama
+      indeksler 0 dan başlarken Hash lar için bir kural yoktur. 
+      Mesela illerimizin adlarını ve plaka numaralarını bir Hash içinde tutabiliriz. 
+      Örneğin bu yazıları yazarken kullandığımız kod parçaları için hangi renkleri kullandığımızı yazalım :
+    %br
+    :coderay
+      #!Ruby   
+      colorArray = []  #  Array.new gibi
+      colorHash  = {}  #  Hash.new gibi
+      
+      colorArray[0]         = 'red'
+      colorArray[1]         = 'green'
+      colorArray[2]         = 'blue'
+      colorHash['strings']  = 'red'
+      colorHash['numbers']  = 'green'
+      colorHash['keywords'] = 'blue'
+      
+      colorArray.each do |color|
+        puts color
+      end
+      colorHash.each do |codeType, color|
+        puts codeType + ':  ' + color
+      end
+    %br
+    :coderay
+      #!Shell
+      red
+      green
+      blue
+      strings:  red
+      keywords:  blue
+      numbers:  green
+    %p
+      Eğer bir dizi kullanıyorsam 0. sırada strings lerin renginin ,
+      1. sırada sayıların renginin vs olduğunu bilmem gerekir. Ama  HASH kullanırsak bu daha kolay olur.
+      “Strings” ler string renklerini barındırır (barındırmak yani hash içindeki bellekte “strings” 
+      anahtarı bize bunların renklerine karşılık gelen bilgilerini saklar ) . 
+      Hatırlamaya ya da ezberlemeye gerek yoktur. each kullandığımızda hash içindeki nesneler bizim 
+      ilk yazdığımız sırada gelmez. Dizilerde ise sıra değişmez aynı sırada çıktı olarak gelir. 
+    %p
+      Genelde programcılar hash içindeki bölümlere ( birimlere ) strings ler ile isimler verirler.
+      Bunun dışında siz istediğiniz nesneyi (hatta dizileri veya diğer hash leri bile ) kullanabilirsiniz 
+      (bunu neden yapmak isteyeceğiniz hakkında bir fikrim yok size kalmış... 
+    %br
+    :coderay
+      #!Ruby
+      weirdHash = Hash.new
+      
+      weirdHash[12] = 'monkeys'
+      weirdHash[[]] = 'emptiness'
+      weirdHash[Time.new] = 'no time like the present'
+    %p Hash ler ve diziler farklı amaçlar için kullanıma uygundur ; hangisini kullanacağınız size kalmıştır. 
+    %br
+    %h3 Sınıfların Genişletilmesi 
+    %p
+      Bir önceki bölümde bir sayının İngilizce okunuşunu veren metotları yazdık. 
+      Bu bir integer metodu değildi, sadece bizim yazdığımız bir genel metot idi. englishNumber 22  
+      yerine şöyle bir kod daha güzel olmaz mı ?
+    %p
+      %b 22.to_eng  : 
+    %br
+    :coderay
+      #!Ruby
+      class Integer
+        
+        def to_eng
+          if self == 5
+            english = 'five'
+          else
+            english = 'fifty-eight'
+          end
+          
+          english
+        end
+      
+      end
+      
+      #  Sayılarımız için bunları deneyelim…
+      puts 5.to_eng
+      puts 58.to_eng
+    %br
+    :coderay
+      #!Shell
+      five
+      fifty-eight
+    %p
+      Evet ben test ettim ; çalışacak gibi görünüyor. ;) 
+    %p
+      Integer sınıfı içine girerek bir tamsayı “integer” metodu tanımladık ve geri çıktık. 
+      Şimdi tüm tamsayılar (tamamlanmamış olanlar da) bu metoda sahiptir. 
+      Eğer önceden oluşturulmuş  to_s gibi bir metot hoşunuza gitmezse bunu kendiniz yeniden tanımlayabilirsiniz…
+      ama bunu önermem ! En iyisi oluşturulmuş hazır metotları kullanmak ve yeni ihtiyaçlar için metotlar yazmaktır.
+    %p
+      Son programımız üzerinde biraz daha duralım…
+      İster bir kod  veya tanımlanmış bir metod çalıştıralım bunu öntanımlı olarak “program” nesnesi içinde
+      yaparız. Son kodumuzda biz ilk defa bu nesneyi bırakıp başka bir sınıfın içine (Integer) girdik.
+      Burada - tüm tamsayıların kullanabileceği- bir tamsayı metodu tanımladık. 
+    %p Bunun için bu metot içinde -metodu kullanacak- nesneye (tamsayı) tanımlı self  kullandık. 
+    %br
+    %h3 Sınıfların Oluşturulması 
+    %p
+      Nesnelerin değişik sınıflarını gördük. Ruby nin sahip olmadığı nesnelerle de bunu yapmak kolaydır.
+      Şanslıyız ki yeni bir sınıf oluşturmak eskisini genişletmek kadar kolaydır. 
+    %p Ruby dili ile çalışan ÇİFTE ZAR kodu yazalım . Bunun için bir ZAR sınıfı açalım :  
+    %br
+    :coderay
+      #!Ruby
+      class Die
+        
+        def roll
+          1 + rand(6)
+        end
+        
+      end
+      # İki tane zar oluşturalım...
+      dice = [Die.new, Die.new]
+      
+      #  ...ve zarları atalım.
+      dice.each do |die|
+        puts die.roll
+      end
+    %br
+    :coderay
+      #!Shell
+      3
+      4
+    %br  
+    %p 
+      (Eğer 
+      %a(href="/kitap/108#rastgele" target="_blank")rastgele sayılar
+      bölümünü okumadıysanız , rand(6) bize 0 ile 5 arası rastgele sayı üretir.) 
+    %p Evet bu kadar. Kendimizin oluşturduğu nesneler ve tamamen kendimizin.  
+    %p
+      Nesnelerimiz için istediğimiz çeşitlilikte metot tanımlayabilriz…ama atladığımız bir şey var.
+      Değişkenler hakkında bir şeyler öğrenmeden bu nesneler ile çalışıyor olmak bize tamamlanmış 
+      bir program gibi gelebilir. Örneğin ZAR kodumuza bakalım. Zarları attığımızda (roll) her seferinde 
+      farklı sayılar bize üretecektir. 
+    %p
+      Bu sayıları bir yerde tutmak istersek , bir değişken oluşturmamız gerekir. 
+      Bu zarın önceden bir sayı tutması ve atıldığında yeni sayıyı tutması olabilir. 
+      Zarın sayılarını biliyorsak (1- 6), zarın göstereceği sayıları tutmamız gerekmez . 
+    %p
+      Ancak zar atılırken oluşacak sayı bir local (yerel) değişkende tutulursa , 
+      zar atılınca yeni sayı geleceği için eski tutulan sayı kaybolur.
+      Bu nedenle faklı özelliğe sahip  bir değişkende bu sayılar tutulmalıdır.
+    %p 
+      Her zar 6 adet sayıya sahip ama bunlardan biri yani atılınca üst yüzünde yazanı önemli. 
+      Bu zara ait bir özellik ve bunu koda / sınıf içine  yansıtabilmeliyiz.
+      Bunun için 
+      %b Instance Variable (örnek /anlık değişken) 
+      kullanırız 
+      %i (yani zarın her yüzü için ayrı bir sayı ). 
+    %br
+    %h3 Örnek / Anlık  (Instance) Değişkenler 
+    %p
+      String lerden bahsederken sadece “string” diye söyleriz. Ayrıca “string nesnesi” de deriz.
+      Bazen programcılar buna “string sınıfının örneği” de derler , fakat bu biraz fanteziye kaçmış şeklidir.
+      Bir sınıfın örneği / anı demek tam olarak o sınıfın nesnesi anlamına gelir.  
+    %p
+      Bu durumda örnek/anlık (instance) değişken demek “nesnelerin değişkeni” demektir. 
+      Bir metodun local (yerel) değişkeni metot bitinceye kadar korunur. 
+      Bir nesnenin örnek/anlık değişkeni ise nesne kaldığı sürece korunur. 
+      Local (yerel) değişkenlerden “örnek/anlık değişkeni” ayırabilmek için  önüne @ işareti konulur : 
+    %br
+    :coderay
+      #!Ruby
+      class Die
+        
+        def roll
+          @numberShowing = 1 + rand(6)
+        end
+        
+        def showing
+          @numberShowing
+        end
+        
+      end
+      
+      die = Die.new
+      die.roll
+      puts die.showing
+      puts die.showing
+      die.roll
+      puts die.showing
+      puts die.showing
+    %br
+    :coderay
+      #!Shell
+      1
+      1
+      5
+      5
+    %p
+      Çok güzel! roll metodu zarı atıyor ve showing bize gelen sayıyı veriyor. 
+      Ancak zarı atmadan gelen sayıyı görmek istersek (yani @numberShowing kurulmadan önce ) ? 
+    %br
+    :coderay
+      #!Ruby
+      class Die
+        
+        def roll
+          @numberShowing = 1 + rand(6)
+        end
+        
+        def showing
+          @numberShowing
+        end
+        
+      end
+      
+      #  Bu zarı tekrar atmayacağımdan,
+      #  bir değişken içine kaydetmeme gerek yok.
+      puts Die.new.showing
+    %br
+    :coderay
+      #!Shell
+      nil
+    %p
+      Hmmm... iyi, en azından hata vermedi. Zarı atmadan instance (örnek/anlık) değişkenin değeri ne olacak ?
+      Bunu mantıklı bir değere set etmeliyiz.
+      Altı yüzü olan bir zarımız var ve bize herhangi bir anda hangi yüzdeki sayı üste gelecek sorulmadan önce set etmeliyiz. 
+      Bunu da ancak nesne yaratılırken oluşturabiliriz. 
+      Bunun için 
+      %b “initialize”
+      metodunu kullanırız ve bu metod, nesne oluşturulurken çağrılır. 
+    %br
+    :coderay
+      #!Ruby
+      class Die
+        
+        def initialize
+          #  Zara 6 sayı tutturmak gibi,
+          #  diğer yaptıracağımız işler varken,
+          #  burada sadece zarı atıyoruz.
+          roll
+        end
+        
+        def roll
+          @numberShowing = 1 + rand(6)
+        end
+        
+        def showing
+          @numberShowing
+        end
+        
+      end
+      
+      puts Die.new.showing
+    %br
+    :coderay
+      #!Shell
+      6
+    %p
+      Bir nesne oluşturulduğunda , bunun initialize (başlangıç) metodu (eğer bir kere tanımlanmış ise)
+      her zaman çağrılır.  
+    %br
+    %p
+      %b Diğer bir örneğimize bakalım :
+    %p
+      Sanal bir “yavru ejderha” tasarlayalım. Bütün yavrular gibi o da yemek yiyecek, uyuyacak ve 
+      tuvaletini yapacak. Fakat normal bir çocuğa sorar gibi ona ihtiyaçlarını soramayacağız. 
+      Birkaç eğlenceli olay daha ekleyebiliriz. Doğduğu zaman ona bir isim vereceğiz mesela. 
+      ( her yeni metodu girişinizde “initialize” metodunuzu da tanımlayacaksınız ) : 
+    %br
+    :coderay
+      #!Ruby
+      class Dragon
+        
+        def initialize name
+          @name = name
+          @asleep = false
+          @stuffInBelly     = 10  #  karnı doymuş.
+          @stuffInIntestine =  0  #  tuvalet ihtiyacı yok.
+          
+          puts @name + ' is born.'
+        end
+        
+        def feed
+          puts 'You feed ' + @name + '.'
+          @stuffInBelly = 10
+          passageOfTime
+        end
+        
+        def walk
+          puts 'You walk ' + @name + '.'
+          @stuffInIntestine = 0
+          passageOfTime
+        end
+        
+        def putToBed
+          puts 'You put ' + @name + ' to bed.'
+          @asleep = true
+          3.times do
+            if @asleep
+              passageOfTime
+            end
+            if @asleep
+              puts @name + ' snores, filling the room with smoke.'
+            end
+          end
+          if @asleep
+            @asleep = false
+            puts @name + ' wakes up slowly.'
+          end
+        end
+        
+        def toss
+          puts 'You toss ' + @name + ' up into the air.'
+          puts 'He giggles, which singes your eyebrows.'
+          passageOfTime
+        end
+        
+        def rock
+          puts 'You rock ' + @name + ' gently.'
+          @asleep = true
+          puts 'He briefly dozes off...'
+          passageOfTime
+          if @asleep
+            @asleep = false
+            puts '...but wakes when you stop.'
+          end
+        end
+        
+        private
+        
+        #  "private" anlamı şu aşağıda tanımlı metodlar 
+        #  nesnenin özel fonksiyonu .  ( ejderhanızı beslersiniz
+        #  ama ona “aç mısın” diye soramazsın.)
+        
+        def hungry?
+          #  Metod isimleri “?” ile bitebilir .
+          #  Bunu genelde eğer metod TRUE veya FALSE 
+          #  değerlerini döndürecekse yaparız , şöyle:
+          @stuffInBelly <= 2
+        end
+        
+        def poopy?
+          @stuffInIntestine >= 8
+        end
+        
+        def passageOfTime
+          if @stuffInBelly > 0
+            #  Move food from belly to intestine.
+            @stuffInBelly     = @stuffInBelly     - 1
+            @stuffInIntestine = @stuffInIntestine + 1
+          else  #  Our dragon is starving!
+            if @asleep
+              @asleep = false
+              puts 'He wakes up suddenly!'
+            end
+            puts @name + ' is starving!  In desperation, he ate YOU!'
+            exit  #  This quits the program.
+          end
+          
+          if @stuffInIntestine >= 10
+            @stuffInIntestine = 0
+            puts 'Whoops!  ' + @name + ' had an accident...'
+          end
+          
+          if hungry?
+            if @asleep
+              @asleep = false
+              puts 'He wakes up suddenly!'
+            end
+            puts @name + '\'s stomach grumbles...'
+          end
+          
+          if poopy?
+            if @asleep
+              @asleep = false
+              puts 'He wakes up suddenly!'
+            end
+            puts @name + ' does the potty dance...'
+          end
+        end
+        
+      end
+      
+      pet = Dragon.new 'Norbert'
+      pet.feed
+      pet.toss
+      pet.walk
+      pet.putToBed
+      pet.rock
+      pet.putToBed
+      pet.putToBed
+      pet.putToBed
+      pet.putToBed
+    %br
+    :coderay
+      #!Shell
+      Norbert is born.
+      You feed Norbert.
+      You toss Norbert up into the air.
+      He giggles, which singes your eyebrows.
+      You walk Norbert.
+      You put Norbert to bed.
+      Norbert snores, filling the room with smoke.
+      Norbert snores, filling the room with smoke.
+      Norbert snores, filling the room with smoke.
+      Norbert wakes up slowly.
+      You rock Norbert gently.
+      He briefly dozes off...
+      ...but wakes when you stop.
+      You put Norbert to bed.
+      He wakes up suddenly!
+      Norbert's stomach grumbles...
+      You put Norbert to bed.
+      He wakes up suddenly!
+      Norbert's stomach grumbles...
+      You put Norbert to bed.
+      He wakes up suddenly!
+      Norbert's stomach grumbles...
+      Norbert does the potty dance...
+      You put Norbert to bed.
+      He wakes up suddenly!
+      Norbert is starving!  In desperation, he ate YOU!
+    %p
+      İnteraktif bir program olsaydı daha iyiydi ama neyse , onu da ilerde yapabileceksiniz. 
+      Burada sadece yeni bir “ejderha” sınıfının ve bununla ilişkili bölümlerin gösterilmesine çalıştık.
+    %p
+      Bu örnek ile bazı yeni şeylerde öğrendik : Birincisi, 
+      %b exit
+      programı sonlandıran bir komuttur.  İkincisi, 
+      %b private
+      ki biz onu sınıf tanımlamamızın ortasında oluşturduk. Ejderhanın bizimle ilgili metodları 
+      (bizim ilgilenmemiz gereken) olduğu gibi kendine ait iç metodları da vardır.
+      Bunları bir otomobile uygularsak : kaportanın altında olanlar sürücü olarak bizi ilgilendirmez , 
+      biz aracı kullanırken sadece gaz, fren, debriyaj ve viteslerle ilgileniriz. 
+      Hava yastığının hangi şartlarda nasıl çalışacağı sürücünün değil programcının 
+      düşünmesi gereken bir ayrıntıdır. 
+    %br
+    %h3 Denemeniz için
+    %br
+    %ul
+      %li
+        %p PortakalAgacı sınıfı yapalım :  
+        %p
+          Onun boyunu veren bir 
+          %b height
+          metodu olsun, ve çağrıldığında ağacın yaşını bir yıl yaşlandıran 
+          %b BirYilGecti
+          metodu olsun. 
+        %p
+          Her yıl ağacın boyu uzayacak ( boyunu siz belirleyin ) ve sizin tanımladığınız bir metod sonunda ağaç ölecek.
+        %p İlk birkaç yıl meyve vermesin ama meyve vermeye başlayınca heryıl bir öncekinden fazla meyve versin.
+        %p
+          Tabii ki olgunlaşan meyveleri sayacak bir 
+          %b PortakalSay 
+          metodu ve meyveleri toplayacak 
+          %b MeyveTopla
+          metodu tanımlayın (ayrıca bu metod topladıkca @PortakalSay değerini azaltmalı ve “ne tatlı portakallar” demeli
+          yada portakallar bitince “bu yıl toplanacak portakal kalmadı” demeli ). 
+        %p Ayrıca şundan emin olun ki ; toplanmayan meyveler bir sonraki yıla kalmadan yere düşecek. 
+      %li
+        %p
+          Yavru ejderhanız ile iletişimde olan bir program yazın. 
+          Yavruya vereceğiniz komutlar 
+          %b “ye” , “yürü”
+          gibi kelimeler olacak. Bunlar string olacağı için bunları ayıracak ve yorumlayacak metodları yazmak size kalıyor. 
+    %br
+    %p 
+      Kullanabileceğiniz ve oluşturabileceğiniz binlerce sınıf yapıları vardır. 
+      Bunları nerede bulacağınızı göstereceğiz. Ondan önce birçok programlama dilinde olmayan 
+      Ruby nin güçlü bir özelliğinden bahsedeceğiz : 
+      %b bloklar ve prosedürler
+    %br
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/111") < Kendi Metotlarımızı Yazalım

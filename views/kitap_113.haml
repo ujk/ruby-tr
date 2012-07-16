@@ -14,9 +14,416 @@
     %br
     %h2 Bloklar ve Procs
     %br
+    %p 
+      Ruby dilinin en ilginç (cool) bölümlerinden biri. Diğer birkaç dilde de bu özellik var ,
+      ismi bazılarında
+      %b closures
+      olarak geçer. 
+    %p 
+      Bu şöyle açıklanabilir ; do…end arasına kod yazarak blok oluşturuyoruz. Bu bloğu bir nesneye (procs)
+      sarıyoruz. Sonra ya bir değişkende saklıyoruz yada metod içine gönderiyoruz. 
+    %p Ne zaman ve ne kadar istersek blok içindeki kodu çalıştırırız. Bu haliyle bir metoda benzetebiliriz.
+    %p Fakat bloklar bir nesneye bağımlı değildir (kendisi bir nesnedir) , biraz karışık mı geldi ? 
+    %p Örnek vermek daha iyi olacak : 
     %br
+    :coderay
+      #!Ruby
+      toast = Proc.new do
+        puts 'Cheers!'
+      end
+      toast.call
+      toast.call
+      toast.call
     %br
-    %h4 sayfa hazırlanıyor...
+    :coderay
+      #!Shell
+      Cheers!
+      Cheers!
+      Cheers!
+    %p
+      Evet bir proc oluşturduk ( bu prosedürün kısaltması gibi düşünülebilir ama daha çok blok ile daha
+      uyumludur ) bu kod bloğunu taşır . proc üç defa çağrıldı , bu haliyle daha çok metoda benziyor. 
+    %p 
+      Ama metodlardan fazlası var :
+      %b
+        %i bloklar parametre alabilirler : 
+    %br
+    :coderay
+      #!Ruby
+      doYouLike = Proc.new do |aGoodThing|
+        puts 'I *really* like '+aGoodThing+'!'
+      end
+
+      doYouLike.call 'chocolate'
+      doYouLike.call 'ruby'
+    %br
+    :coderay
+      #!Shell  
+      I *really* like chocolate!
+      I *really* like ruby!
+    %p
+      Blok ve Procs nedir öğrendik. Ama neden metodlar yerine bunları kullanalım ? 
+      Çünkü bazı özellikler varki metodlarla yapamayız. En önemlisi ; 
+    %p
+      %i metodları başka metodlar içinde kullanamayız (ama procs lar metodlar içinde kullanılabilir) . 
+    %p
+      Diğer sebep ; 
+      %i 
+        metodlar diğer metodlara değer döndürmez (ama metodlar procslar döndürebilir). 
+        Çünkü procs lar nesnedir , ama metodlar değil. 
+    %p
+      (Bu size tanıdık gelmedi mi? Evet bu tür blokları tekrarlayıcılar bölümünde de gördük. 
+      Şimdi bloklara daha yakından bakalım.) 
+    %br
+    %h3 Procs Alan Metodlar 
+    %p
+      Bir metod içince procs kullanınca proc nasıl kullanılacak kaç defa çağrılacak kontrol edebiliriz.
+      Örneğin bir koddan önce ve sonra çalışmasını istediğimiz şeyler olduğunu düşünelim :  
+    %br
+    :coderay
+      #!Ruby
+      def doSelfImportantly someProc
+        puts 'Everybody just HOLD ON!  I have something to do...'
+        someProc.call
+        puts 'Ok everyone, I\'m done.  Go on with what you were doing.'
+      end
+      
+      sayHello = Proc.new do
+        puts 'hello'
+      end
+      
+      sayGoodbye = Proc.new do
+        puts 'goodbye'
+      end
+      
+      doSelfImportantly sayHello
+      doSelfImportantly sayGoodbye
+    %br
+    :coderay
+      #!Shell
+      Everybody just HOLD ON!  I have something to do...
+      hello
+      Ok everyone, I'm done.  Go on with what you were doing.
+      Everybody just HOLD ON!  I have something to do...
+      goodbye
+      Ok everyone, I'm done.  Go on with what you were doing.
+    %p
+      Bu kod yapısının ne kadar önemli olduğu buradan pek anlaşılmıyor , ama öyle .
+      Programlamada mutlaka yapmanız gereken bazı katı istekler , şartlar vardır.
+    %p
+      Bir dosyayı kaydetmek istediğinizde , dosyayı açarsınız , içine bir şeyler yazarsınız ve dosyayı 
+      kapatırsınız. Dosyayı kapatmayı unutursanız kötü şeyler olabilir. Her zaman bir dosyayı açmak ve 
+      işlem yapmak istersiniz bu yüzden dosyanın açık unutulması mümkündür. Ruby, ile dosyaların açılması
+      ve kaydedilmesi yukarıdaki kodun mantığında çalışır. 
+      (Sonraki bölümde dosyaların kaydedilmesi ve yüklenmesi ile ilgili referenslar verilecek.) 
+    %p
+      Bazen procs ların kaç defa çağrılacağına dair metod yazmak isteyebilirsiniz : 
+    %br
+    :coderay
+      #!Ruby
+      def maybeDo someProc
+        if rand(2) == 0
+          someProc.call
+        end
+      end
+      
+      def twiceDo someProc
+        someProc.call
+        someProc.call
+      end
+      
+      wink = Proc.new do
+        puts '<wink>'
+      end
+      
+      glance = Proc.new do
+        puts '<glance>'
+      end
+      
+      maybeDo wink # rand(2) değeri 0 ise çalışacak
+      maybeDo glance # rand(2) değeri 0 ise çalışacak
+      twiceDo wink
+      twiceDo glance
+    %br
+    :coderay
+      #!Shell
+      <glance> ( wink için rand(2) değeri 0 değilmiş , glance için 0 mış )
+      <wink>
+      <wink>
+      <glance>
+      <glance>
+    %p 
+      Bunlar metodlarla yapamadığımız , procs lar ile yapabileceğimiz genel örneklerdir. 
+      Tabiki iki defa <wink> yapacak metod yazabilirsiniz , ama bu parametre someProc almadığı için iki
+      şeyi birden (hem wink , hem glance) çift yazdıramazsınız. 
+    %p
+      Şu ana kadar gördüğümüz procs lar birbirine benziyordu. Son örnektekiler biraz farklı.
+      Metodun çağrılma sayısı içinde kaç procs olduğuna bağlı. Metodumuz nesne ve procs alabilir
+      ve procs bu nesne üstünden çağrılabilir. 
+      Eğer procs FALSE değeri alırsa işlem durur (procs çağrılmaz) , 
+      TRUE değeri alırsa procs geri döndürme nesnesi ile beraber çağrılır. 
+      Procs FALSE döndürünceye kadar işlem devam eder.Metodun geri döndüreceği değer son
+      FALSE-olmayan değeri procs ile alır. 
+    %br
+    :coderay
+      #!Ruby
+      def doUntilFalse firstInput, someProc
+        input  = firstInput
+        output = firstInput
+        
+        while output
+          input  = output
+          output = someProc.call input
+        end
+        
+        input
+      end
+      
+      buildArrayOfSquares = Proc.new do |array|
+        lastNumber = array.last
+        if lastNumber <= 0
+          false
+        else
+          array.pop                        #  sondaki sayıyı atıyoruz...
+          array.push lastNumber*lastNumber # ...yerine karesini koyuyoruz...
+          array.push lastNumber-1      #  ...diğer küçük sayı ile devam.
+        end
+      end
+      
+      alwaysFalse = Proc.new do |justIgnoreMe|
+        false
+      end
+      
+      puts doUntilFalse([5], buildArrayOfSquares).inspect
+      puts doUntilFalse('I\'m writing this at 3:00 am; someone knock me out!', alwaysFalse)
+    %br
+    :coderay
+      #!Shell
+      [25, 16, 9, 4, 1, 0]
+      I'm writing this at 3:00 am; someone knock me out!
+    %p
+      Acayip anlaşılmaz bir örnek olabilir, itiraf ediyorum. Fakat farklı procs lar verildiğinde bir 
+      metodun nasıl davrandığını çok iyi anlatıyor. 
+    %p
+      Buradaki inspect metodu to_s e çok benzer. to_s bize bağlandığı nesneyi döndürürken inspect 
+      doUntilFalse ile çağırdığımız dizinin tamamını döndürür. Şunu da görmeliyiz ki dizinin sonunda
+      0 ın karesini almıyoruz, zaten 0 ın karesi yine 0, gerek yok. Ayrıca alwaysFalse  FALSE döndüreceği
+      için, doUntilFalse ikinci çağrılmada bir şey döndürmez sadece verilen stringi yazar. 
+    %br
+    %h3 Procs Döndüren Metodlar  
+    %p
+      Procs ların başka güzel özelliği metodlar içinde procs lar oluşturulması ve döndürülmesidir (return).
+      Aşağıdaki örnekte iki procs oluşturup yeni bir procs da döndürüyoruz. 
+      Bu yeni procs çağrılınca birinci procs u çağırır bunun sonucu da ikinci procs a geçer. 
+    %br
+    :coderay
+      #!Ruby
+      def compose proc1, proc2
+        Proc.new do |x|
+          proc2.call(proc1.call(x))
+        end
+      end
+      
+      squareIt = Proc.new do |x|
+        x * x
+      end
+      
+      doubleIt = Proc.new do |x|
+        x + x
+      end
+      
+      doubleThenSquare = compose doubleIt, squareIt
+      squareThenDouble = compose squareIt, doubleIt
+      
+      puts doubleThenSquare.call(5)
+      puts squareThenDouble.call(5)
+    %br
+    :coderay
+      #!Shell
+      100
+      50
+    %p
+      Yukarıda 3. satırda proc1 in  proc2 den önce işleme girmesi için parantez içinde proc2 ye yazılmıştır. 
+    %br
+    %h3 Metodlar İçinden Blokları ( Procs değil ) Oluşturma
+    %p
+      Bu konu akademik olarak ilginç olduğu için incelenebilir ama uygulamada tartışılan bir konudur. 
+      Çünkü üç aşamalı bir yol ( metodu tanımlama , proc u oluşturma ve son olarak metod proc la beraber
+      çağırma ) olmasına rağmen sadece iki aşamanın ( metodu tanımlama ve proc kullanmadan metodla blok 
+      içine girme ) olmasıdır. Siz de çoğu zaman metodun içine girdikten sonra proc/block kullanmak
+      istemeyeceksiniz. Ruby ise bunu zaten bizim için yapıyor : 
+      Tekrarlayıcıları her yerde kullanıyoruz unuttunuz mu? Bir örnek verelim : 
+    %br
+    :coderay
+      #!Ruby
+      class Array
+        
+        def eachEven(&wasABlock_nowAProc)
+          isEven = true  # "true" ile başlıyoruz çünkü diziler çift sayı olan 0
+                         #  ile başlar.
+          
+          self.each do |object|
+            if isEven
+              wasABlock_nowAProc.call object
+            end
+            
+            isEven = (not isEven)  #  çift => tek , tek => çift değiştirme.
+          end
+        end
+      
+      end
+      
+      ['apple', 'bad apple', 'cherry', 'durian'].eachEven do |fruit|
+        puts 'Yum!  I just love '+fruit+' pies, don\'t you?'
+      end
+      
+      #  sadece çift sayıları kullanıyoruz
+      #  tek sayılara ne olacak ?
+      #  onlara da bir uyarı yazalım.
+      [1, 2, 3, 4, 5].eachEven do |oddBall|
+        puts oddBall.to_s+' is NOT an even number!'
+      end
+    %br
+    :coderay
+      #!Shell
+      Yum!  I just love apple pies, don't you?
+      Yum!  I just love cherry pies, don't you?
+      1 is NOT an even number!
+      3 is NOT an even number!
+      5 is NOT an even number!
+    %p
+      eachEven metodu içinden blok oluşturmak için bloğu metod dan sonra hemen yerleştiriyoruz. 
+      Siz bloğu metod içine koysanızda birçok metod bunu yok sayabilir. Bunu önlemek için bu blok adı
+      önüne 
+      %b &
+      koyarız ve procs a çevirmiş oluruz bir anlamda ve bu proc metod parametrelerinin en sonuna
+      yazılır. 
+    %p 
+      Biraz karışık olabilir ama zor değil. Bunu metodu tanımlarken ve bir kere yaparız. 
+      Sonra bu metodu önceden Ruby de tanımlı (built-in) blok kullanan metodlar gibi ( .each ve .times ) 
+      istediğiniz kadar kullanırsınız. 5.times do vardı hatırlayınız… 
+    %p
+      Karıştırıyorsanız , eachEven metodu ne yapmak için oluşturuldu düşünün : 
+      %i “bloğu çağırmak ve dizinin kalan her elemanı üzerinde işlem yapmak için”.
+      Bir kere bu yazılınca işleyecektir , hangi blok ne zaman çağrılacak gibi bir endişeniz olmasın.
+      Bu zaten metodları neden böyle yazdığımızı açıklar : onların tekrar ne zaman çalışacağını düşünmemize
+      gerek yoktur. Sayıların tek ve çift olaması durumlarında çalışmasına devam etmiştir. 
+    %p
+      Bir keresinde bir programın farklı bölümlerinin çalışmasının ne kadar zaman aldığını hesaplamam
+      gerekmişti ( buna kod profillendirmesi denir ). Bunun için bir metod yazmıştım , kod çalışmadan 
+      zaman tutuyordu , kod çalışıp bitince aradaki zaman farkını çıkarıyordu. Kodu tam hatırlamıyorum 
+      ama benzer işi yapan bir örnek vereyim : 
+    %br
+    :coderay
+      #!Ruby
+      def profile descriptionOfBlock, &block
+        startTime = Time.now
+        
+        block.call
+        
+        duration = Time.now - startTime
+        
+        puts descriptionOfBlock+':  '+duration.to_s+' seconds'
+      end
+      
+      profile '25000 doublings' do
+        number = 1
+        
+        25000.times do
+          number = number + number
+        end
+        
+        puts number.to_s.length.to_s+' digits'  #büyük sayının rakam sayısı.
+      end
+      
+      profile 'count to a million' do
+        number = 0
+        
+        1000000.times do
+          number = number + 1
+        end
+      end
+    %br
+    :coderay
+      #!Shell
+      7526 digits
+      25000 doublings:  0.246768 seconds
+      count to a million:  0.90245 seconds
+    %p
+      Ne kadar basit ve kullanışlı. Şimdi bir programın istediğim kısmının ne kadar süre çalıştığını
+      kolayca hesaplatabilirim. Yapacağım tek şey çalışacak kodu blok içine yazmak ve onu da profile a göndermek. 
+    %br
+    %h3 Denemeniz için… 
+    %br
+    %ul
+      %li 
+        Eski bir çalar saat : İçinde blok olan bir metod oluşturalım. 
+        Bu metod her saat başı bloğu bir kere çağırsın ve 
+        %p
+          %i do…. puts “ding-dong” …end  
+          desin. 
+        %p
+          İpucu: Time.now.hour şimdiki zamanı tanımlamada kullanılabilir , 
+          ama bu 0-23 arası olarak saatı verir sizin bunu gerçek saatteki gösterim gibi
+          1 – 12 rakamları ile yapmanız gerekiyor. 
+      %br    
+      %li 
+        Program Logger : İsmi 
+        %b log
+        olan bir metod ve bu bir bloga sahip , 
+        %p
+          bu blog da 
+          %b blog
+          ismini string olarak döndürecek. 
+          %b doSelfImportantly
+          gibi.
+        %p 
+          Blogun başlamasını ve bitişini string ifadelerle verecek , 
+          bize de hangi blok döndürülüyor söyleyecek. 
+        %p Bu metodu bir kod bloğu göndererek test edin. 
+        %p 
+          Blok içinde 
+          %b another 
+          gibi bir ifade olsun bu işlem başlatsın ve diğer bloğa işlem aktarılsın ( nesting : iç-içe ).
+        %p Çıktınız şuna benzer birşey olmalı : 
+        %br
+        :coderay
+          #!Shell
+          Beginning "outer block"...
+          Beginning "some little block"...
+          ..."some little block" finished, returning:  5
+          Beginning "yet another block"...
+          ..."yet another block" finished, returning:  I like Thai food!
+          ..."outer block" finished, returning:  false
+      %br    
+      %li
+        %b Daha İyi Bir Logger :
+        Son logger çıktısının okunması daha karmaşık iç içe yapılar için zor olacaktı. 
+        %p Ama blokların yapısına göre çıktıyı da girintili yazdırabilirsek daha anlaşılır olmaz mı?
+        %p Bunun için içiçe olan yapıları takip etmeniz lazım. global değişkenler kullanmanız yerinde olacaktır.
+        %p Bunlar kodunuzun her yerinden görebileceğiniz değişkenlerdir. 
+        %p Bunları ifade etmek için başlarına $ koyarız : $global, $nestingDepth, and $bigTopPeeWee.
+        %p Sonuçta şuna benzer bir çıktı almalısınız : 
+        %br
+    :coderay
+      #!Shell
+      Beginning "outer block"...
+        Beginning "some little block"...
+          Beginning "teeny-tiny block"...
+          ..."teeny-tiny block" finished, returning:  lots of love
+        ..."some little block" finished, returning:  42
+        Beginning "yet another block"...
+        ..."yet another block" finished, returning:  I love Indian food!
+      ..."outer block" finished, returning:  true
+    %br
+    %hr
+    %p Evet tebrikler bu derslerden öğrenecekleriniz bu kadardı ! 
+    %p Herşeyi hatırlamıyor olabilirsiniz yada bazı bölümleri atlamış olabilirsiniz. 
+    %p Programlama ne bildiğinizle çok alakalı değildir , çözümü nasıl ifade ettiğinizle alakalıdır.
+    %P Neyi nerede bulacağınızı bildiğiniz sürece hatırlamamanız bir problem olmaz. 
+    %p Ümit ederim bütün bunları hiçbir yere bakmadan yazdığımı düşünmüyorsunuzdur. Çünkü baktım. 
+    %p Ayrıca oldukca fazla yardım da aldım. Bu yardımları ve kimlerden ve nerelerden aldım ? Anlatayım :
+    %br
     %hr
     %h3
       %a.btn.btn-success.btn-large.pull-left(href="/kitap/112") < Sınıflar (Classes)
