@@ -19,23 +19,474 @@
         %i.icon-search
     = haml :gs_sidebar
 %div.row
-  %div.span12
+  %div.span12(style="background: #eee")
     %hr
     %p
-      Bu renklerin tümü isimleri ile kullanılabilir.
+      Bu renklerin tümü isimleri ile kullanılabilir. (Yani herhangi bir slot içerisinde 
+      %b tomato 
+      metodu çağırmak size güzel bir kırmızı renk verecektir) Aşağıdaki her renk 
+      için ayrıca 
+      %a(href="/kitap/206#rgb") rgb 
+      metodunda kullanılacak sayılar da verilmiştir.
+    %br
+    %br
+    %div.row(style="text-align: center")
+      %div.span2(style="background: aliceblue; color: black")
+        %h4 aliceblue
+        %p rgb(240, 248, 255)
+      %div.span2(style="background: antiquewhite; color: black")
+        %h4 antiquewhite
+        %p rgb(250, 235, 215)
+      %div.span2(style="background: aqua; color: black")
+        %h4 aqua
+        %p rgb(0, 255, 255)
+      %div.span2(style="background: aquamarine; color: black")
+        %h4 aquamarine
+        %p rgb(127, 255, 212)
+      %div.span2(style="background: azure; color: black")
+        %h4 azure
+        %p rgb(240, 255, 255)
+      %div.span2(style="background: beige; color: black")
+        %h4 beige
+        %p rgb(245, 245, 220)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: bisque; color: black")
+        %h4 bisque
+        %p rgb(255, 228, 196)
+      %div.span2(style="background: black; color: white")
+        %h4 black
+        %p rgb(0, 0, 0)
+      %div.span2(style="background: blanchedalmond; color: black")
+        %h4 blanchedalmond
+        %p rgb(255, 235, 205)
+      %div.span2(style="background: blue; color: black")
+        %h4 blue
+        %p rgb(0, 0, 255)
+      %div.span2(style="background: blueviolet; color: black")
+        %h4 blueviolet
+        %p rgb(138, 43, 226)
+      %div.span2(style="background: brown; color: white")
+        %h4 brown
+        %p rgb(165, 42, 42)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: burlywood; color: black")
+        %h4 burlywood
+        %p rgb(222, 184, 135)
+      %div.span2(style="background: cadetblue; color: black")
+        %h4 cadetblue
+        %p rgb(95, 158, 160)
+      %div.span2(style="background: chartreuse; color: black")
+        %h4 chartreuse
+        %p rgb(127, 255, 0)
+      %div.span2(style="background: chocolate; color: black")
+        %h4 chocolate
+        %p rgb(210, 105, 30)
+      %div.span2(style="background: coral; color: black")
+        %h4 coral
+        %p rgb(255, 127, 80)
+      %div.span2(style="background: cornflowerblue; color: black")
+        %h4 cornflowerblue
+        %p rgb(100, 149, 237)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: cornsilk; color: black")
+        %h4 cornsilk
+        %p rgb(255, 248, 220)
+      %div.span2(style="background: crimson; color: black")
+        %h4 crimson
+        %p rgb(220, 20, 60)
+      %div.span2(style="background: cyan; color: black")
+        %h4 cyan
+        %p rgb(0, 255, 255)
+      %div.span2(style="background: darkblue; color: white")
+        %h4 darkblue
+        %p rgb(0, 0, 139)
+      %div.span2(style="background: darkcyan; color: black")
+        %h4 darkcyan
+        %p rgb(0, 139, 139)
+      %div.span2(style="background: darkgoldenrod; color: black")
+        %h4 darkgoldenrod
+        %p rgb(184, 134, 11)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: darkgray; color: black")
+        %h4 darkgray
+        %p rgb(169, 169, 169)
+      %div.span2(style="background: darkgreen; color: white")
+        %h4 darkgreen
+        %p rgb(0, 100, 0)
+      %div.span2(style="background: darkkhaki; color: black")
+        %h4 darkkhaki
+        %p rgb(189, 183, 107)
+      %div.span2(style="background: darkmagenta; color: black")
+        %h4 darkmagenta
+        %p rgb(139, 0, 139)
+      %div.span2(style="background: darkolivegreen; color: white")
+        %h4 darkolivegreen
+        %p rgb(85, 107, 47)
+      %div.span2(style="background: darkorange; color: black")
+        %h4 darkorange
+        %p rgb(255, 140, 0)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: darkorchid; color: black")
+        %h4 darkorchid
+        %p rgb(153, 50, 204)
+      %div.span2(style="background: darkred; color: white")
+        %h4 darkred
+        %p rgb(139, 0, 0)
+      %div.span2(style="background: darksalmon; color: black")
+        %h4 darksalmon
+        %p rgb(233, 150, 122)
+      %div.span2(style="background: darkseagreen; color: black")
+        %h4 darkseagreen
+        %p rgb(143, 188, 143)
+      %div.span2(style="background: darkslateblue; color: black")
+        %h4 darkslateblue
+        %p rgb(72, 61, 139)
+      %div.span2(style="background: darkslategray; color: white")
+        %h4 darkslategray
+        %p rgb(47, 79, 79)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: darkturquoise; color: black")
+        %h4 darkturquoise
+        %p rgb(0, 206, 209)
+      %div.span2(style="background: darkviolet; color: black")
+        %h4 darkviolet
+        %p rgb(148, 0, 211)
+      %div.span2(style="background: deeppink; color: black")
+        %h4 deeppink
+        %p rgb(255, 20, 147)
+      %div.span2(style="background: deepskyblue; color: black")
+        %h4 deepskyblue
+        %p rgb(0, 191, 255)
+      %div.span2(style="background: dimgray; color: black")
+        %h4 dimgray
+        %p rgb(105, 105, 105)
+      %div.span2(style="background: dodgerblue; color: black")
+        %h4 dodgerblue
+        %p rgb(30, 144, 255)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: firebrick; color: white")
+        %h4 firebrick
+        %p rgb(178, 34, 34)
+      %div.span2(style="background: floralwhite; color: black")
+        %h4 floralwhite
+        %p rgb(255, 250, 240)
+      %div.span2(style="background: forestgreen; color: white")
+        %h4 forestgreen
+        %p rgb(34, 139, 34)
+      %div.span2(style="background: fuchsia; color: black")
+        %h4 fuchsia
+        %p rgb(255, 0, 255)
+      %div.span2(style="background: gainsboro; color: black")
+        %h4 gainsboro
+        %p rgb(220, 220, 220)
+      %div.span2(style="background: ghostwhite; color: black")
+        %h4 ghostwhite
+        %p rgb(248, 248, 255)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: gold; color: black")
+        %h4 gold
+        %p rgb(255, 215, 0)
+      %div.span2(style="background: goldenrod; color: black")
+        %h4 goldenrod
+        %p rgb(218, 165, 32)
+      %div.span2(style="background: gray; color: black")
+        %h4 gray
+        %p rgb(128, 128, 128)
+      %div.span2(style="background: green; color: white")
+        %h4 green
+        %p rgb(0, 128, 0)
+      %div.span2(style="background: greenyellow; color: black")
+        %h4 greenyellow
+        %p rgb(173, 255, 47)
+      %div.span2(style="background: honeydew; color: black")
+        %h4 honeydew
+        %p rgb(240, 255, 240)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: hotpink; color: black")
+        %h4 hotpink
+        %p rgb(255, 105, 180)
+      %div.span2(style="background: indianred; color: black")
+        %h4 indianred
+        %p rgb(205, 92, 92)
+      %div.span2(style="background: indigo; color: white")
+        %h4 indigo
+        %p rgb(75, 0, 130)
+      %div.span2(style="background: ivory; color: black")
+        %h4 ivory
+        %p rgb(255, 255, 240)
+      %div.span2(style="background: khaki; color: black")
+        %h4 khaki
+        %p rgb(240, 230, 140)
+      %div.span2(style="background: lavender; color: black")
+        %h4 lavender
+        %p rgb(230, 230, 250)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: lavenderblush; color: black")
+        %h4 lavenderblush
+        %p rgb(255, 240, 245)
+      %div.span2(style="background: lawngreen; color: black")
+        %h4 lawngreen
+        %p rgb(124, 252, 0)
+      %div.span2(style="background: lemonchiffon; color: black")
+        %h4 lemonchiffon
+        %p rgb(255, 250, 205)
+      %div.span2(style="background: lightblue; color: black")
+        %h4 lightblue
+        %p rgb(173, 216, 230)
+      %div.span2(style="background: lightcoral; color: black")
+        %h4 lightcoral
+        %p rgb(240, 128, 128)
+      %div.span2(style="background: lightcyan; color: black")
+        %h4 lightcyan
+        %p rgb(224, 255, 255)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: lightgoldenrodyellow; color: black")
+        %h4 lightgoldenrodyellow
+        %p rgb(250, 250, 210)
+      %div.span2(style="background: lightgreen; color: black")
+        %h4 lightgreen
+        %p rgb(144, 238, 144)
+      %div.span2(style="background: lightgrey; color: black")
+        %h4 lightgrey
+        %p rgb(211, 211, 211)
+      %div.span2(style="background: lightpink; color: black")
+        %h4 lightpink
+        %p rgb(255, 182, 193)
+      %div.span2(style="background: lightsalmon; color: black")
+        %h4 lightsalmon
+        %p rgb(255, 160, 122)
+      %div.span2(style="background: lightseagreen; color: black")
+        %h4 lightseagreen
+        %p rgb(32, 178, 170)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: lightskyblue; color: black")
+        %h4 lightskyblue
+        %p rgb(135, 206, 250)
+      %div.span2(style="background: lightslategray; color: black")
+        %h4 lightslategray
+        %p rgb(119, 136, 153)
+      %div.span2(style="background: lightsteelblue; color: black")
+        %h4 lightsteelblue
+        %p rgb(176, 196, 222)
+      %div.span2(style="background: lightyellow; color: black")
+        %h4 lightyellow
+        %p rgb(255, 255, 224)
+      %div.span2(style="background: lime; color: black")
+        %h4 lime
+        %p rgb(0, 255, 0)
+      %div.span2(style="background: limegreen; color: black")
+        %h4 limegreen
+        %p rgb(50, 205, 50)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: linen; color: black")
+        %h4 linen
+        %p rgb(250, 240, 230)
+      %div.span2(style="background: magenta; color: black")
+        %h4 magenta
+        %p rgb(255, 0, 255)
+      %div.span2(style="background: maroon; color: white")
+        %h4 maroon
+        %p rgb(128, 0, 0)
+      %div.span2(style="background: mediumaquamarine; color: black")
+        %h4 mediumaquamarine
+        %p rgb(102, 205, 170)
+      %div.span2(style="background: mediumblue; color: white")
+        %h4 mediumblue
+        %p rgb(0, 0, 205)
+      %div.span2(style="background: mediumorchid; color: black")
+        %h4 mediumorchid
+        %p rgb(186, 85, 211)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: mediumpurple; color: black")
+        %h4 mediumpurple
+        %p rgb(147, 112, 219)
+      %div.span2(style="background: mediumseagreen; color: black")
+        %h4 mediumseagreen
+        %p rgb(60, 179, 113)
+      %div.span2(style="background: mediumslateblue; color: black")
+        %h4 mediumslateblue
+        %p rgb(123, 104, 238)
+      %div.span2(style="background: mediumspringgreen; color: black")
+        %h4 mediumspringgreen
+        %p rgb(0, 250, 154)
+      %div.span2(style="background: mediumturquoise; color: black")
+        %h4 mediumturquoise
+        %p rgb(72, 209, 204)
+      %div.span2(style="background: mediumvioletred; color: black")
+        %h4 mediumvioletred
+        %p rgb(199, 21, 133)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: midnightblue; color: white")
+        %h4 midnightblue
+        %p rgb(25, 25, 112)
+      %div.span2(style="background: mintcream; color: black")
+        %h4 mintcream
+        %p rgb(245, 255, 250)
+      %div.span2(style="background: mistyrose; color: black")
+        %h4 mistyrose
+        %p rgb(255, 228, 225)
+      %div.span2(style="background: moccasin; color: black")
+        %h4 moccasin
+        %p rgb(255, 228, 181)
+      %div.span2(style="background: navajowhite; color: black")
+        %h4 navajowhite
+        %p rgb(255, 222, 173)
+      %div.span2(style="background: navy; color: white")
+        %h4 navy
+        %p rgb(0, 0, 128)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: oldlace; color: black")
+        %h4 oldlace
+        %p rgb(253, 245, 230)
+      %div.span2(style="background: olive; color: black")
+        %h4 olive
+        %p rgb(128, 128, 0)
+      %div.span2(style="background: olivedrab; color: black")
+        %h4 olivedrab
+        %p rgb(107, 142, 35)
+      %div.span2(style="background: orange; color: black")
+        %h4 orange
+        %p rgb(255, 165, 0)
+      %div.span2(style="background: orangered; color: black")
+        %h4 orangered
+        %p rgb(255, 69, 0)
+      %div.span2(style="background: orchid; color: black")
+        %h4 orchid
+        %p rgb(218, 112, 214)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: palegoldenrod; color: black")
+        %h4 palegoldenrod
+        %p rgb(238, 232, 170)
+      %div.span2(style="background: palegreen; color: black")
+        %h4 palegreen
+        %p rgb(152, 251, 152)
+      %div.span2(style="background: paleturquoise; color: black")
+        %h4 paleturquoise
+        %p rgb(175, 238, 238)
+      %div.span2(style="background: palevioletred; color: black")
+        %h4 palevioletred
+        %p rgb(219, 112, 147)
+      %div.span2(style="background: papayawhip; color: black")
+        %h4 papayawhip
+        %p rgb(255, 239, 213)
+      %div.span2(style="background: peachpuff; color: black")
+        %h4 peachpuff
+        %p rgb(255, 218, 185)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: peru; color: black")
+        %h4 peru
+        %p rgb(205, 133, 63)
+      %div.span2(style="background: pink; color: black")
+        %h4 pink
+        %p rgb(255, 192, 203)
+      %div.span2(style="background: plum; color: black")
+        %h4 plum
+        %p rgb(221, 160, 221)
+      %div.span2(style="background: powderblue; color: black")
+        %h4 powderblue
+        %p rgb(176, 224, 230)
+      %div.span2(style="background: purple; color: white")
+        %h4 purple
+        %p rgb(128, 0, 128)
+      %div.span2(style="background: red; color: black")
+        %h4 red
+        %p rgb(255, 0, 0)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: rosybrown; color: black")
+        %h4 rosybrown
+        %p rgb(188, 143, 143)
+      %div.span2(style="background: royalblue; color: black")
+        %h4 royalblue
+        %p rgb(65, 105, 225)
+      %div.span2(style="background: saddlebrown; color: white")
+        %h4 saddlebrown
+        %p rgb(139, 69, 19)
+      %div.span2(style="background: salmon; color: black")
+        %h4 salmon
+        %p rgb(250, 128, 114)
+      %div.span2(style="background: sandybrown; color: black")
+        %h4 sandybrown
+        %p rgb(244, 164, 96)
+      %div.span2(style="background: seagreen; color: black")
+        %h4 seagreen
+        %p rgb(46, 139, 87)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: seashell; color: black")
+        %h4 seashell
+        %p rgb(255, 245, 238)
+      %div.span2(style="background: sienna; color: black")
+        %h4 sienna
+        %p rgb(160, 82, 45)
+      %div.span2(style="background: silver; color: black")
+        %h4 silver
+        %p rgb(192, 192, 192)
+      %div.span2(style="background: skyblue; color: black")
+        %h4 skyblue
+        %p rgb(135, 206, 235)
+      %div.span2(style="background: slateblue; color: black")
+        %h4 slateblue
+        %p rgb(106, 90, 205)
+      %div.span2(style="background: slategray; color: black")
+        %h4 slategray
+        %p rgb(112, 128, 144)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: snow; color: black")
+        %h4 snow
+        %p rgb(255, 250, 250)
+      %div.span2(style="background: springgreen; color: black")
+        %h4 springgreen
+        %p rgb(0, 255, 127)
+      %div.span2(style="background: steelblue; color: black")
+        %h4 steelblue
+        %p rgb(70, 130, 180)
+      %div.span2(style="background: tan; color: black")
+        %h4 tan
+        %p rgb(210, 180, 140)
+      %div.span2(style="background: teal; color: black")
+        %h4 teal
+        %p rgb(0, 128, 128)
+      %div.span2(style="background: thistle; color: black")
+        %h4 thistle
+        %p rgb(216, 191, 216)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: tomato; color: black")
+        %h4 tomato
+        %p rgb(255, 99, 71)
+      %div.span2(style="background: turquoise; color: black")
+        %h4 turquoise
+        %p rgb(64, 224, 208)
+      %div.span2(style="background: violet; color: black")
+        %h4 violet
+        %p rgb(238, 130, 238)
+      %div.span2(style="background: wheat; color: black")
+        %h4 wheat
+        %p rgb(245, 222, 179)
+      %div.span2(style="background: white; color: black")
+        %h4 white
+        %p rgb(255, 255, 255)
+      %div.span2(style="background: whitesmoke; color: black")
+        %h4 whitesmoke
+        %p rgb(245, 245, 245)
+    %div.row(style="text-align: center")
+      %div.span2(style="background: yellow; color: black")
+        %h4 yellow
+        %p rgb(255, 255, 0)
+      %div.span2(style="background: yellowgreen; color: black")
+        %h4 yellowgreen
+        %p rgb(154, 205, 50)
     
     
 
 
 
 
-
+    %div.span3
     %h3 Devam Edecek...
 
     %hr
-    %a.btn.btn-large.btn-success.pull-left(href="/kitap/208")
+    %a.btn.btn-large.btn-success.pull-left(href="/kitap/209")
       %i.icon-backward.icon-white 
-      Stiller
-    %a.btn.btn-large.btn-success.pull-right(href="/kitap/210")
-      Renkler
+      Sınıflar
+    %a.btn.btn-large.btn-success.pull-right(href="/kitap/211")
+      Slotlar
       %i.icon-forward.icon-white
