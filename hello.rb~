@@ -1,6 +1,5 @@
 require "sinatra"
 require "haml"
-require "haml-coderay"
 
 
 get "/" do
