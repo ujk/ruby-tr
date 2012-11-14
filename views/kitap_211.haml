@@ -1,0 +1,93 @@
+-# coding: UTF-8
+
+
+%div.row
+  %div.span10
+    %h1 Slot'lar
+    %h3 
+      Slotlar , resim, yazı ve benzerlerini yerleştirmek için kutulardır. En çok 
+      kullanılan şekilleri 
+      %i stack 
+      ve 
+      %i flow
+      'dur. Green Shoes terminolojisinde slotlar "kutular" ya da "canvas" olarak 
+      da kullanılabilir.
+    %hr
+    %h4 Çeviren : Ümit Kayacık
+  %div.span2
+    %form.form-search(action='/k_search' method='GET')
+      %input(type="hidden" name="start" value="201")
+      %input(type="hidden" name="end" value="238")
+      %input.search-query(type="text" name="search_str" style="width: 70px;" placeholder="Ara")
+      %button.btn(type="submit")
+        %i.icon-search
+    = haml :gs_sidebar
+%div.row
+  %div.span12
+    %hr
+    %p
+      Mouse tekerleği ve PageUp-PageDown butonları kullanımı çok yaygın 
+      olduğundan dikey kaymalı ekranlar, web sayfalarında olduğu gibi, çok 
+      kullanılmaktadır. Genellikle genişlik kısıtlanıp yükseklik esnek bırakılır.
+    %p
+      Şimdi eğer istiyorsanız sabit genişlik ve yükseklik kullanarak da uygulama 
+      yapabilirsiniz. Biraz matematik yaparsınız , belki de herşey daha güzel 
+      olur. 
+    %p
+      Genelde sizlere stack ve flow kullanmanızı tavsite edeceğim. Burada ana 
+      fikir, belli bir genişliği şeylerle doldurmak, sonra alt satıra kayıp tekrar bir 
+      genişlik doldurmak şeklindedir. HTML'in blokları ve satır içi stilleri gibi 
+      düşünülebilir.
+    %br
+    
+    %h2 Stack
+    
+    %p
+      Bir stack içinde elemanlar dikey olarak sıralanır. Stack içindeki her 
+      eleman bir öncekinin altına yerleştirilir. 
+    %p
+      Stack , ayrıca bir kutu olarak da düşünüleilir. 250 piksel genişliğinde bir 
+      stack içinde eğer birtek eleman varsa o eleman da 250 piksel genişliğinde 
+      olacaktır. 
+    %p
+      Yeni bir stack oluşturmak için 
+      %a(href="/kitap/213#stack") stack 
+      metodu kullanın, her slot içinde çağrılabilir. Yani stack başka stack veya 
+      slotları içerebilir.
+    %br
+    
+    %h2 Flow
+    
+    %p
+      Bir flow elemanları mümkün olan en sıkı şekilde yerleştirir. Bir genişlik 
+      doldurulacak ve içindeki elemanları saracaktır. Text elemanları arka 
+      arkaya yerleşip aynı paragraf gibi görünür. Resimler ve widget'lar dizi 
+      gibi görünür.
+    %p
+      Stack gibi flow da bir kutudur ve stacklar ile flowlar birbiri içlerine 
+      yerleştirilebilir. Birbirlerine benzerler sadece içlerindeki elemanlara farklı 
+      davranırlar. 
+    %p
+      Yeni bir flow oluşturmak için 
+      %a(href="/kitap/213#flow") flow 
+      metodu kullanın. Flowlar diğer flow ve stackları içerebilir.
+    %p
+      Son olarak: Green Shoes penceresi de bir flowdur.
+    
+    
+    
+    
+
+
+
+
+
+    %h3 Devam Edecek...
+
+    %hr
+    %a.btn.btn-large.btn-success.pull-left(href="/kitap/210")
+      %i.icon-backward.icon-white 
+      Renkler
+    %a.btn.btn-large.btn-success.pull-right(href="/kitap/212")
+      Çizim
+      %i.icon-forward.icon-white
