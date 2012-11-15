@@ -1,0 +1,90 @@
+-# coding: UTF-8
+
+
+%div.row
+  %div.span10
+    %h1 Slot'ların Çizilmesi
+    %h3 
+      Her slot bir canvas gibidir, boş bir yüzey çeşitli renkli şekiller ya da 
+      gradientlerle kaplanır.
+    %hr
+    %h4 Çeviren : Ümit Kayacık
+  %div.span2
+    %form.form-search(action='/k_search' method='GET')
+      %input(type="hidden" name="start" value="201")
+      %input(type="hidden" name="end" value="238")
+      %input.search-query(type="text" name="search_str" style="width: 70px;" placeholder="Ara")
+      %button.btn(type="submit")
+        %i.icon-search
+    = haml :gs_sidebar
+%div.row
+  %div.span12
+    %hr
+    %p
+      Birçok kullanılan şekil 
+      %b oval 
+      ve 
+      %b rect 
+      gibi metodlarla çizilir. Öncelikle çizimi yapacak fırçanın renklerini tayin 
+      etmelisiniz.
+    %p
+      %b stroke 
+      komutu çizgi rengini belirler ve 
+      %b fill 
+      komutu da çizgiler arasına doldurulacak rengi belirler.
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        stroke red
+        fill blue
+        oval top: 10, left: 10, radius: 100
+      end
+    %br
+    
+    %p
+      Bu kod size etrafı kırmızı çizili bir mavi daire verir. Yüz piksel çapında ve 
+      pencerenin sol üst köşesinin biraz güneydoğusuna yerleştirilir.
+    %p
+      Buradaki 
+      %b red 
+      ve 
+      %b blue 
+      metodları birze RGB array verir. Bu konuyu 
+      %a(href="/kitap/210") renkler 
+      sayfasında görmüştük. Renkleri nasıl kullanacağınızı bu bölümde 
+      bulabilirsiniz.
+    %br
+    
+    %h2 Processing ve NodeBox'tan Alınan İlham
+    %p
+      Çizim metodları nerdeyse aynen bir Python çizim aracı olan NodeBox'tan 
+      gelir. Nodebox da bir çok fikrini grafik ve animasyon için yazılmış Java 
+      benzeri bir dil olan Processing'den alır. Bu harika programların yaratıcılarına 
+      çok şey borçluyum. 
+    %p
+      Green Shoes birkaç şeyi NodeBox ve Processing'den farklı yapar. 
+      Örneğin, Green Shoes farklı renk metodlarına sahiptir. 
+
+    
+    %h2 Stack
+    
+    
+    
+    
+    
+
+
+
+
+
+    %h3 Devam Edecek...
+
+    %hr
+    %a.btn.btn-large.btn-success.pull-left(href="/kitap/211")
+      %i.icon-backward.icon-white 
+      Slotlar
+    %a.btn.btn-large.btn-success.pull-right(href="/kitap/213")
+      Elemanlar
+      %i.icon-forward.icon-white
