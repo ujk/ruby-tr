@@ -65,10 +65,72 @@
       çok şey borçluyum. 
     %p
       Green Shoes birkaç şeyi NodeBox ve Processing'den farklı yapar. 
-      Örneğin, Green Shoes farklı renk metodlarına sahiptir. 
+      Örneğin, Green Shoes RGB array de kullanabileceğiniz 
+      farklı renk metodlarına sahiptir. Aslında bunlar Processing'in renk 
+      metodlarına çok benzer. Ayrıca Green Shoes çizilen şekillerin arkaplanında 
+      resim veya gradyenler kullanmanıza da imkan verir. 
+    %p
+      Shoes ayrıca bazı animasyon fikirlerini de Processing'den almıştır. Geliştikçe 
+      bu metodları kullanmayı artırmaktadır.
+    %br
+    
+    %a(name="arc")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#arc" style="width: 100%;") 
+        %big 
+          %b arc(left, top, width, height, angle1, angle2) 
+        » a Shoes::Oval
+    %br
+    
+    %p
+      Verilen koordinatlara (left, top) bir yay çizer (dairenin bir kısmı). Bu 
+      metod size 
+      %b :angle1 
+      ve 
+      %b :angle2 
+      stilleri ile 
+      %a(href="/kitap/212#oval") oval 
+      metodundan biraz daha fazla kontrol sağlar. (Aslında 
+      %b oval 
+      metodu 
+      %b :angle1 
+      değeri 0  ve 
+      %b :angle2 
+      değeri 2*Math::PI olan bir arc'dır)
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        fill yellow..green
+        stroke red..blue
+        strokewidth 10
+        cap :curve
+        a = animate 12 do |i|
+          @e.remove if @e
+          r = i * (Math::PI * 0.01)
+          @e = arc 100, 50, 180, 360, 0, r
+          a.stop if r >= 2*Math::PI
+        end
+      end
+      %br
+      
+    %a(name="arrow")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#arrow" style="width: 100%;") 
+        %big 
+          %b arrow(left, top, width) 
+        » a Shoes::Shape
+    %br
+    
+    %p
+      
 
     
-    %h2 Stack
     
     
     
