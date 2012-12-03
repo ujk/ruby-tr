@@ -128,9 +128,139 @@
     %br
     
     %p
-      
-
+      Verilen (left, top) koordinatlarında 
+      %b width 
+      piksel genişlikte bir ok çizer.
+    %br
     
+    :coderay
+      #!Ruby
+      Shoes.app do
+        para 'Bir ok şekli:', left: 20, top: 10
+        arrow 30, 40, 70
+      end
+    %br
+      
+    %a(name="cap")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#cap" style="width: 100%;") 
+        %big 
+          %b cap(:curve or :rect or :project) 
+        » a self
+    %br
+    
+    %p
+      Çizgilerin başlıklarını ayarlar, yani çizginizin her iki ucunun şeklini. Eğer 
+      %b :curve 
+      yapıldıysa, uçlar yuvarlatılır. Default değeri 
+      %b :rect'
+      dir, keskin bir düz şekille biter. 
+      %b :project 
+      uçlar da düz kesimlidir ancak biraz daha uzundurlar.
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        nofill
+        strokewidth 20
+        stroke green
+        cap :curve
+        line 100, 100, 300, 100
+        line 100, 250, 300, 300
+        cap :rect
+        line 100, 150, 300, 150
+        stroke blue
+        cap :project
+        line 100, 200, 300, 200
+        line 200, 100, 200, 300
+        strokewidth 1
+        stroke red
+        rect 100, 100, 200, 200
+      end
+    %br
+      
+    %a(name="fill")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#fill" style="width: 100%;") 
+        %big 
+          %b fill(pattern) 
+        » a pattern
+    %br
+    
+    %p
+      Doldurma fırçasını bir renge (ya da şekle) ayarlar. Şekiller, renkler, 
+      gradyenler veya resim olabilir. Doldurma fırçasını bir kez ayarlayınca 
+      çizdiğiniz her şey bu şekille doldurulacaktır.
+    %p
+      İçi bir resimle doldurulan bir yıldız çizmek için:
+    %br
+    
+    :coderay
+      #!Ruby
+      Shoes.app do
+        fill File.join(DIR, "../static/gshoes-icon.png")
+        star 200, 200, 5, 100, 50
+      end
+    %br
+    
+    %p
+      Doldurma fırçasını temizlemek için 
+      %b nofill 
+      komutu kullanın. Çizgi rengini tayin içinse 
+      %b stroke 
+      metodunu kullanın.
+    %br
+      
+    %a(name="nofill")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#nofill" style="width: 100%;") 
+        %big 
+          %b nofill() 
+        » a self
+    %br
+    
+    %p
+      Doldurma fırçasını boşaltır, böylece çizilen herhangi bir şekilin içi 
+      doldurulmayacaktır. Bunun yerine şekilin sadece çizgileri çizilip iç kısmı 
+      şeffaf kalacaktır.
+    %br
+      
+    %a(name="nostroke")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#nostroke" style="width: 100%;") 
+        %big 
+          %b nostroke() 
+        » a self
+    %br
+    
+    %p
+      Çizgi kalemini boşaltır. Çizdiğiniz şekillerin kenar çizgileri olmaz. Ayrıca 
+      %b nostroke 
+      da seçildiyse şekliniz tamamen görünmez olacaktır.
+    %br
+      
+    %a(name="line")
+    %br
+    %br
+    %p
+      %a.btn.btn-inverse(href="#line" style="width: 100%;") 
+        %big 
+          %b line(left, top, x2, y2) 
+        » a Shoes::Line
+    %br
+    
+    %p
+      Seçilmiş olan ("stroke") renkle (left, top) koordinatından başlayıp, (x2, y2) 
+      koordinatına kadar bir çizgi çizer.
     
     
     
