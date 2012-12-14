@@ -13,6 +13,7 @@
     };
     
     var step = 1;
+    var time = 1;
     var left1 = parseInt($("#resim").width()/2 - $(".puan").width()/2 + 5);
     var top1 = parseInt($("#resim").height()/30 + 5);
     var left2 = parseInt($("#resim").width()*55/60 - $(".puan").width()/2);
@@ -30,30 +31,94 @@
     
     $(".puan").at_intervals(function(){
       //console.log(left1,$(".puan").css("left"),top1,$(".puan").css("top"));
-      step += 1;
-      switch(step)
-      {
-      case 1:
-        goto_(left1,top1);
-        break;
-      case 2:
-        goto_(left2,top2);
-        break;
-      case 3:
-        goto_(left3,top3);
-        break;
-      case 4:
-        goto_(left4,top4);
-        break;
-      case 5:
-        goto_(left5,top5);
-        break;
-      case 6:
-        goto_(left6,top6);
-        break;
-      default:
-        step = 1
-        goto_(left1,top1);
+      time += 1;
+      if(time >= 0 & time <= 60){
+        step += 1;
+        switch(step)
+        {
+        case 1:
+          goto_(left1,top1);
+          break;
+        case 2:
+          goto_(left2,top2);
+          break;
+        case 3:
+          goto_(left3,top3);
+          break;
+        case 4:
+          goto_(left4,top4);
+          break;
+        case 5:
+          goto_(left5,top5);
+          break;
+        case 6:
+          goto_(left6,top6);
+          break;
+        default:
+          step = 1
+          goto_(left1,top1);
+        }
+      }
+      if(time > 60 & time <= 120){
+        step -= 1;
+        switch(step)
+        {
+        case 1:
+          goto_(left1,top1);
+          break;
+        case 2:
+          goto_(left2,top2);
+          break;
+        case 3:
+          goto_(left3,top3);
+          break;
+        case 4:
+          goto_(left4,top4);
+          break;
+        case 5:
+          goto_(left5,top5);
+          break;
+        case 6:
+          goto_(left6,top6);
+          break;
+        default:
+          step = 6
+          goto_(left6,top6);
+        }
+      }
+      if(time > 120 & time <= 180){
+        step += 1;
+        switch(step)
+        {
+        case 1:
+          goto_(left2,top2);
+          break;
+        case 2:
+          goto_(left5,top5);
+          break;
+        default:
+          step = 1
+          goto_(left2,top2);
+        }
+      }
+      if(time > 180 & time <= 240){
+        step += 1;
+        switch(step)
+        {
+        case 1:
+          goto_(left3,top3);
+          break;
+        case 2:
+          goto_(left6,top6);
+          break;
+        default:
+          step = 1
+          goto_(left3,top3);
+        }
+      }
+      if(time > 240){
+        step = 1;
+        time = 1;
       }
        /* if(($(".puan").css("left") == left1+"px") & 
                 ($(".puan").css("top") == top1+"px")) {
