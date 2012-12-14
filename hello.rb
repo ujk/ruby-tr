@@ -7,6 +7,10 @@ get "/" do
   haml :index
 end
 
+get "/tibet" do
+  haml :tibet, :layout => false
+end
+
 get "/kitap/:n" do |number|
   if File.exist?("./views/kitap_#{number}.haml")
     haml :"kitap_#{number}"
