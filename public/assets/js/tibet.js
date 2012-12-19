@@ -2,6 +2,9 @@
     var yuks = $(window).height();
     var en = $(window).width();
     $(".puan").css({ position: "absolute", left: "240px", top: "20px"});
+    $(".puan").hide();
+    $("#resim").hide();
+    $(".en").hide();
     
     //if width is smaller then height, care width
     if(en/yuks < 525/641){
@@ -117,8 +120,8 @@
         }
       }
       if(time > 240){
-        step = 1;
-        time = 1;
+        $(".puan").hide();
+        $("#resim").hide();
       }
        /* if(($(".puan").css("left") == left1+"px") & 
                 ($(".puan").css("top") == top1+"px")) {
@@ -138,4 +141,15 @@
     $(".puan").css("top",t);
   }
   
-  
+  $(".start").click(function() {
+    $(".tr").hide();
+    $(".en").hide();
+    $(".puan").show();
+    $("#resim").show();
+});
+
+  $("a.tr").click(function() {
+    $(".tr").hide();
+    $(".en").show();
+});
+
