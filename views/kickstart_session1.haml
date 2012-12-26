@@ -1,0 +1,113 @@
+-# coding: UTF-8
+
+%script
+  document.title = "Ruby Türkiye - Kickstart - Arrays"
+
+%div.row
+  %div.leaderboard
+    %h1 Ruby Ögretiler Seri - 1 
+    %h4 
+      Orjinali : 
+      %a(href="https://github.com/JoshCheek/ruby-kickstart/tree/master/session1" target="_blank") Ruby-Kickstart
+    %h4 Çeviren : Ümit Kayacık
+
+%br
+
+%div.row
+  %div.span12
+    %h4.sag 01-intro.rb
+    
+    :coderay
+      #!Ruby
+      # Ruby Dilinin Kaynağı:
+      #   Yazan: Matz (Yukihiro Matsumoto)
+      #   İlk Yayınlanması: 1995
+      #   Ruby dinamik (derle), strong typing (çoğunlukla), dynamic typing (duck typing diye bilinir)
+      #   (Ördek gibi yürüyen, ördek gibi yüzen ve ördek gibi öten bir kuş gördüysem , o bir ördektir)
+      #   Temelleri:
+      #     Prosedural
+      #     OO (object oriented - nesne temelli - bazı operatörler hariç, _herşey_ bir objedir)
+      #     Fonksiyonel
+
+      # Neden Ruby?
+      #   Çok taze! Okulumuzun mail listelerinden bir istatistik:
+      #     2010'dan beri olan iş imkanları % değişimi
+      #     Ruby on Rails        +84%
+      #     Python               +53%
+      #     MySQL                +46%
+      #     PHP                  +43%
+      #     Ajax                 +37%
+      #     Linux                +31%
+      #     Perl                 +25%
+      #     Apache               +24%
+      #     Tomcat               +24%
+      #     Red Hat Linux        +21%
+      #     
+      #     Kaynak: Dice.com via May 9, 2011 ComputerWorld
+      # 
+      #   Tamam, ama Ruby ne alemde Rails değil? derseniz
+      #     $ rvm list known
+      #     
+      #     MacRuby'yi gördünüz mü? Size söylüyorum Apple Objective C'den MacRuby'ye geçiyor.
+      #     Bu Mac için yazılım geliştirecekseniz Ruby kullanacaksınız demek, bu iPhone 
+      #     yazılımı geliştirmek için Ruby kullanacaksınız demek. iPhone çıktığında Objective C ne 
+      #     olmuştu hatırlayın. Bu güç şimdi Ruby'ye kayıyor
+      #     
+      #     JRuby'yi gördünüz mü? JVM harika bir şey ve Ruby'nin gücüne sahipsiniz.  
+      #     Harika Java kütüphaneleri var. Bununla Ruby'nin gücü bir arada. 
+      #     JVM sayesinde her yerde çalışabilir.
+      # 
+      #   Rubyistler neşelidir. Program yazmayı severiz. Zerafeti severiz.
+      #   Diğerlerinin yazılıma bakışını değiştiririz. Ruby on Rails 
+      #   sahne de çok çabuk yer aldı çünkü çok hızlı geliştirme yapılabilir. 
+      #   Web domainde "spagetti kod" karşısında güzel ve şıktır ve herşeyi "doğru"
+      #   yapma ilkesiyle sınırları zorlar.
+      # 
+      # Düşünün, kendi sorunlarınız hakim olabilir ve onları çözebilirsiniz.
+      # Parlak bir mimar gibi hayalinizdeki her şeyi yapabilirsiniz.
+      # "Whoever holds the keys to programming ends up building the reality in which the rest of us live."
+      # -- Douglas Rushkoff    
+    %br
+    
+    %br
+    %h4.sag 02-conventions.rb
+    :coderay
+      #!Ruby
+      # Notlarda , örneklerde ve verilen kartlarda birkaç basit yöntemle kodlarımızı yazdık
+      # işlemlerin sonuçlarını göstermek için aşağıdaki notasyonu kullandık.
+
+      3 + 9       # => 12
+      my_var = 4
+      my_var      # => 4
+
+      # Burada yorum olarak işlemin sonucu yer alır eğer sadece bir değişken varsa onun değerini verir
+
+      # Daha karmaşık sonuçlarda mesela print işlem sonucunda bir alt satıra sonuç yazılacaktır
+
+    %br
+    
+    %br
+    %h4.sag 03-object-definition.rb
+    :coderay
+      #!Ruby
+        # Ruby işlediği veriyi ve onu işleme yollarını nesne (object) adı verilen sanal yerlerde organize eder
+        # Örneğin, veri bir sayı olsun ve bu sayıya uygulanabilen işlemler. Bu sayı nesnesi şöyle tanımlanır.
+
+        # 5 sayısı için veri 1'ler ve 0'lardan oluşur ve şuna benzer
+        "%032b" % 5 # => "00000000000000000000000000000101"
+
+        # ve bı 5 sayısı bir nesne olduğu için kendisinin metodları (işlemleri) da vardır
+        5.even? # => false
+        5.odd?  # => true
+        5.next  # => 6
+    %br
+    
+    %br
+
+%hr
+
+#disqus_thread
+%script(type="text/javascript" async="true" src="http://ruby-tr.disqus.com/embed.js")
+  
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
