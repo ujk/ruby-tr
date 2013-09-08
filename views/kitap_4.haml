@@ -368,15 +368,182 @@
     
     .alert.alert-info
       %p
-        %b İterasyonlar ve For Döngüleri
-      %p
+        %b İteratörler ve For Döngüleri
+        %br
+        Bir 
+        %b for 
+        döngüsü içinde verilen bir eşitliğin her elemanı için bir kere işlemler gerçekleştirilir. 
+        Deyim şöyle düşünülebilir:
+        %br
         
+        :coderay
+          #!Ruby
+          for <bir yada daha çok değişken> in <eşitlik> do
+            <çalışacak kod>
+          end
+        %br
+        
+        Ne zaman birden fazla değişken verilirse, bunlar 
+        %b for..end 
+        bloğuna sanki bir metodun argümanlarıymış gibi gönderilir. Örneğin buradaki 
+        örnekte 
+        %b (a,b,c,d) 
+        yi 
+        %b for 
+        döngüsüne verilen dört argüman gibi düşünebilirsiniz. 
+        %b For 
+        döngüsünün her turunda bu dört değişken 
+        %b multiarr 
+        satırlarından değerlerini alırlar :
+        %br
+        
+        :coderay
+          #!Ruby
+          for (a,b,c,d) in multiarr
+            print("a=\#{a}, b=\#{b}, c=\#{c}, d=\#{d}\n" )
+          end 
+        %br
+        
+        Bir sonraki bölümde 
+        %b for 
+        döngüleri ve diğer iteratörleri daha derinden inceleyeceğiz.
+      %p
+    
+    %br
+    %br
+    %h4.sag multi_array2.rb
+    
+    %p
+      Ayrıca 
+      %b for 
+      döngüsünü tüm alt arrayler için bağımsız kullanabilirsiniz
+    %br
+    
+    :coderay
+      #!Ruby
+      for s in multiarr[0] 
+        puts(s) 
+      end
+      for s in multiarr[1] 
+        puts(s) 
+      end
+    %br
+    
+    %p
+      Yukardaki her iki teknik (çoklu iteratör değişkenleri ya da çoklu 
+      %b for 
+      döngüleri) iki şeye ihtiyaç duyar. a) arrayde kaç satır ya da sütun olduğunu 
+      biliyorsunuzdur ve b) her alt array aynı sayıda eleman içerir.
+    %p
+      Çok boyutlu array üzerinde iterasyon yapmak için daha esnek bir yol için 
+      içiçe 
+      %b for 
+      döngüleri kullanabilirsiniz:
+    %br
+    
+    :coderay
+      #!Ruby
+      for row in multiarr
+        for item in row
+          puts(item) 
+        end
+      end
+    %br
+    %br
+    %br
+    
+    %h3 Array İçini İndexlemek
+    
+    %p
+      Stringlerde gördüğümüz üzere (3. bölüme bakınız) array içinde de eksi işareti 
+      kullanarak indexleme yapabilirsiniz. Bu durumda -1 arraydeki son elemanı 
+      gösterecektir. Ayrıca range de kullanabilirsiniz:
+    
+    %h4.sag array_index.rb
+    
+    :coderay
+      #!Ruby
+      arr = ['h','e','l','l','o',' ','w','o','r','l','d']
+      
+      print( arr[0,5] )    #=> „hello‟
+      print( arr[-5,5 ] )    #=> „world‟
+      print( arr[0..4] )    #=> „hello‟
+      print( arr[-5..-1] )   #=> „world‟
+    %br
+    
+    %p
+      Dikkat ederseniz stringlerdeki gibi arrayin bir kısmını almak için iki tamsayı 
+      veriyoruz. İlk tamsayı sıranın başlangıç indexini , ikinci tamsayı kaç tane 
+      eleman alınacağını gösteriyor (ikinci sayı index değil):
+    %br
+    
+    :coderay
+      #!Ruby
+      arr[0,5]        #cevap 5 karakter - ["h","e","l","l","o"]
+    %br
+    
+    %h4.sag array_assign.rb
+    
+    %p
+      Ayrıca indexleme yoluyla array içinde atamalar da yapabilirsiniz. Örneğin 
+      burada ben önce boş bir array tanımlıyorum, sonra index 0, 1 ve 3'e değerler 
+      atıyorum. Boş olan 2 numaralı göz değeriyse nil olacaktır:
+    %br
+    
+    :coderay
+      #!Ruby
+      arr = [] 
+      
+      arr[0] = [0]
+      arr[1] = ["one"]
+      arr[3] = ["a", "b", "c"]
+      
+      # arr şöyle oldu:
+      # [[0], ["one"], nil, ["a", "b", "c"]]
+    %br
+    
+    %p Bir kez daha, baş-son indexleri, range ve negatif index değerler kullanabilirsiniz:
+    %br
+    
+    :coderay
+      #!Ruby
+      arr2 = ['h','e','l','l','o',' ','w','o','r','l','d']
+      
+      arr2[0] = 'H'
+      arr2[2,2] = 'L', 'L'
+      arr2[4..6] = 'O','-','W'
+      arr2[-4,4] = 'a','l','d','o'
+      
+      # arr2 şöyle oldu:
+      # ["H", "e", "L", "L", "O", "-", "W", "a", "l", "d", "o"]
+    %br
+    %br
+    %br
+    
+    %h3 Array Kopyalamak
+    
+    %p
+      Dikkat edin atama operatörü = ile bir array diğerine eşitlenirse, yeni değişken 
+      hala eski arrayi gösterir. Bir kopya almıyorsunuz, aynı nesneyi göstermesini 
+      sağlıyorsunuz. Array kopyasını almak için 
+      %b clone 
+      metodunu kullanabilirsiniz:
+    %br
+    
+    %h4.sag array_copy.rb
+    
+    :coderay
+      #!Ruby
+      arr1=['h','e','l','l','o',' ','w','o','r','l','d']
+      arr2=arr1
+          # arr2 şimdi arr1 ile aynı. arr1'deki değişim arr2'yi de değiştirir!
+      arr3=arr1.clone
+          # arr3 şimdi arr1'in kopyası. arr1 değişir ve arr2 etkilenmez
+    %br
     
     
-  
-
     
-    66
+    56
     %h3 Devam Edecek...
 
     %p.orta Copyright © 2009 Huw Collingbourne
