@@ -540,10 +540,111 @@
       arr3=arr1.clone
           # arr3 şimdi arr1'in kopyası. arr1 değişir ve arr2 etkilenmez
     %br
+    %br
+    %br
+    
+    %h3 Arraylerin Eşitliğini Sınamak
+    
+    %p
+      Karşılaştırma operatörü <=> için birkaç kelime daha söylemek gerekiyor. Bu 
+      iki arrayi karşılaştırır - hadi onları 
+      %b arr1 
+      ve 
+      %b arr2 
+      olarak isimlendirelim. Eğer 
+      %b arr1 arr2'
+      den küçükse -1 değeri döner. Eğer 
+      %b arr1 
+      ve 
+      %b arr2 
+      eşitse 0 değeri döner. Eğer 
+      %b arr2 arr1'
+      den büyükse +1 değeri döner. Fakat Ruby bir arrayin diğerinden büyük mü 
+      ya da küçük mü olduğuna nasıl karar veriyor? Bunun için her iki array içindeki 
+      elemanları tek tek karşılaştırıyor. İlk eşit olmayan elemanla karşılaştığında 
+      bu karşılaştırmanın sonucu oluşuyor. Başka bir deyişle eğer karşılaştırma 
+      şuysa:
+    %br
+    
+    %h4.sag array_compare.rb
+    
+    :coderay
+      #!Ruby
+      [0,10,20] <=> [0,20,20]
+    %br
+    
+    %p
+      değer -1 olarak dönecektir (ilk array ikinciden küçüktür). Çünkü ilk arraydeki 
+      1 nolu eleman (10) , 2. arraydeki aynı sıradaki elemandan (20) küçüktür.
+    %p
+      Eğer stringlerden oluşan arrayleri karşılaştırıyorsanız, karşılaştırma ASCII 
+      değerleri üzerinden yapılacaktır. Eğer arraylerden biri diğerinden daha fazla 
+      elemana sahip ama olan elemanlar birbirine eşitse , çok elemanı olan array 
+      daha büyük olarak kabul edilir. Kafanız karışmasın ancak eğer az eleman sayılı 
+      olanda bir tek eleman dahi çok elemanlı arrayden büyükse az elemanlı olan 
+      daha büyük olacaktır.
+    %br
+    %br
+    %br
     
     
     
-    56
+    
+    %h3 Arrayleri Sıralamak
+    
+    %p
+      %b sort 
+      metodu aslında <=> operatörünü kullanarak komşu array elemanlarını 
+      karşılaştırır. Bu operatör Ruby içinde Array, String, Float, Date ve Fixnum 
+      dahil birçok sınıf için tanımlanmıştır. Bununla beraber sort metodu tüm sınıflar 
+      için tanımlı değildir (yani Object sınıfı içinde tanımlı değildir). Malesef bunun 
+      bir sonucu olarak sort metodu içinde 
+      %b nil 
+      değerinde elemanlar olan arraylerin sıralamasında kullanılamaz. Bunu kendi 
+      sort metodunuzu üreterek aşabilirsiniz. Kendi metodlarınızı tanımlamaya 10. 
+      bölümde yer ayıracağız. Şimdilik 
+      %b sort 
+      metodunu aşağıdaki gibi düşünebilirsiniz.
+    %p
+      Bu benim 
+      %b sort 
+      rutinim: 
+    %br
+    
+    %h4.sag array_sort.rb
+    
+    :coderay
+      #!Ruby
+      arr.sort{
+        |a,b|
+          a.to_s <=> b.to_s
+      }
+    %br
+    
+    %p
+      Burada 
+      %b arr 
+      bir array nesnesi ve değerler 
+      %b a 
+      ve 
+      %b b 
+      iki bitişik array elemanı. Her değişkeni 
+      %b to_s 
+      metodunu kullanrak stringe çevirdim. Bu sayede 
+      %b nil 
+      değer boş bir stringe çevrilir ve en değersiz olur. Burada benim sıralama bloğum 
+      elemanları etkilemez. Böylece 
+      %b nil 
+      değer hala sıralanmadan sonra da değerini korumaktadır. Stringe dönüştürme sadece 
+      karşılaştırma yapabilmek için kullanılmıştır.
+    %br
+    %br
+    %br
+    
+    %h3 Değerleri Karşılaştırmak
+    
+    
+    58
     %h3 Devam Edecek...
 
     %p.orta Copyright © 2009 Huw Collingbourne
