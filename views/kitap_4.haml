@@ -643,6 +643,92 @@
     
     %h3 Değerleri Karşılaştırmak
     
+    %p
+      Karşılaştırma operaörü <=> (aslında bir metoddur) Ruby'nin Comparable 
+      isimli modülü içinde tanımlanmıştır. Şimdilik modülü sonradan kullanmak 
+      için hazırlanmış bir kod kütüphanesi olarak düşünebilirsiniz. Bölüm 12'de 
+      modüller üzerinde duracağız.
+    %p
+      Comparable modülünü kendi sınıflarınız içinde de 'include' edebilirsiniz. 
+      Bunu yaptığınızda <=> metodu üzerine yazabilir ve özel veri tipleri için 
+      karşılaştırmanın nasıl olacağını belirleyebilirsiniz. Mesela arraylerin 
+      elemanlarını tek tek karşılaştırmak yerine boyutlarını karşılaştırmayı tercih 
+      edebilirsiniz. Bunu şöyle yapabilirsiniz:
+    %br
+    
+    %h4.sag comparisons.rb
+    
+    :coderay
+      #!Ruby
+      class MyArray < Array
+        include Comparable
+        
+        def <=> ( anotherArray )
+          self.length <=> anotherArray.length
+        end
+      end
+    %br
+    
+    %p Şimdi iki MyArray nesnesini şöyle seçebilirsiniz:
+    
+    :coderay
+      #!Ruby
+      myarr1 = MyArray.new([0,1,2,3])
+      myarr2 = MyArray.new([1,2,3,4])
+    %br
+    
+    %p Burada <=> metodu ile karşılaştırma yapılırsa:
+    
+    :coderay
+      #!Ruby
+                        # İki MyArray nesnesi
+      myarr1 <=> myarr2  #  0 değer döner
+    %br
+    
+    %p
+      Bu iki arrayin eşit olduğunu belirten 0 değeri döner (bizim <=> metodumuz 
+      uzunluklara baktığı için). Diğer taraftan eğer aynı değerlerle normal array nesneleri 
+      üretmiş olsaydık Array sınıfının kendi <=> metodu karşılaştırmayı 
+      yapacaktı:
+    
+    :coderay
+      #!Ruby
+      # İki Array nesnesi
+      arr1 <=> arr2    #  -1 değeri döner
+    %br
+    
+    %p
+      Buradaki dönen -1 değeri birinci arrayin ikinciden küçük olduğunu gösterir. 
+      Çünkü elemanlar karşılaştırılacak ve daha ilk elemanda 0 değeri 1 den 
+      küçük olduğu için sonuç küçük çıkacaktır. 
+    %p
+      Fakat isterseniz klasik 'küçüktür' , 'büyüktür' , 'eşittir' karşılaştırmalarını da 
+      kullanabilirsiniz. 
+    :coderay
+      #!Ruby
+      <     #küçüktür
+      ==   #eşittir
+      >     #büyüktür
+    %br
+    
+    %p
+      MyArray sınıf tanımlasında ek bir kod yazmadan bu karşılaştırmaları yapabiliriz. 
+      Comparable metodunu sınıf tanımında içerdiğimiz için ve bu karşılaştırmalar 
+      <=> metodu sonuçlarına göre yapıldığı için otomatik olarak karşılaştırma 
+      tanımları da değişmiştir. <=> metodu eleman sayılarına baktığı için < metodu 
+      eğer ilk array eleman sayısı ikinciden azsa true çıkış verir. Eleman sayıları 
+      eşitse == metodu true çıkış verir:
+    :coderay
+      #!Ruby
+      p( myarr1 < myarr2 )  #=> false
+      p( myarr1 == myarr2 )   #=> true
+    %br
+    
+    %p
+      Bununla birlikte standart Array sınıfı Comparable modülünü içermediği için 
+      Bu yüzden eğer iki arrayi <, ==, > operatörleriyle karşılaştırmaya kalkarsanız 
+      Ruby metodun tanımsız olduğunu belirten bir error mesajı verecektir.
+    
     
     58
     %h3 Devam Edecek...
