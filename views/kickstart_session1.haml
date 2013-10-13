@@ -1,7 +1,7 @@
 -# coding: UTF-8
 
 %script
-  document.title = "Ruby Türkiye - Kickstart - Arrays"
+  document.title = "Ruby Türkiye - Kickstart - Seri-1"
 
 %div.row
   %div.leaderboard
@@ -103,7 +103,140 @@
     %br
     
     %br
+    %h4.sag 04-variables.rb
+    :coderay
+      #!Ruby
+      # Bir nesnenin bilgileri hafızanın "yığın" adı verilen bir parçasında bulunur
+      # Ruby bir nesneyi saklamak istediğinde , yığına gider , kullanılabilir ilk hafıza yerini bulur ve nesne bilgilerini buraya saklar.
+      # Fakat nesnemizi nereye koyduğumuzu nasıl bileceğiz? Yerini bilebilmek için ve daha sonra kullanabilmek için birşeylere
+      # ihtiyaç duyarız (adres bilgisi).
+      #
+      # Değişkenler hafızadaki adresleri gösteren işaret parmakları gibidirler!
+      # Onlar bize nesnelerimizin nerede olduğunu gösterirler -- bu sayede nesnelere değişkenler yoluyla erişebilirsiniz.
+      
+      five = 5 # "five" bir değişkendir, 5 ise onun gösterdiği nesnedir
+                      
+      five.even? # => false (çift mi?)
+      five.odd? # => true (tek mi?)
+      five.next # => 6 (sonraki sayı)
+      
+      
+      # değişkenler yeni değerleri (nesneleri) gösterecek şekilde ayarlanabilir
+      
+      five # => 5
+      five = "five"
+      five # => "five"
+    %br
+    
+    %br
+    %h4.sag 05-methods.rb
+    :coderay
+      #!Ruby
+      # Nesneleri bir dizi komutlar yardımıyla değiştirmek için metodlar kullanılır.
+      # Örneğin , bir yazının kelimelerinin ilk harflerini büyük yapmak için "capitalize" adı verilen metod kullanılır.
+      
+      "josh".capitalize # => "Josh"
+      
+      
+      
+      # Siz kendiniz de metodlar tanımlayabilirsiniz!
+      
+      def bu_bir_metod_mu?
+        "Evet oyle!" # "Evet oyle!" bir nesnedir. Bu metod tanımı içindeki son nesne olduğundan sonuç olarak o geri dönecektir.
+      end
 
+      bu_bir_metod_mu? # => "Evet oyle!"
+    %br
+    
+    %br
+    %h4.sag 06-method-scope.rb
+    :coderay
+      #!Ruby
+      # Bir metod yaptığınızda , şunu unutmayın o kendi küçük dünyasındadır,
+      # bu dünyanın dışındaki şeylerden haberi olmayacaktır , buna scope denir.
+      
+      defined? oniki # => nil
+      oniki = 12
+      defined? oniki # => "local-variable" (yerel değişken)
+
+      def benim_kucuk_dunyam
+        defined? oniki # => nil
+      end
+
+      benim_kucuk_dunyam # => nil
+      defined? oniki # => "local-variable"
+      
+      
+      
+      # Pekala pek de kullanışsız görünüyor di mi? Allahtan bu dünyada bir internet bağlantısı var!
+      # Nesneleri metod tanımlaması içine gönderebiliriz. Bu içeri taşıma işini yapan değişkenlere ise
+      # argüman ya da parametre denir
+
+      # person1 ve person2 argüman ya da parametredir
+      def ısınla_beni(person1, person2)
+        "Dışardaki ekip \#{person1} ve \#{person2}'den oluşuyor."
+      end
+      
+      ısınla_beni("Ryker", "Data") # => "Dışardaki ekip Ryker ve Data'den oluşuyor."
+    %br
+    
+    %br
+    %h4.sag 07-method-arguments.rb
+    :coderay
+      #!Ruby
+      # Bildiğiniz gibi siz ve ben aynı web sitesine gidebiliriz, fakat ikimiz de tarayıcımızda aynı anda web sitesini
+      # gördüğümüz halde , aslında sadece bir tane web sitesi vardır?
+      #
+      # Nesneler de aynıdır , biz birini metoda gönderdiğimizde ona hem metodun içinden hem de
+      # dışında erişebiliriz. Ancak hala bir tane nesne vardır.
+
+      def browser_goto(website)
+        website.object_id # => 2151945040, 2151945040
+        "Tarayıcınız \#{website} sitesine yönlendiriliyor"
+      end
+
+      # aynı object id aynı nesne demektir
+      website = "ruby-kickstart.com"
+      website.object_id # => 2151945040
+      browser_goto(website) # => "Tarayıcınız ruby-kickstart.com sitesine yönlendiriliyor"
+
+      # Ruby havalı bir dil olmayı sever, ne dediğnizi anlamak için parantezler içinde vermenize gerek yoktur.
+      browser_goto website # => "Tarayıcınız ruby-kickstart.com sitesine yönlendiriliyor"
+    %br
+    
+    %br
+    %h4.sag 08-operators.rb
+    :coderay
+      #!Ruby
+      # Operatör adı verilen bazı özel metodlar vardır.
+      # Özeldirler çünkü Ruby yorumlayıcısı onları daha serbest kullanmanıza izin verir, sadece metod olmalarına rağmen.
+      # Buna syntactic sugar (sözdizimsel şeker) denilir!
+
+      # + adında bir metod vardır
+      3.+(5) # => 8
+
+      # fakat bu çirkin bir görüntü , Ruby bunu daha havalı şekilde şöyle yazmanıza imkan verir
+      3 + 5 # => 8
+      2 - 4 # => -2
+      10 / 3 # => 3
+      10 % 3 # => 1
+      
+      # Gördünüz mü, ne istediğinizi biliyor :)
+      # (% işlemi size bölümden kalanı verir)
+      
+      # Ruby size yardımcı olmaya çalışır , fakat syntactic sugar çok yardımcı olmayabilir
+      # eğer bir sıralama yapacaksa Ruby işlemlerin yapılma sırasına bağlı kalacaktır.
+      2 * 3 + 10 # => 16
+      2 + 3 * 10 # => 32
+      
+      # soru: eğer operatörler sadece nesneler üzerindeki metodlarsa, sayılardan başka nesneler de
+      # operatörlere sahip midir? Hemen bir irb açın ve deneyin!
+    %br
+    
+    %br
+    
+    
+    
 %hr
 
 #disqus_thread
