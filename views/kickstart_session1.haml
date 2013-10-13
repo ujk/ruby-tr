@@ -234,7 +234,118 @@
     %br
     
     %br
+    %h4.sag 09-numbers.rb
+    :coderay
+      #!Ruby
+      # Gerçekçi dünyanın kısıtlamalarından dolayı , matematik dersanelerde yapıldığı şekliyle yapılamaz
+      # Bu şu demektir , siz 10 ve 10.0 sayılarının eşit olduğunu düşünseniz bile bu birçok programlama 
+      # dili için böyle değildir.
+      
+      10.class.ancestors # => [Fixnum, Integer, Numeric, Comparable, Object, Kernel, BasicObject]
+      10.0.class.ancestors # => [Float, Numeric, Comparable, Object, Kernel, BasicObject]
+      
+      # Her ikisi de sayıdır (henüz sınıflardan bahsetmedik, fakat atalarından Numeric gördüğünüz gibi ortak)
+      # fakat biraz farklı davranırlar. Örneğin tamsayıların (integer) bölünmesi tamsayı bir sonuç verir, 
+      # fakat noktalı sayı (float) bölünmesi noktalı sayı verir
+      10 / 3 # => 3
+      10.0 / 3 # => 3.3333333333333335
+      
+      # eğer birbirlerine dönüştürmek istersek?
+      10.to_f # => 10.0
+      10.0.to_i # => 10
+      
+      # Ayrıca parantezler de kullanabilirsiniz. Parantezler içindeki işlemin sonuç değerini alır.
+      (1 + 2) * 3 # => 9
+      (91 + 2).even? # => false
+    %br
     
+    %br
+    %h4.sag 10-introducing-strings.rb
+    :coderay
+      #!Ruby
+      # Geleneklerden dolayı programlama dillerinde yazılara "string" (dizi) denir
+      # tırnaklar arasındaki karakterlerin dizilmesi olarak düşünebilirsiniz. 
+      # soru: eğer 10.to_f 10 sayısını float yapıyorsa, 10 sayısını nasıl string yaparsınız?
+
+      "text".class # => String
+
+      # Bir stringi tırnaklar içinde ifade ederek belirtebilirsiniz
+
+      "abc" # => "abc"
+      'abc' # => "abc"
+    %br
+    
+    %br
+    %h4.sag 11-stdin-and-stdout.rb
+    :coderay
+      #!Ruby
+      # Klasik programlar bir terminalde çalışır yazı girişlerini okur ve çıktı olarak yazı geri verirler.
+      # Bu birçok farklı programın birbiriyle etkileşimde bulunduğu ortak bir arabirimdir.
+
+      # Bir program yazı çıktısı verdiğinde biz onu standart çıkışa (stdout) gönderdiğini kabul ederiz.
+      # Terminalde stdout'a gönderilen her çıktı terminalde gösterilir.
+      # Örneğin cat komutu dosya içeriğini standart çıkışa gönderir, echo argümanlarını standart çıkışa gönderir.
+
+      # Progam ne zaman bir yazı okursa onu standart girişten alır (stdin).
+      # Terminalde stdin tuş takımınızdan gelen bilgileri alır.
+      # Klavyeden ne girerseniz programınızın stdin'ine gönderilir.
+
+      # stdin'den bir giriş okumak için gets komutu kullanılır
+      user_response = gets
+
+      # stdout'a yazmak için puts komutu kullanılır
+      puts "Dediniz ki: \#{user_response}"
+
+
+
+      # Dikkat
+      #
+      # Bir satır enter tuşuyla biten bir yazıdır. line = "Line\n"
+      # Satırı okuduğunuzda ayrıca enter tuşunu da okursunuz.
+      # Bunun anlamı: line + line # => "Line\nLine\n"
+      #
+      # Eğer _gerçekte_ "LineLine" istiyorsanız:
+      # enter tuş karakterini uzaklaştırmanız gerekir.
+      #
+      # Ruby size chomp adı verilen ve dizin,n sonundan enter tuş karakterini çıkaran bir metod verir
+      # line.chomp # => "Line"
+      # line # => "Line\n"
+      #
+    %br
+    
+    %br
+    %h4.sag 12-puts.rb
+    :coderay
+      #!Ruby
+      # Ruby yazıları stdout'a göndermek için birçok metoda sahiptir, en çok kullanılanı puts'dir:
+      puts "Welcome to the program!"
+      
+        # Çıktı:
+        # Welcome to the program!
+        #
+
+
+      # Dikkat ederseniz puts yazdığı yazınını arkasına yeni satıra geçiş ekler ve puts yazacağı nesneyi önce 
+      # string'e çevirir , sonra yazar:
+      puts 45
+      
+        # Çıktı:
+        # 45
+        #
+      
+      
+      # puts diğer nesneleri String'e çevirirken onların to_s metodunu kullanır.
+      # ve sonra string değeri yazar. Şöyle çalışır.
+      number = 56
+      thing_to_print = number.to_s
+      puts thing_to_print
+
+        # çıktı:
+        # 56
+        #
+    %br
+    
+    %br
     
     
 %hr
