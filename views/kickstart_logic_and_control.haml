@@ -1,0 +1,148 @@
+-# coding: UTF-8
+
+%script
+  document.title = "Ruby Türkiye - Kickstart - logic_and_control"
+
+%div.row
+  %div.leaderboard
+    %h1 Ruby Lojik ve Kontrol Klavuzu 
+    %h4 
+      Orjinali : 
+      %a(href="https://github.com/JoshCheek/ruby-kickstart/blob/master/cheatsheets/logic_and_control.rb" target="_blank") Ruby-Kickstart
+    %h4 Çeviren : Ümit Kayacık
+
+%br
+
+%div.row
+  %div.span12
+    %h4.sag logic_and_control.rb
+    
+    :coderay
+      #!Ruby
+      # =====  Lojik Operatörler  =====
+      a , b , c = 1 , 2 , 3
+      a == b && a == c          # lojik 've' işlemi
+      a == b || a == c          # lojik 'veya' işlemi
+      
+      # küçüktür , büyüktür
+      4 <  5  # => true
+      4 <  3  # => false
+      
+      4 >  3  # => true
+      4 >  5  # => false
+      
+      # küçük/büyük yada eşittir
+      4 <= 3  # => false
+      4 <= 4  # => true
+      4 <= 5  # => true
+      
+      4 >= 3  # => true
+      4 >= 4  # => true
+      4 >= 5  # => false
+      
+      # eşittir
+      4 == 3  # => false
+      4 == 4  # => true
+      
+      # =====  if yapısının genel şekli  =====
+      def one_two_or_three(n)
+        if n == 1
+          return 'one'
+        elsif n == 2
+          return 'two'
+        else
+          return 'three'
+        end
+      end
+      
+      one_two_or_three 1 # => "one"
+      one_two_or_three 2 # => "two"
+      one_two_or_three 3 # => "three"
+      
+      
+      # =====  Tek satır  =====
+      result = 'set'
+      result = 'modified once' if 1 == 1
+      result                                    # => "modified once"
+      result = 'modified twice' if 1 != 1
+      result                                    # => "modified once"
+      
+      
+      # =====  ! ile değilleme  =====
+      result = 'set'
+      result = 'modified once' if !false
+      result                                    # => "modified once"
+      result = 'modified twice' if !true
+      result                                    # => "modified once"
+      
+      
+      # =====  False ve nil değeri false olur, geri kalan herşeyin boolean değer true olur  =====
+      !!false           # => false
+      !!true            # => true
+      !!nil             # => false
+      !!Array.new       # => true
+      !!String.new      # => true
+      !!Regexp.new('')  # => true
+      
+      
+      # =====  Unless  =====
+      result = 'set'
+      result = 'modified once' unless 1 == 2
+      result                                    # => "modified once"
+      result = 'modified twice' unless 1 == 1
+      result                                    # => "modified once"
+      
+      
+      # =====  While  =====
+      i = 0
+      ary = Array.new
+      while i < 5
+        ary << i
+        i += 1
+      end
+      ary # => [0, 1, 2, 3, 4]
+      
+      
+      # =====  Döngüler  =====
+      ary = Array.new
+      5.times do |current|
+        ary << current
+      end
+      ary # => [0, 1, 2, 3, 4]
+      
+      
+      ary = Array.new
+      1.step 10 , 2 do |current|
+        ary << current
+      end
+      ary # => [1, 3, 5, 7, 9]
+      
+      
+      
+      # =====  Bu iterasyonu atla, sonrakine geç  =====
+      ary = Array.new
+      10.times do |current|
+        next if current % 2 == 1
+        ary << current
+      end
+      ary # => [0, 2, 4, 6, 8]
+      
+      
+      # döngüyü kırıp dışarı çıkmak
+      ary = Array.new
+      10.times do |current|
+        break if current >= 5
+        ary << current
+      end
+      ary # => [0, 1, 2, 3, 4]
+    %br
+
+
+
+%hr
+
+#disqus_thread
+%script(type="text/javascript" async="true" src="http://ruby-tr.disqus.com/embed.js")
+  
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>

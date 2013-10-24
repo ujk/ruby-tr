@@ -346,6 +346,342 @@
     %br
     
     %br
+    %h4.sag 13-single-vs-double-quotes.rb
+    :coderay
+      #!Ruby
+      # Ruby'de stringleri ifade etmek için iki yol vardır: çift tırnaklarla (" ") ya da tek tırnaklarla (' ')
+      # Çift tırnaklarla enter tuşu karakteri (\n) gibi string yazılırken dönüştürülecek özel karakterleri de ifade edebilirsiniz
+      # Tek tırnaklarla string aynen ifade edildiği gibi çıkışa yazdırılır
+      
+      puts "Bura'da\nİki satır var."
+      puts 'Bu sadece\nbir satır çıktı verir'
+      
+        # Çıktı:
+        # Bura'da
+        # İki satır var.
+        # Bu sadece\nbir satır çıktı verir
+    %br
+    
+    %br
+    %h4.sag 14-operators-on-strings.rb
+    :coderay
+      #!Ruby
+      # Basit operatörleri tıpkı diğer nesnelerdeki gibi String'e de kullanabilirsiniz:
+      
+      my_string = "Face"
+      your_string = "book"
+      
+      my_string + your_string # => "Facebook"
+      
+      my_string == your_string # => false
+      my_string = "book"
+      my_string == your_string # => true
+    %br
+    
+    %br
+    %h4.sag 15-interpolation.rb
+    :coderay
+      #!Ruby
+      # Çift tırnaklar çok daha güçlüdür. Özel karakter sıralamaları kullanarak stringinizin içinde kod çalıştırabilirsiniz.
+      # Bu kod çalıştırılır ve sonucu string içine eklenir.
+
+      small_number = 5
+      neg_number = -97
+
+      puts "1 + 3 eşittir \#{1 + 3}"
+      puts "Benim iki tane sayım \#{small_number} ve \#{neg_number.abs} (burada hepsi pozitif olur)"
+
+        # Çıktı:
+        # 1 + 3 eşittir 4
+        # Benim iki tane sayım 5 ve 97 (burada hepsi pozitif olur)
+        #
+
+      # Dikkat ettiyseniz \#{} içine herşeyi koyabiliriz , nesnelere referans verebileceğimiz gibi metod da çalıştırabiliriz.
+    %br
+    
+    %br
+    %h4.sag 16-p.rb
+    :coderay
+      #!Ruby
+      # Bir diğer önemli çıkış metodu da 'p' metodudur. p bir nesnenin dahili tanımını çıkışa yazar:
+      # bunu nesnenin kod içinde nasıl göründüğü olarak düşünebilirsiniz. Bu çeşit çıktı bizim kod yazarken
+      # sağ tarafta yazdıklarımıza benzer.
+      
+      puts "Rain and lightning"
+      p "Rain and lightning"
+      
+        # puts çıktısı:
+        # Rain and lightning
+        
+        # p çıktısı:
+        # "Rain and lightning"
+        
+        
+      # Dikkat ettiyseniz p metodu string kenarlarına çift tırnak koydu. Bir örnek daha verelim.
+      # (Ruby'de nesnelerden oluşan bir listeye Array denir. Array üzerinde daha sonra duracağız)
+      
+      array = [1, 2, 3]
+      
+      puts array
+      p array
+      
+      # Çıktı:
+      
+        # puts:
+        # 1
+        # 2
+        # 3
+        
+        # p:
+        # [1, 2, 3]
+    %br
+    
+    %br
+    %h4.sag 17-naming-conventions.rb
+    :coderay
+      #!Ruby
+      # Şimdiye kadar baktığımız tüm değişkenler yerel değişkenlerdi.
+      # Bunun anlamı onlar bulunulan ortamda geçerliler , fakat ortamı terkedersek yok olurlar.
+      # Yerel değişkenler küçük harfle başlarlar ve alfanumerik değerler ya da alt çizgilerle devam edebilir.
+      # Ruby'de stil olarak değişken isimlerinde snake_case denilen kelimeleri alt çizgiyle birleştirme tercih edilir
+      local_variable = nil
+      
+      # Sabitler de değişkenlere benzer fakat bunların değerleri değişmeyecektir.
+      # Büyük harfle başlayan değişken isimleri bir sabiti gösterir.
+      # Ruby'de stil olarak sabit isimlerinde CamelCase denilen kelimeleri ilk harfleri büyüterek birleştirme tercih edilir.
+      SabitDeger = nil
+      
+      
+      # Oluşum değişkenleri (instance variables) bulunulan ortama değil nesneye aittirler.
+      # '@' işaretiyle başlayan değişken isimleri oluşum değişkenlerini gösterir.
+      # Bu konuda daha sonra ayrıntılı konuşacağız.
+      @instance_variable = nil
+      
+      
+      # Hatırlarsanız size metodların kendi küçük dünyaları olduğunu söylemiştim. Biraz yalandı.
+      # Sabitler kendi scope'larındaki (ortamlarındaki) her yerden görülebilirler.
+      
+      MyConstant  = 12
+      my_variable = 13
+      def example
+        begin
+          MyConstant        # => 12
+          my_variable       # => 
+        rescue => exception
+          exception         # => #<NameError: undefined local variable or method `my_variable' for main:Object>
+        end
+      end
+      
+      example       # metodu çağırır
+      
+      
+      # soru: Sınıf isimleri büyük harfle başlar, bunlar bir sabit midir?
+      #   Unutmayın, sabitler değişmemeleri beklenen değişkenlerdir.
+      #   bunu irb'le test edin
+      
+      
+    %br
+    
+    %br
+    %h4.sag 18-keywords.rb
+    :coderay
+      #!Ruby
+      # keyword'lara dikkat etmeliyiz, çünkü bunlar Ruby'de başka anlamlar ifade eden kelimelerdir.
+      # Bunun anlamı onları değişken ismi olarak kullanamayız.
+      #
+      # Eğer birini kullanırsanız yorumlayıcı sizi hemen haberdar edecektir.
+      # Eğer Ruby bilen bir editörde program yazıyorsanız, editörün renklendirdiği yazıları kullanmayın :)
+      # 
+      # Eğer tam_bir_liste istiyorsanız, http://www.google.com/search?&q=ruby+keywords+list
+      
+      
+      
+      
+      # def metod tanımlamak için bir keyword. Özel bir anlamı var , değişken adında kullanamazsınız.
+      
+      def = 3 # !> useless use of a literal in void context
+      # ~> -:14: syntax error, unexpected '='
+      # ~> def = 3 # !> useless use of a literal in void context
+      # ~>      ^
+    %br
+    
+    %br
+    %h4.sag 19-nil.rb
+    :coderay
+      #!Ruby
+      # nil adında özel bir nesne vardır
+      nil.class # => NilClass
+      
+      # Bir nesne gösteremediğinizde bunu ifade etmek için bu nesneyi kullanırsınız.
+      array = [1,5,7]
+      array.find { |number| number * 2 == 10 } # => 5
+      array.find { |number| number * 2 == 11 } # => nil
+    %br
+    
+    %br
+    %h4.sag 20-logic.rb
+    :coderay
+      #!Ruby
+      # Hayatınız boyunca, koşullara göre bişey yapmanız gerekince lojik (mantık) kullanırsınız.
+      # Lojik iki değere sahiptir: true ve false (doğru ve yanlış)
+      # Şöyle konuşursunuz : "eğer yağmur varsa ve şemsiyem varsa dışarı çıkarım, yoksa içerde kalırım."
+      # Bu bir lojik yapıdır.
+      # 
+      # Ruby'de de böyle mantıksal yapılar vardır, bu sayede dışarı çıkabilirliğinizi test eden program yazılabilir, hadi yapalım!
+      
+      def go_outside?(raining, umbrella)
+        raining && umbrella
+      end
+      
+      go_outside?( true  , true  )  # => true
+      go_outside?( true  , false )  # => false
+      go_outside?( false , true  )  # => false
+      go_outside?( false , false )  # => false
+      
+      # bakın, go_outside? metodu gerçekten ne yapacağını biliyor, çünkü lojik biliyor!
+    %br
+    
+    %br
+    %h4.sag 21-true-and-false.rb
+    :coderay
+      #!Ruby
+      # Ruvy'deki lojik "boolean" nesnelerle yapılır. Yanlış bilmiyorsam bu lojiği geliştiren kişinin adından geliyor!
+      # Bir boolean nesne değeri 'doğru' ya da 'yanlış' (true-false) olabilecek nesnedir.
+      
+      # true nesnesi:
+      true.class                      # => TrueClass
+      'yep, its true'   if true       # => "yep, its true"
+      
+      # false nesnesi:
+      false.class                     # => FalseClass
+      'nope, its not true' if false   # => nil
+      
+      # önlerine ünlem işareti koyarak birbirine dönüştürebilirsiniz
+      !true     # => false
+      !false    # => true
+      !!true    # => true
+      !!false   # => false
+      
+      
+      # Fakat diğer tüm nesneler ne olacak? Onlar da boolean olmak istiyor!
+      # Aşağıdaki gibi dönüştürülebilir! (nil hariç hepsi true sonuç verir)
+      
+      [0, 1, "two", :three, Object.new, nil].each do |object|
+        !!object # => true, true, true, true, true, false
+      end
+    %br
+    
+    %br
+    %h4.sag 22-if-else.rb
+    :coderay
+      #!Ruby
+      # Diyelim bazı şeyleri koşula bağlı yapmak istiyorsunuz
+      
+      if 4 == (2 + 2)             # eğer 4 ve (2+2) değerleri eşitse
+        "Burdaki işlem yapılır"   # => "Burdaki işlem yapılır"
+      else
+        "Bu yapılmaz :("        # => 
+      end
+      
+      
+      my_number = 56
+      
+      if my_number < 12
+        puts "Bir düzineden az"
+      elsif my_number < 64
+        puts "6 sayıya kadar beni yakalayacaksın"
+      else
+        puts "Bu gerçekten büyük bir sayı"
+      end
+      
+        # Çıktı:
+        # 6 sayıya kadar beni yakalayacaksın
+        # 
+      
+      
+      'tek satırda if komutu'     if true       # => "tek satırda if komutu"
+      'tek satırda unless komutu' unless false  # => "tek satırda unless komutu"
+    %br
+    
+    %br
+    %h4.sag 23-if-returns-a-value.rb
+    :coderay
+      #!Ruby
+      # Ruby'de kod yazdığınız her yer bir değer geri döner buna 'if' yapısı da dahildir
+      
+      sonuc = if true
+        "evet, doğru"
+      else 
+        "hayır, yanlış"
+      end
+      
+      result # => "evet, doğru"
+      
+      
+      # bunu metod içinde yapalım
+      def if_deger_doner(bool)
+        if bool
+          "evet, doğru"
+        else
+          "hayır, yanlış"
+        end
+      end
+      
+      if_deger_doner true     # => "evet, doğru"
+      if_deger_doner false    # => "hayır, yanlış"
+      
+      
+      
+      # benzer şekilde unless
+      def unless_deger_doner(bool)
+        unless bool
+          "hayır, yanlış"
+        else
+          "evet, doğru"
+        end
+      end
+      
+      unless_deger_doner true   # => "evet, doğru"
+      unless_deger_doner false  # => "hayır, yanlış"
+    %br
+    
+    %br
+    %h4.sag 24-go-do-the-challenges.rb
+    :coderay
+      #!Ruby
+      # Tamam, hepsini bir geçtik :)
+      # Şimdi düellolara gitmeniz gerekiyor (challenges)
+      # 
+      # Editörünüzde düelloları açın ve ilkini tamamlamaya çalışın.
+      # Sonra terminalde Rakefile olan klasöre gidin ve "rake 1:1" komutu çalıştırın.
+      # 
+      # Geçtiniz mi? Hayır?
+      # Tamam , çıktıyı okuyun ve tekrar deneyin. Neyin yanlış olduğunu söylüyor?
+      # Bir daha deneyin!
+      # 
+      # Geçtiniz mi? Evet?
+      # Harika! Geri kalanları da bitirin :D
+
+
+
+      # !!!!!!!!!!UNUTMAYIN!!!!!!!!!
+      # Size yardımcı olmak için cheatsheet'ler (referans sayfaları) var. Onlardan destek alabilirsiniz!
+      #
+      # Nasıl kullanılacak bu cheatsheet'ler?
+      # Onları bir okuyun ve içlerinde ne olduğuna bir göz atın.
+      # Sonra birşeyi kullanmaya ihtiyaç duyduğunuzda önce nasıl bişey olduğunu hatırlayın.
+      # Eğer hatırlayamazsanız gidip buralardan tekrar bakın.
+      # Çözüm konusunda bir yönteme odaklanın ve hemen onu arayıp bulun.
+      # Bu sayede kullanmak istediğiniz şeyi daha çabuk öğrenirsiniz.
+      # 
+      # Oturup tüm sayfayı hatırlamanıza gerek yok (yapabiliyorsanız ne ala)
+      # Önemli olan o sayfada temel olarak nelerin olduğunu hatırlamak ve 
+      # sık kullandığınız parçaları hatırlamak
+      #
+
+      # Bu bölüm için şunlara ihtiyacınız var:
+      # https://github.com/JoshCheek/ruby-kickstart/blob/master/cheatsheets/logic_and_control.rb
+      # https://github.com/JoshCheek/ruby-kickstart/blob/master/cheatsheets/strings.rb
     
     
 %hr

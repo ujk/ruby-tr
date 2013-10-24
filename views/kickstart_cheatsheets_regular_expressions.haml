@@ -1,0 +1,265 @@
+-# coding: UTF-8
+
+%script
+  document.title = "Ruby Türkiye - Kickstart - regular_expressions"
+
+%div.row
+  %div.leaderboard
+    %h1 Düzenli İfadeler Klavuzu 
+    %h4 
+      Orjinali : 
+      %a(href="https://github.com/JoshCheek/ruby-kickstart/blob/master/cheatsheets/regular_expressions.rb" target="_blank") Ruby-Kickstart
+    %h4 Çeviren : Ümit Kayacık
+
+%br
+
+%div.row
+  %div.span12
+    %h4.sag regular_expressions.rb
+    
+    :coderay
+      #!Ruby
+      # Ryan Davis'in klavuzunun modifiye versiyonu: http://www.zenspider.com/Languages/Ruby/QuickRef.html#11
+      
+      # =====  Kısa Referans  =====
+      # .             yeni satır karakteri hariç herhangibir karakter
+      # [ ]           bir küme karakter içinden herhangi biri
+      # [^ ]          bir küme karakter haricinde herhangi bir karakter
+      # *             önceki düzenli ifadeden 0 tane ya da daha fazlası
+      # *?            önceki düzenli ifadeden 0 tane ya da daha fazlası (non-greedy)
+      # +             önceki düzenli ifadeden 1 tane ya da daha fazlası
+      # +?            önceki düzenli ifadeden 1 tane ya da daha fazlası (non-greedy)
+      # ?             önceki düzenli ifadeden 0 ya da 1 tane
+      # |             veya işlemi 
+      # ( )           düzenli ifadeleri gruplamak
+      # ^             bir satır ya da stringin başı
+      # $             bir satır ya da stringin sonu
+      # {m,n}         önceki düzenli ifadeden enaz m ençok n tanesi
+      # {m,n}?        önceki düzenli ifadeden enaz m ençok n tanesi (non-greedy)
+      # \1-9          n'inci önceki eşleşen grup
+      # \&            tam eşleşme
+      # \`            ilk eşleşme
+      # \'            son eşleşme
+      # \+            eşleşen en yüksek grup
+      # \A            bir stringin başı
+      # \b            backspace(0x08)(sadece[]içinde)
+      # \b            kelime sınırı(sadece[]dışında)
+      # \B            kelime sınırı olmayan
+      # \d            rakam, [0-9] ile aynı
+      # \D            rakam olmayan
+      # \S            whitespace karakter olmayan 
+      # \s            whitespace karakter [ \t\n\r\f]
+      # \W            kelimede kullanılmayan karakter
+      # \w            kelime karakteri[0-9A-Za-z_]
+      # \z            bir stringin sonu
+      # \Z            bir stringin sonu ya da sondaki yeni satır karakteri öncesi
+      # (?#)          yorum
+      # (?:)          back referans üretmeden grup eşleştirir
+      # (?=)          takip eden karakter grubunu bulur ama sonuç içine almaz
+      # (?!)          yukardakinin eşleşmeyen grubu bulmak için kullanılanı
+      # (?>)          nested anchored sub-regexp. stops backtracking.
+      # (?imx-imx)    turns on/off imx options for rest of regexp.
+      # (?imx-imx:re) turns on/off imx options, localized in group.
+
+
+
+      # =====  Yapısı  =====
+
+      # bir regex yaratmak için iki yanını bölü işaretiyle kapatın
+      /regex/       # => /regex/
+      /regex/.class # => Regexp
+      
+      
+      # eğer regex'iniz içinde bölü işareti içeriyorsa escape kullanarak (\) dışarda bırakmalısınız.
+      # ayrıca %r arkasından gelen sınırlayıcı semboller arasında da regex üretilebilir (Array veya Stringdeki %w gibi)
+      %r(regex)     # => /regex/
+      %r[regex]     # => /regex/
+      %r{regex}     # => /regex/
+      %r(/usr/bin)  # => /\/usr\/bin/
+      
+      # içinde kod da olabilir
+      str = "ege"
+      /r\#{str}x/    # => /regex/
+      
+      
+      
+      # =====  Regex kullanım yolları (basit)  =====
+      str = "This is a cheatsheet for regular expressions."
+
+      # bir eşleşmenin indexini bul
+      str =~ /h../ # => 1
+      str =~ /q../ # => nil
+      
+      # eşleşmenin içeriğini al
+      str[/h../]  # => "his"
+      str[/q../]  # => nil
+      
+      # sub ile ilk eşleşmenin içeirğini değiştir, gsub ile tüm eşleşmeleri değiştir (g regex'i stringe global olarak uygulamak anlamına gelir)
+      str = "bobbling babbling bubbles"
+      str.sub(  /b.b/ , "--replacement--" )       # => "--replacement--bling babbling bubbles"
+      str.gsub( /b.b/ , "--replacement--" )       # => "--replacement--bling --replacement--bling --replacement--bles"
+      str.gsub( /b.b/ ) { |match| match.upcase }  # => "BOBbling BABbling BUBbles"
+      
+      # bir eşleşmenin tüm olduğu yerleri bul
+      str.scan(/b.b/)   # => ["bob", "bab", "bub"]
+      
+      # eşleşeni sınırlayıcı olarak kullanarak parçalara ayırmak
+      str.split(/b.b/)  # => ["", "bling ", "bling ", "bles"]
+      
+      # Bunlar sembollerde direk çalışmaz, ama bir Arrayde grep metodunu çağırırsanız başka
+      # bu düzenli ifadenizi kontrol etmeden önce onları sembole çevirecektir 
+      # Böylece her eleman üzerinden geçecek ve eğer regex eşleşirse onu sonuç array içine koyacaktır
+      words = %w(Oh, oh, oh, finding the answer. Oh, oh, oh, oh, oh. Finding that there ain't no answer to find.)
+      words.grep(/e/) # => ["the", "answer.", "there", "answer"]
+      
+      
+      
+      # =====  Bayraklar  =====
+      # Regex davranışını etkilemek için sonuna bayrak ekleyebilirsiniz
+      # /i         büyük küçük harf bağımsız
+      # /o         #{} bloklarını sadece birkez işle
+      # /m         çok satır modu - '.' enter tuşu karakterine eşleşir
+      # /x         genişletilmiş mod - whitespace karakterleri devre dışı bırakılır
+      # /[neus]    encoding: sırasıyla none, EUC, UTF-8, SJIS
+      
+      "BOBble bobble".scan(/b.b/)  # => ["bob"]
+      "BOBble bobble".scan(/b.b/i) # => ["BOB", "bob"]
+      
+      str = "bobble\nbubble\nbabble"
+      str[/e.b/]  # => nil
+      str[/e.b/m] # => "e\nb"
+      
+      
+      
+      # =====  Karakterleri Eşleştirmek  =====
+      # Her karakter kendi aynısıyla eşleşir
+      "abc"[/a/]  # => "a"
+      "abc"[/ab/] # => "ab"
+      "abc"[/ac/] # => nil
+      "abc"[/A/]  # => nil
+      "abc"[/A/i] # => "a"
+      
+      # Bir nokta enter tuş karakteri hariç herhangi bir karakterle eşleşir
+      "ab\ncd".scan(/./) # => ["a", "b", "c", "d"]
+      
+      # Köşeli parantezler içindeki karakter kümesinin herhangi biri eşleşmesi yeterli olacaktır.
+      str = "bobble bubble babble"
+      str.scan(/b.b/)     # => ["bob", "bub", "bab"]
+      str.scan(/b[oa]b/)  # => ["bob", "bab"]
+      
+      # köşeli parantes içinde bir aralık da verilebilir, ilk ve son karakterleri belirtilerek
+      # bu /b[abcdefghijklmnopqrst]b/ ile aynıdır
+      str.scan(/b[a-t]b/)                                                 # => ["bob", "bab"]
+      # bu /b[abcnop]b/ ile aynıdır
+      str.scan(/b[a-cn-p]b/)                                              # => ["bob", "bab"]
+      alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      alphabet.scan(/[a-cmnoy-z]/)                                        # => ["a", "b", "c", "m", "n", "o", "y", "z"]
+      
+      
+      # Verilen kümede olmayan herhangi bir şeyle eşleşmesi için köşeli parantez içi '^' ile başlatılır
+      str.scan(/b[^o]b/) # => ["bub", "bab"]
+      
+      
+      
+      # =====  İsimli Kümeler  =====
+      # \d rakam, [0-9] ile aynı
+      # \D rakam olmayan
+      # \S whitespace olmayan karakter
+      # \s whitespace karakteri[ \t\n\r\f]
+      # \W kelimede kullanılmayacak karakter
+      # \w kelimede kullanılacak karakter[0-9A-Za-z_]
+      
+      
+      
+      # =====  Miktar belirticiler  =====
+      # 0 yada daha fazla önceki düzenli ifadeden eşleşmeye devam etmek için yıldız kullanın
+      # burdaki örnekte MX yazısını takip eden 0 yada daha fazla sayıda rakam eşleşmesi aranmakta
+      # gördüğünüz üzere ne kadar fazla sayıda rakam olursa olsun eşleşmekteler
+      str = "The product tags are plain MX, MX104, MX952, and MX7511."
+      str.scan(/MX[1-9]*/) # => ["MX", "MX1", "MX952", "MX7511"]
+      
+      # artı işareti de aynı şeyi yapar ama 0 yerine enaz 1 yada daha fazla eşleşme arar
+      str.scan(/MX[1-9]+/) # => ["MX1", "MX952", "MX7511"]
+      
+      # açgözlü olmayıp tüm eşleşmeler yerine sadece ilkini almaları için arkalarına bir '?' eklemeniz yeterli 
+      str = "Then I said 'Oh no' and he said 'oh yes!', can you believe it?"
+      str[/'.*'/]   # => "'Oh no' and he said 'oh yes!'"
+      str[/'.*?'/]  # => "'Oh no'"
+      
+      # soru işareti ile önceki karakterin 0 yada 1 kez kullanımına eşleştirilebilir
+      str = "The product tags are plain MX, MX104, MX952, and MX7511."
+      str.scan(/MX[0-9]?/) # => ["MX", "MX1", "MX9", "MX7"]
+      
+      # süslü parantezler arasında en az ve en çok kaç kullanım olacağını belirle
+      numbers = "1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890"
+      numbers.scan(/\d{4,8}/) # => ["1234", "12345", "123456", "1234567", "12345678", "12345678", "12345678"]
+      # Hoppalaa işler karıştı ben sadece "12345678" in eşleşmesini isterim "1234567890" un değil
+      numbers.scan(/\b\d{4,8}\b/) # => ["1234", "12345", "123456", "1234567", "12345678"]
+      
+      
+      
+      # =====  Lojik, Gruplama ve Kontrol  =====
+      # veya işareti ile alternatifleri girin (biri ya da diğeri)
+      str = "I'm planning a trip to the moon, and then from there to venus, and from there to the center of milky way!"
+      str.scan(/moon|venus|milky way/) # => ["moon", "venus", "milky way"]
+      
+      # bir şeyleri parantezler ile gruplayabilirsiniz
+      str = "I rode a sunbeam from the sunburst on Sunday."
+      str.gsub(/sun(beam|burst|day)/i) { |match| match.upcase } # => "I rode a SUNBEAM from the SUNBURST on SUNDAY."
+      
+      # Parantzler içlerinde ne eşleşen varsa bulurlar. Ruby'de eşleşmelere $1 - $9 değişkenleri ile ulaşabilirsiniz
+      str = "location: France, language: French, name: Aimée"
+      str =~ /location: (\w+), language: (\w+), name: (\w+)/
+      $1  # => "France"
+      $2  # => "French"
+      $3  # => "Aimée"
+      $4  # => nil
+      
+      # Bulunmuş gruplara geri bağlanmak için \1 den \9 a kadar kullanabilirsiniz
+      str = "I rode a sunbeam from the sunburst on Monday."
+      str.gsub( /(sun|mon)(beam|burst|day)/i , '(\1)(\2)' ) # => "I rode a (sun)(beam) from the (sun)(burst) on (Mon)(day)."
+      # dikkat çift tırnaklı stringlerde çift escape karakter gerekir:
+      '(\1)(\2)'    # => "(\\1)(\\2)"
+      "(\\1)(\\2)"  # => "(\\1)(\\2)"
+      
+      # eğer bulunanı gruba geri bağlanmak istemezseniz önüne ?: koyun. Şimdi ikinci grup ilk bulunan olarak dikkate alınacak.
+      str = "I rode a sunbeam from the sunburst on Monday."
+      str.gsub( /(?:sun|mon)(beam|burst|day)/i , '(\1)(\2)' ) # => "I rode a (beam)() from the (burst)() on (day)()."
+      
+      # Eğer koşula bağlı eşleşme isterseniz, eğer arkasından gelene bağlı eşleştrmek isterseniz 
+      # (?=) kullanın eğer eşleşmeyenleri bulmak isterseniz (?!) kullanın
+      # NOTE THAT THESE DO NOT TAKE UP ANY WIDTH IN THE MATCH
+      str = "This is the firstday of the secondstone of the month."
+      str.scan(/(?:first|second)(?:stone|day)/) # => ["firstday", "secondstone"]
+      str.scan(/(?:first|second)(?=stone)/) # => ["second"]
+      str.scan(/(?:first|second)(?!stone)/) # => ["first"]
+      
+      
+      
+      # =====  Sıfır genişlikli eşleştiriciler  =====
+      # '^' bir satırın başlangıcını yakalar, dolar işareti satırın sonunu yakalar
+      # örneğe dikkat edersek, çok satırlı belirtnmezsek sorgu enter tuşu karakterini yakalamaz
+      str = "Hello my\ndarling how\nare you?"
+      str.scan(/^./)      # => ["H", "d", "a"]
+      str.scan(/.$/)      # => ["y", "w", "?"]
+      str.scan(/.$.^./)   # => []
+      str.scan(/.$.^./m)  # => ["y\nd", "w\na"]
+      
+      # \A ve \Z aynı ^ ve $ gibidirler, fakat onlar sadece satırın değil tüm bir stringin başı ve sonunu yakalarlar
+      str.scan(/\A./)     # => ["H"]
+      str.scan(/.\Z/)     # => ["?"]
+      
+      # kelime karakteri ve kelime karakteri olmayan arasındaki sınırı yakalamak için \b kullanın
+      str.scan(/\w\b/) # => ["o", "y", "g", "w", "e", "u"]
+      str.scan(/\b\w/) # => ["H", "m", "d", "h", "a", "y"]
+    %br
+
+
+
+%hr
+
+#disqus_thread
+%script(type="text/javascript" async="true" src="http://ruby-tr.disqus.com/embed.js")
+  
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
